@@ -1,2 +1,2 @@
-# ui-elements
-User interface elements for building Domapic applications
+# ui-catalog
+Domapic front end building blocks catalog
