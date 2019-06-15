@@ -1,0 +1,31 @@
+.accept-cookies {
+  opacity:0.8;
+  padding:6px 20px;
+}
+
+.accept-cookies a {
+  text-decoration: underline;
+  padding-left: 6px;
+  color:#fff;
+}
+
+.accept-cookies a:hover {
+  color:#fff;
+}
+
+.accept-cookies p {
+  word-wrap: break-word;
+  max-width: 80vw;
+}
+
+@media (max-width: 767px) {
+  .accept-cookies p {
+    max-width: 70vw;
+  }
+}
+
+.accept-cookies.ui.menu .item>.button {
+  color: #000;
+  padding-top:0.5em;
+  padding-bottom: 0.5em;
+}

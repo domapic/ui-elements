@@ -27,5 +27,10 @@ yarn-error.log*
 #build
 webpack-stats.json
 /dist
+/components
+/modules
+/contexts
+/data
+/temp
 
 #config
