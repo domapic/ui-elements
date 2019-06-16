@@ -1,12 +1,17 @@
 const path = require("path");
+
 const globule = require("globule");
 const commonjs = require("rollup-plugin-commonjs");
 const resolve = require("rollup-plugin-node-resolve");
 const babel = require("rollup-plugin-babel");
-const sass = require("rollup-plugin-sass");
+const sassPlugin = require("rollup-plugin-sass");
 const { flatten, compact } = require("lodash");
+const sass = require("node-sass");
+const fsExtra = require("fs-extra");
 
 const packageJson = require("./package.json");
+
+const importAlias = require("./sassImportAlias");
 
 const srcBase = path.resolve(__dirname, "src");
 
@@ -71,32 +76,77 @@ const IsExternalOrFromOtherType = otherTypesAbsolutePaths => (id, parentId) => {
 
 const getTypeConfig = type => {
   const otherTypesAbsolutePaths = getOtherTypesAbsolutePaths(type);
+  const indexFiles = getIndexFilesOfType(type);
 
-  return {
-    input: getIndexFilesOfType(type),
+  const ignoreSassPlugin = sassPlugin({
+    options: {
+      importer: importAlias({
+        styles: "./src/styles"
+      })
+    }
+  });
+
+  const BASE_PLUGINS = [
+    resolve({
+      module: true,
+      main: true,
+      browser: true,
+      jsnext: true,
+      preferBuiltins: true
+    }),
+    commonjs({
+      include: "node_modules/**"
+    }),
+    babel({
+      exclude: "node_modules/**"
+    })
+  ];
+
+  const BASE_CONFIG = {
     external: IsExternalOrFromOtherType(otherTypesAbsolutePaths),
     output: {
       dir: type,
       format: "esm",
       paths: getOtherTypesRelativePaths(otherTypesAbsolutePaths)
     },
-    plugins: [
-      resolve({
-        module: true,
-        main: true,
-        browser: true,
-        jsnext: true,
-        preferBuiltins: true
-      }),
-      commonjs({
-        include: "node_modules/**"
-      }),
-      babel({
-        exclude: "node_modules/**"
-      }),
-      sass()
-    ]
+    plugins: BASE_PLUGINS
   };
+
+  return [
+    {
+      input: indexFiles,
+      ...BASE_CONFIG,
+      plugins: BASE_PLUGINS.concat(ignoreSassPlugin)
+    }
+  ].concat(
+    Object.keys(indexFiles).map(indexFile => {
+      return {
+        input: indexFiles[indexFile],
+        ...BASE_CONFIG,
+        output: {
+          file: `temp/${type}/${indexFile}.js`,
+          format: "esm",
+          paths: getOtherTypesRelativePaths(otherTypesAbsolutePaths)
+        },
+        plugins: BASE_PLUGINS.concat(
+          sassPlugin({
+            output: styles => {
+              const filePath = path.resolve(__dirname, type, `${indexFile}.css`);
+              fsExtra.writeFile(filePath, styles, "utf8").then(() => {
+                console.log(`created ${filePath}`);
+              });
+            },
+            runtime: sass,
+            options: {
+              importer: importAlias({
+                styles: "./src/styles"
+              })
+            }
+          })
+        )
+      };
+    })
+  );
 };
 
-module.exports = elementsTypes.map(getTypeConfig);
+module.exports = flatten(elementsTypes.map(getTypeConfig));

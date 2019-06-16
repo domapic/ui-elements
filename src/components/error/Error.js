@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import { Message, Icon } from "semantic-ui-react";
 
+import "./error.scss";
+
 export const ErrorComponent = ({ children }) => (
   <Message negative size="large" data-testid="error-message">
     <Icon name="warning sign" /> {children}

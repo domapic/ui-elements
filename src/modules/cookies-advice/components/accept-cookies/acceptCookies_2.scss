@@ -1,0 +1,10 @@
+@import "styles/theme-a/index";
+
+$primary-color: #393553;
+
+.testing {
+  .foo {
+    color: $primary-color;
+    width: $foo-width;
+  }
+}

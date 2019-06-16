@@ -30,6 +30,7 @@ webpack-stats.json
 /components
 /modules
 /contexts
+/styles
 /data
 /temp
 

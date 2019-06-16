@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { Menu, Button } from "semantic-ui-react";
 
 import RoutesContext from "contexts/routes";
+import BetaLabel from "components/beta-label";
 
 import "./acceptCookies.scss";
 
@@ -36,6 +37,7 @@ export class AcceptCookies extends React.Component {
             Got it
           </Button>
         </Menu.Item>
+        <BetaLabel />
       </Menu>
     );
   }
