@@ -27,28 +27,29 @@ const getElementsOfType = type => {
   });
 };
 
-const getIndexFilesOfType = type => {
+/* const getIndexFilesOfType = type => {
   return getElementsOfType(type).reduce((allElements, element) => {
     allElements[element] = `src/${type}/${element}/index.js`;
     return allElements;
   }, {});
-};
+}; */
 
-const getOtherTypesAbsolutePaths = mainFolder => {
+const getOtherAbsolutePaths = (elementType, elementName) => {
   return compact(
     flatten(
       elementsTypes.map(type => {
-        if (type !== mainFolder) {
-          return getElementsOfType(type).map(element => {
-            return path.resolve(__dirname, "src", type, element);
-          });
-        }
+        return getElementsOfType(type).map(name => {
+          if (type === elementType && name === elementName) {
+            return null;
+          }
+          return path.resolve(__dirname, "src", type, name);
+        });
       })
     )
   );
 };
 
-const getOtherTypesRelativePaths = absolutePaths => {
+const getOtherRelativePaths = absolutePaths => {
   return absolutePaths.reduce((allPaths, currentPath) => {
     const splitted = currentPath.split("/");
     allPaths[currentPath] = `../${splitted[splitted.length - 2]}/${
@@ -58,7 +59,7 @@ const getOtherTypesRelativePaths = absolutePaths => {
   }, {});
 };
 
-const IsExternalOrFromOtherType = otherTypesAbsolutePaths => (id, parentId) => {
+const IsExternal = otherAbsolutePaths => (id, parentId) => {
   if (!parentId) {
     return false;
   }
@@ -68,85 +69,61 @@ const IsExternalOrFromOtherType = otherTypesAbsolutePaths => (id, parentId) => {
   const splittedId = parentId.split("/");
   splittedId.splice(splittedId.length - 1, 1);
   const idPath = path.resolve(splittedId.join("/"), id);
-  if (otherTypesAbsolutePaths.includes(idPath)) {
+  if (otherAbsolutePaths.includes(idPath)) {
     return true;
   }
   return false;
 };
 
-const getTypeConfig = type => {
-  const otherTypesAbsolutePaths = getOtherTypesAbsolutePaths(type);
-  const indexFiles = getIndexFilesOfType(type);
+const getElementConfig = (type, name) => {
+  const otherAbsolutePaths = getOtherAbsolutePaths(type, name);
 
-  const ignoreSassPlugin = sassPlugin({
-    options: {
-      importer: importAlias({
-        styles: "./src/styles"
-      })
-    }
-  });
-
-  const BASE_PLUGINS = [
-    resolve({
-      module: true,
-      main: true,
-      browser: true,
-      jsnext: true,
-      preferBuiltins: true
-    }),
-    commonjs({
-      include: "node_modules/**"
-    }),
-    babel({
-      exclude: "node_modules/**"
-    })
-  ];
-
-  const BASE_CONFIG = {
-    external: IsExternalOrFromOtherType(otherTypesAbsolutePaths),
+  return {
+    input: `src/${type}/${name}/index.js`,
+    external: IsExternal(otherAbsolutePaths),
     output: {
-      dir: type,
+      file: `${type}/${name}.js`,
       format: "esm",
-      paths: getOtherTypesRelativePaths(otherTypesAbsolutePaths)
+      paths: getOtherRelativePaths(otherAbsolutePaths)
     },
-    plugins: BASE_PLUGINS
-  };
-
-  return [
-    {
-      input: indexFiles,
-      ...BASE_CONFIG,
-      plugins: BASE_PLUGINS.concat(ignoreSassPlugin)
-    }
-  ].concat(
-    Object.keys(indexFiles).map(indexFile => {
-      return {
-        input: indexFiles[indexFile],
-        ...BASE_CONFIG,
-        output: {
-          file: `temp/${type}/${indexFile}.js`,
-          format: "esm",
-          paths: getOtherTypesRelativePaths(otherTypesAbsolutePaths)
+    plugins: [
+      resolve({
+        module: true,
+        main: true,
+        browser: true,
+        jsnext: true,
+        preferBuiltins: true
+      }),
+      commonjs({
+        include: "node_modules/**"
+      }),
+      babel({
+        exclude: "node_modules/**"
+      }),
+      sassPlugin({
+        output: styles => {
+          const filePath = path.resolve(__dirname, type, `${name}.css`);
+          fsExtra.writeFile(filePath, styles, "utf8").then(() => {
+            console.log(`created ${filePath}`);
+          });
         },
-        plugins: BASE_PLUGINS.concat(
-          sassPlugin({
-            output: styles => {
-              const filePath = path.resolve(__dirname, type, `${indexFile}.css`);
-              fsExtra.writeFile(filePath, styles, "utf8").then(() => {
-                console.log(`created ${filePath}`);
-              });
-            },
-            runtime: sass,
-            options: {
-              importer: importAlias({
-                styles: "./src/styles"
-              })
-            }
+        runtime: sass,
+        options: {
+          importer: importAlias({
+            styles: "./src/styles"
           })
-        )
-      };
-    })
-  );
+        }
+      })
+    ]
+  };
 };
 
-module.exports = flatten(elementsTypes.map(getTypeConfig));
+const getTypeConfig = type => {
+  return getElementsOfType(type).map(elementName => getElementConfig(type, elementName));
+};
+
+const getElementsConfig = () => {
+  return flatten(elementsTypes.map(getTypeConfig));
+};
+
+module.exports = getElementsConfig();
