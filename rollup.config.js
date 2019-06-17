@@ -11,7 +11,7 @@ const fsExtra = require("fs-extra");
 
 const packageJson = require("./package.json");
 
-const importAlias = require("./sassImportAlias");
+const importAlias = require("./scripts/sassImportAlias");
 
 const srcBase = path.resolve(__dirname, "src");
 
