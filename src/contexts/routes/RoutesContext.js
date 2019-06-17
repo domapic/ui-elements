@@ -5,6 +5,7 @@ const defaultRoute = "/";
 export const defaultRoutes = {
   index: defaultRoute,
   assets: defaultRoute,
+  privacy: "",
   home: defaultRoute,
   resetPassword: defaultRoute,
   helpers: {
