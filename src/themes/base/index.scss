@@ -1,0 +1,9 @@
+$mq-mobile-and-tablet: 767px !default;
+//...
+
+// Both mobile and tablet
+@mixin mobile-and-tablet {
+  @media (max-width : $mq-mobile-and-tablet) {
+    @content;
+  }
+}

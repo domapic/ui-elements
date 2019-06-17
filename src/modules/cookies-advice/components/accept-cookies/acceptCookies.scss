@@ -1,4 +1,4 @@
-@import "./acceptCookies_2.scss";
+@import "theme";
 
 .accept-cookies {
   opacity:0.8;
@@ -20,7 +20,7 @@
   max-width: 80vw;
 }
 
-@media (max-width: 767px) {
+@include mobile-and-tablet {
   .accept-cookies p {
     max-width: 70vw;
   }
@@ -30,8 +30,4 @@
   color: #000;
   padding-top:0.5em;
   padding-bottom: 0.5em;
-}
-
-.foo {
-  color: $primary-color;
 }

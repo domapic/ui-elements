@@ -10,8 +10,7 @@
           "components": "./src/components",
           "modules": "./src/modules",
           "data": "./src/data",
-          "helpers": "./src/helpers",
-          "styles": "./src/styles"
+          "helpers": "./src/helpers"
         }
       }
     ]

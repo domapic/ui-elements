@@ -5,7 +5,7 @@ const commonjs = require("rollup-plugin-commonjs");
 const resolve = require("rollup-plugin-node-resolve");
 const babel = require("rollup-plugin-babel");
 const sassPlugin = require("rollup-plugin-sass");
-const { flatten, compact } = require("lodash");
+const { flatten, compact, difference } = require("lodash");
 const sass = require("node-sass");
 const fsExtra = require("fs-extra");
 
@@ -15,24 +15,19 @@ const importAlias = require("./sassImportAlias");
 
 const srcBase = path.resolve(__dirname, "src");
 
+const OMMITED_ELEMENTS = ["themes"];
+
 const externalDependencies = Object.keys(packageJson.peerDependencies).concat(
   Object.keys(packageJson.dependencies)
 );
 
-const elementsTypes = globule.find("*", { srcBase });
+const elementsTypes = difference(globule.find("*", { srcBase }), OMMITED_ELEMENTS);
 
 const getElementsOfType = type => {
   return globule.find(`*`, {
     srcBase: path.resolve(srcBase, type)
   });
 };
-
-/* const getIndexFilesOfType = type => {
-  return getElementsOfType(type).reduce((allElements, element) => {
-    allElements[element] = `src/${type}/${element}/index.js`;
-    return allElements;
-  }, {});
-}; */
 
 const getOtherAbsolutePaths = (elementType, elementName) => {
   return compact(
@@ -88,10 +83,7 @@ const getElementConfig = (type, name) => {
     },
     plugins: [
       resolve({
-        module: true,
-        main: true,
-        browser: true,
-        jsnext: true,
+        mainFields: ["module", "jsnext:main", "main"],
         preferBuiltins: true
       }),
       commonjs({
@@ -101,6 +93,7 @@ const getElementConfig = (type, name) => {
         exclude: "node_modules/**"
       }),
       sassPlugin({
+        insert: true,
         output: styles => {
           const filePath = path.resolve(__dirname, type, `${name}.css`);
           fsExtra.writeFile(filePath, styles, "utf8").then(() => {
@@ -110,7 +103,7 @@ const getElementConfig = (type, name) => {
         runtime: sass,
         options: {
           importer: importAlias({
-            styles: "./src/styles"
+            theme: "./src/themes/base/index"
           })
         }
       })
