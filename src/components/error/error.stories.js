@@ -1,0 +1,16 @@
+import React from "react";
+import { storiesOf } from "@storybook/react";
+import { withKnobs, text } from "@storybook/addon-knobs";
+
+import { ErrorComponent } from "./Error";
+import readme from "./readme.md";
+
+const stories = storiesOf("Components/Error", module);
+
+stories.addDecorator(withKnobs);
+
+stories.add("default", () => <ErrorComponent>{text("Text", "Error message")}</ErrorComponent>, {
+  notes: {
+    markdown: readme
+  }
+});

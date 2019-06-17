@@ -1,10 +1,12 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { BetaLabel } from "./BetaLabel";
 
+import Module from "./index";
 import readme from "./readme.md";
 
-storiesOf("Components/BetaLabel", module).add("default", () => <BetaLabel />, {
+const stories = storiesOf("Modules/cookies-advice", module);
+
+stories.add("default", () => <Module />, {
   notes: {
     markdown: readme
   }

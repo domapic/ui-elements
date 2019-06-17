@@ -7,8 +7,9 @@ addDecorator(storyFn => <div style={{ textAlign: "center", padding: "20px" }}>{s
 addDecorator((storyFn, context) => withConsole()(storyFn)(context));
 addParameters({
   backgrounds: [
-    { name: "dark", value: "#000000" },
-    { name: "light", value: "#ffffff", default: true }
+    { name: "light", value: "#FFFFFF", default: true },
+    { name: "light-dirty", value: "#F7F7F4" },
+    { name: "dark", value: "#1B1C1D" }
   ]
 });
 addParameters({
