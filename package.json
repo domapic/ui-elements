@@ -87,6 +87,7 @@
     "lint-staged": "^8.1.4",
     "lodash": "^4.17.11",
     "node-sass": "^4.12.0",
+    "node-sass-alias-importer": "1.0.0",
     "npm-run": "^5.0.1",
     "prettier": "^1.16.4",
     "react": "^16.8.6",

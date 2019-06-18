@@ -11,7 +11,7 @@ const fsExtra = require("fs-extra");
 
 const packageJson = require("./package.json");
 
-const importAlias = require("./scripts/sassImportAlias");
+const aliasImporter = require("node-sass-alias-importer");
 
 const srcBase = path.resolve(__dirname, "src");
 
@@ -102,7 +102,7 @@ const getElementConfig = (type, name) => {
         },
         runtime: sass,
         options: {
-          importer: importAlias({
+          importer: aliasImporter({
             theme: "./src/themes/base/index"
           })
         }

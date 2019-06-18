@@ -1,7 +1,7 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const importAlias = require("../scripts/sassImportAlias");
+const aliasImporter = require("node-sass-alias-importer");
 
 // Export a function. Accept the base config as the only param.
 module.exports = async ({ config /*, mode*/ }) => {
@@ -18,7 +18,7 @@ module.exports = async ({ config /*, mode*/ }) => {
       {
         loader: "sass-loader",
         options: {
-          importer: importAlias({
+          importer: aliasImporter({
             theme: "./src/themes/base/index"
           })
         }

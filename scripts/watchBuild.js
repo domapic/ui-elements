@@ -20,8 +20,7 @@ const runBuild = () => {
     pendingBuild = false;
     const child = npmRun.spawn("rollup", ["--config"], {
       env: {
-        FORCE_COLOR: true,
-        COLORS: true
+        FORCE_COLOR: true
       },
       cwd: path.resolve(__dirname, "..")
     });
