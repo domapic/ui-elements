@@ -6,7 +6,7 @@ import readme from "./readme.md";
 
 const stories = storiesOf("Modules/cookies-advice", module);
 
-stories.add("default", () => <CookiesAdvice />, {
+stories.add("simple", () => <CookiesAdvice />, {
   notes: {
     markdown: readme
   }

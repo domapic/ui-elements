@@ -9,7 +9,7 @@ const stories = storiesOf("Components/Error", module);
 
 stories.addDecorator(withKnobs);
 
-stories.add("default", () => <ErrorComponent>{text("Text", "Error message")}</ErrorComponent>, {
+stories.add("simple", () => <ErrorComponent>{text("Text", "Error message")}</ErrorComponent>, {
   notes: {
     markdown: readme
   }
