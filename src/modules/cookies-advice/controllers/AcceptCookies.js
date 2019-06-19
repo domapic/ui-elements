@@ -1,5 +1,6 @@
 import { connect } from "@xbyorange/react-mercury";
 
+import withRoutes from "components/with-routes";
 import AcceptCookiesComponent from "../components/accept-cookies";
 
 import { cookies, acceptCookies } from "data/legal";
@@ -11,4 +12,4 @@ export const mapDataSourceToProps = () => {
   };
 };
 
-export const AcceptCookies = connect(mapDataSourceToProps)(AcceptCookiesComponent);
+export const AcceptCookies = connect(mapDataSourceToProps)(withRoutes(AcceptCookiesComponent));

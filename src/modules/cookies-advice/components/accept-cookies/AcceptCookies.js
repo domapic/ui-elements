@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 
 import { Menu, Button } from "semantic-ui-react";
 
-import withLink from "components/with-link";
+import Link from "components/link";
 
 import "./acceptCookies.scss";
 
-export class AcceptCookiesComponent extends React.Component {
+export default class AcceptCookies extends React.Component {
   constructor(props) {
     super(props);
     this.handleAccept = this.handleAccept.bind(this);
@@ -22,7 +22,6 @@ export class AcceptCookiesComponent extends React.Component {
     if (this.props.accepted) {
       return null;
     }
-    const Link = this.props.Link;
     return (
       <Menu inverted borderless fixed="bottom" className="accept-cookies">
         <Menu.Item position="left">
@@ -42,11 +41,10 @@ export class AcceptCookiesComponent extends React.Component {
   }
 }
 
-AcceptCookiesComponent.propTypes = {
-  Link: PropTypes.func.isRequired,
+AcceptCookies.propTypes = {
   accepted: PropTypes.bool,
   onAccept: PropTypes.func.isRequired,
-  routes: PropTypes.any.isRequired
+  routes: PropTypes.shape({
+    privacy: PropTypes.string.isRequired
+  }).isRequired
 };
-
-export const AcceptCookies = withLink(AcceptCookiesComponent);

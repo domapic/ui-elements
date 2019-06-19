@@ -1,8 +1,10 @@
 import React from "react";
 import { configure, addDecorator, addParameters } from "@storybook/react";
+import { withInfo } from "@storybook/addon-info";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { withConsole } from "@storybook/addon-console";
 
+addDecorator(withInfo);
 addDecorator(storyFn => <div style={{ textAlign: "center", padding: "20px" }}>{storyFn()}</div>);
 addDecorator((storyFn, context) => withConsole()(storyFn)(context));
 addParameters({

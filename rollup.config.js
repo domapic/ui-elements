@@ -15,7 +15,7 @@ const aliasImporter = require("node-sass-alias-importer");
 
 const srcBase = path.resolve(__dirname, "src");
 
-const OMMITED_ELEMENTS = ["themes"];
+const OMMITED_ELEMENTS = ["themes", "storybook"];
 
 const externalDependencies = Object.keys(packageJson.peerDependencies).concat(
   Object.keys(packageJson.dependencies)

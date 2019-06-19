@@ -5,7 +5,7 @@ import { withKnobs, text } from "@storybook/addon-knobs";
 import { ErrorComponent } from "./Error";
 import readme from "./readme.md";
 
-const stories = storiesOf("Components/Error", module);
+const stories = storiesOf("Components/error", module);
 
 stories.addDecorator(withKnobs);
 

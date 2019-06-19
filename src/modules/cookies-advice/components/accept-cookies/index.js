@@ -1,3 +1,3 @@
-import { AcceptCookies } from "./AcceptCookies";
+import AcceptCookies from "./AcceptCookies";
 
 export default AcceptCookies;
