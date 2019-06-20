@@ -7,3 +7,7 @@ export const acceptCookies = () => {
 export const rejectCookies = () => {
   return cookies.accepted().update(false);
 };
+
+export const toggleCookies = value => {
+  return cookies.accepted().update(value);
+};

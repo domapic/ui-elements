@@ -1,11 +1,22 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { STORY_CHANGED } from "@storybook/core-events";
 import addons, { types } from "@storybook/addons";
 
-const ADDON_ID = "mercury";
-const PARAM_KEY = "mercury";
-const PANEL_ID = `${ADDON_ID}/panel`;
+import { styled } from "@storybook/theming";
+import { Placeholder, Link, ScrollArea } from "@storybook/components";
+
+import ActionsForm from "./components/ActionsForm";
+import { ADDON_ID, PARAM_KEY, PANEL_ID } from "./shared";
+
+const PanelWrapper = styled(({ children, className }) => (
+  <ScrollArea horizontal vertical className={className}>
+    {children}
+  </ScrollArea>
+))({
+  height: "100%",
+  width: "100%"
+});
 
 class MercuryPanel extends React.Component {
   constructor(props) {
@@ -36,34 +47,39 @@ class MercuryPanel extends React.Component {
     }
   };
 
-  sendAction = name => {
+  sendAction = ({ name, value }) => {
     const { api } = this.props;
-    api.emit("mercury/sendAction", name);
+    api.emit("mercury/sendAction", {
+      name,
+      value
+    });
   };
 
   render() {
     const { actions } = this.state;
     const { active } = this.props;
-    if (!active) {
+    if (!active || !actions) {
       return null;
     }
+    if (actions.length === 0) {
+      return (
+        <Placeholder>
+          <Fragment>No Mercury actions found</Fragment>
+          <Fragment>
+            Learn how to{" "}
+            <Link href="https://github.com/@xbyorange" target="_blank" withArrow>
+              dynamically interact with Mercury actions
+            </Link>
+          </Fragment>
+        </Placeholder>
+      );
+    }
     return (
-      <div>
-        {actions.map(action => {
-          return (
-            <div key={action.name}>
-              {action.name}{" "}
-              <button
-                onClick={() => {
-                  this.sendAction(action.name);
-                }}
-              >
-                Send
-              </button>
-            </div>
-          );
-        })}
-      </div>
+      <Fragment>
+        <PanelWrapper>
+          <ActionsForm actions={actions} onClickAction={this.sendAction} />
+        </PanelWrapper>
+      </Fragment>
     );
   }
 }
