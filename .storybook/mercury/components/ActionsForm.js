@@ -1,10 +1,20 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { Form } from "@storybook/components";
+import { styled } from "@storybook/theming";
+import { Form, DocumentFormatting } from "@storybook/components";
+
 import TypeMap from "./types";
 
 const InvalidType = () => <span>Invalid Type</span>;
+
+const Section = styled.div({
+  padding: "15px",
+  borderBottom: "2px solid rgba(0,0,0,.2)",
+  color: "rgba(0,0,0,.5)",
+  fontSize: "14px",
+  fontWeight: "700"
+});
 
 class ActionField extends Component {
   constructor(props) {
@@ -73,16 +83,19 @@ export default class ActionsForm extends Component {
   render() {
     const { actions, onClickAction } = this.props;
     return (
-      <Form>
-        {actions.map(action => (
-          <ActionField
-            key={action.name}
-            label={action.name}
-            action={action}
-            onClick={onClickAction}
-          />
-        ))}
-      </Form>
+      <DocumentFormatting>
+        <Section>ACTIONS</Section>
+        <Form>
+          {actions.map(action => (
+            <ActionField
+              key={action.name}
+              label={action.name}
+              action={action}
+              onClick={onClickAction}
+            />
+          ))}
+        </Form>
+      </DocumentFormatting>
     );
   }
 }
