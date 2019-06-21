@@ -4,6 +4,14 @@ import { withInfo } from "@storybook/addon-info";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { withConsole } from "@storybook/addon-console";
 
+import theme from "./theme";
+
+addParameters({
+  options: {
+    theme
+  }
+});
+
 addDecorator(withInfo);
 addDecorator(storyFn => <div style={{ textAlign: "center", padding: "20px" }}>{storyFn()}</div>);
 addDecorator((storyFn, context) => withConsole()(storyFn)(context));

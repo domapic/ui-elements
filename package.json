@@ -29,7 +29,7 @@
   "scripts": {
     "build": "rollup --config",
     "dev": "cross-env node ./scripts/watchBuild.js",
-    "storybook": "start-storybook -p 3001",
+    "start": "start-storybook -s ./static -p 3001",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "lint": "eslint src scripts .storybook rollup.config.js",
     "lint-staged": "lint-staged",

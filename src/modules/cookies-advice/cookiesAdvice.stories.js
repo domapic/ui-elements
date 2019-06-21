@@ -43,7 +43,7 @@ stories.add(
           value: boolean(true)
         },
         {
-          name: "toggleCookies",
+          name: "numberCookies",
           action: toggleCookies,
           value: number(5)
         }
