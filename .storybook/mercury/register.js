@@ -7,7 +7,15 @@ import { styled } from "@storybook/theming";
 import { Placeholder, Link, ScrollArea } from "@storybook/components";
 
 import ActionsForm from "./components/ActionsForm";
-import { ADDON_ID, PARAM_KEY, PANEL_ID, ACTION_EVENT, OPTIONS_EVENT } from "./shared";
+import SourcesDisplay from "./components/SourcesDisplay";
+import {
+  ADDON_ID,
+  PARAM_KEY,
+  PANEL_ID,
+  ACTION_EVENT,
+  OPTIONS_EVENT,
+  REFRESH_SOURCE_EVENT
+} from "./shared";
 
 const PanelWrapper = styled(({ children, className }) => (
   <ScrollArea horizontal vertical className={className}>
@@ -22,39 +30,48 @@ class Panel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      actions: []
+      actions: [],
+      sources: []
     };
     this.sendAction = this.sendAction.bind(this);
     this.setOptions = this.setOptions.bind(this);
     this.onStoryChange = this.onStoryChange.bind(this);
+    this.onSourcesChange = this.onSourcesChange.bind(this);
   }
 
   componentDidMount() {
     const { api } = this.props;
     api.on(OPTIONS_EVENT, this.setOptions);
     api.on(STORY_CHANGED, this.onStoryChange);
+    api.on(REFRESH_SOURCE_EVENT, this.onSourcesChange);
   }
 
   componentWillUnmount() {
     const { api } = this.props;
     api.off(OPTIONS_EVENT, this.setOptions);
     api.off(STORY_CHANGED, this.onStoryChange);
+    api.off(REFRESH_SOURCE_EVENT, this.onSourcesChange);
   }
 
   onStoryChange(id) {
     const { api } = this.props;
     const params = api.getParameters(id, PARAM_KEY);
     if (!params || !params.disable) {
-      this.setState({ actions: [] });
+      this.setState({ actions: [], sources: [] });
     }
   }
 
+  onSourcesChange(sources) {
+    this.setState(state => ({
+      ...state,
+      sources
+    }));
+  }
+
   setOptions(options) {
-    console.log("options---------");
-    console.log(options);
     if (options) {
-      const { actions } = options;
-      this.setState({ actions });
+      const { actions, sources } = options;
+      this.setState({ actions, sources });
     }
   }
 
@@ -67,19 +84,19 @@ class Panel extends React.Component {
   }
 
   render() {
-    const { actions } = this.state;
+    const { actions, sources } = this.state;
     const { active } = this.props;
-    if (!active || !actions) {
+    if (!active || !actions || !sources) {
       return null;
     }
-    if (actions.length === 0) {
+    if (actions.length === 0 && sources.length === 0) {
       return (
         <Placeholder>
-          <Fragment>No Mercury actions found</Fragment>
+          <Fragment>No Mercury actions nor sources found</Fragment>
           <Fragment>
             Learn how to{" "}
-            <Link href="https://github.com/@xbyorange" target="_blank" withArrow>
-              dynamically interact with Mercury actions
+            <Link href="https://github.com/xbyorange" target="_blank" withArrow>
+              dynamically interact with Mercury actions and sources
             </Link>
           </Fragment>
         </Placeholder>
@@ -88,7 +105,10 @@ class Panel extends React.Component {
     return (
       <Fragment>
         <PanelWrapper>
-          <ActionsForm actions={actions} onClickAction={this.sendAction} />
+          {sources.length > 0 ? <SourcesDisplay sources={sources} /> : null}
+          {actions.length > 0 ? (
+            <ActionsForm actions={actions} onClickAction={this.sendAction} />
+          ) : null}
         </PanelWrapper>
       </Fragment>
     );

@@ -1,35 +1,26 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import deepEqual from "fast-deep-equal";
-import { polyfill } from "react-lifecycles-compat";
 import { Form } from "@storybook/components";
 
 class ObjectType extends Component {
-  state = {
-    value: {},
-    failed: false,
-    json: ""
-  };
-
-  static getDerivedStateFromProps(props, state) {
-    if (!deepEqual(props.knob.value, state.json)) {
-      try {
-        return {
-          value: JSON.stringify(props.knob.value, null, 2),
-          failed: false,
-          json: props.knob.value
-        };
-      } catch (e) {
-        return { value: "Object cannot be stringified", failed: true };
-      }
+  constructor(props) {
+    super(props);
+    try {
+      this.state = {
+        value: JSON.stringify(props.value, null, 2),
+        failed: false,
+        json: props.value
+      };
+    } catch (e) {
+      this.state = { value: "Object cannot be stringified", failed: true };
     }
-    return null;
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange = e => {
-    const { value } = e.target;
-    const { json: stateJson } = this.state;
-    const { knob, onChange } = this.props;
+  handleChange(event) {
+    const { value } = event.target;
+    const { onChange } = this.props;
 
     try {
       const json = JSON.parse(value.trim());
@@ -38,24 +29,22 @@ class ObjectType extends Component {
         json,
         failed: false
       });
-      if (deepEqual(knob.value, stateJson)) {
-        onChange(json);
-      }
+      onChange(json);
     } catch (err) {
       this.setState({
         value,
         failed: true
       });
     }
-  };
+  }
 
   render() {
     const { value, failed } = this.state;
-    const { knob } = this.props;
+    const { name } = this.props;
 
     return (
       <Form.Textarea
-        name={knob.name}
+        name={name}
         valid={failed ? "error" : null}
         value={value}
         onChange={this.handleChange}
@@ -66,16 +55,9 @@ class ObjectType extends Component {
 }
 
 ObjectType.propTypes = {
-  knob: PropTypes.shape({
-    name: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
-  }).isRequired,
-  onChange: PropTypes.func.isRequired
+  name: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.any
 };
-
-ObjectType.serialize = object => JSON.stringify(object);
-ObjectType.deserialize = value => (value ? JSON.parse(value) : {});
-
-polyfill(ObjectType);
 
 export default ObjectType;

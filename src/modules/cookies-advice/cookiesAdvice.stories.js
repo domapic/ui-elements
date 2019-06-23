@@ -1,11 +1,17 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs } from "@storybook/addon-knobs";
-import { withMercury, boolean, number } from "../../../.storybook/mercury";
+import { withMercury, boolean, number, text, object } from "../../../.storybook/mercury";
 
 import withRoutesKnob from "storybook/with-routes-knob";
 
-import { cookies, rejectCookies, acceptCookies, toggleCookies } from "data/legal";
+import {
+  cookies,
+  rejectCookies,
+  acceptCookies,
+  toggleCookies,
+  cookiesAreAccepted
+} from "data/legal";
 import CookiesAdviceModule from "./index";
 import readme from "./readme.md";
 
@@ -27,7 +33,7 @@ stories.add(
       markdown: readme
     },
     mercury: {
-      sources: [cookies],
+      sources: [cookies, cookiesAreAccepted],
       actions: [
         {
           name: "rejectCookies",
@@ -43,9 +49,21 @@ stories.add(
           value: boolean(true)
         },
         {
-          name: "numberCookies",
+          name: "numberTest",
           action: toggleCookies,
           value: number(5)
+        },
+        {
+          name: "textTest",
+          action: toggleCookies,
+          value: text("foo")
+        },
+        {
+          name: "objectTest",
+          action: toggleCookies,
+          value: object({
+            foo: "foo4"
+          })
         }
       ]
     }

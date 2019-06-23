@@ -4,27 +4,32 @@ import React from "react";
 import { Form } from "@storybook/components";
 
 class TextType extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    const { knob } = this.props;
-
-    return nextProps.knob.value !== knob.value;
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: props.value
+    };
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange = event => {
+  handleChange(event) {
     const { onChange } = this.props;
     const { value } = event.target;
 
+    this.setState({
+      value
+    });
+
     onChange(value);
-  };
+  }
 
   render() {
-    const { knob } = this.props;
-
+    const { name } = this.props;
     return (
-      <Form.Textarea
-        id={knob.name}
-        name={knob.name}
-        value={knob.value}
+      <Form.Input
+        value={this.state.value}
+        type="text"
+        name={name}
         onChange={this.handleChange}
         size="flex"
       />
@@ -32,20 +37,10 @@ class TextType extends React.Component {
   }
 }
 
-TextType.defaultProps = {
-  knob: {},
-  onChange: value => value
-};
-
 TextType.propTypes = {
-  knob: PropTypes.shape({
-    name: PropTypes.string,
-    value: PropTypes.string
-  }),
-  onChange: PropTypes.func
+  name: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string
 };
-
-TextType.serialize = value => value;
-TextType.deserialize = value => value;
 
 export default TextType;
