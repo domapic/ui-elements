@@ -1,4 +1,4 @@
-import { isArray } from "lodash";
+import { isArray, isFunction } from "lodash";
 
 const findNameAndDomain = (source, domains) => {
   let found = false;
@@ -26,12 +26,17 @@ const findNameAndDomain = (source, domains) => {
   return null;
 };
 
+const methodToString = method => {
+  const webpackAliasRegex = /[^\s]*_WEBPACK_IMPORTED[^\s]*\["([\S]*)"\]/;
+  return method.toString().replace(webpackAliasRegex, "$1");
+};
+
 const getCustomQueries = source => {
   const sourceCustomQueries = source._customQueries && Object.keys(source._customQueries);
   if (sourceCustomQueries && sourceCustomQueries.length > 0) {
     const customQueries = {};
     sourceCustomQueries.forEach(customQueryName => {
-      customQueries[customQueryName] = source._customQueries[customQueryName].toString();
+      customQueries[customQueryName] = methodToString(source._customQueries[customQueryName]);
     });
     return customQueries;
   }
@@ -39,8 +44,8 @@ const getCustomQueries = source => {
 };
 
 const getSourceConstructor = source => {
-  var funcNameRegex = /function (.{1,})\(/;
-  var results = funcNameRegex.exec(source.constructor.toString());
+  const funcNameRegex = /function (.{1,})\(/;
+  const results = funcNameRegex.exec(source.constructor.toString());
   return results && results.length > 1 ? results[1] : "";
 };
 
@@ -71,10 +76,10 @@ const getSources = (sources, domains) => {
         source: parseSourceContent(source.source, domains)
       };
       if (source.query) {
-        sourceObject.query = source.query.toString();
+        sourceObject.query = methodToString(source.query);
       }
       if (source.catch) {
-        sourceObject.catch = source.catch.toString();
+        sourceObject.catch = methodToString(source.catch);
       }
       return sourceObject;
     }
@@ -123,7 +128,7 @@ const parseSourceContent = (source, domains, constructorName) => {
   return display;
 };
 
-export const parseSource = (source, domains) => {
+const parseSource = (source, domains) => {
   let sourceName;
 
   if (domains) {
@@ -144,4 +149,43 @@ export const parseSource = (source, domains) => {
 
 export const parseSources = (sources, domains) => {
   return sources.map(source => parseSource(source, domains));
+};
+
+const getActionName = (action, domains) => {
+  if (action.name) {
+    return action.name;
+  }
+  const stringAction = action.toString();
+  let name = null;
+
+  if (domains) {
+    Object.keys(domains).forEach(domainName => {
+      Object.keys(domains[domainName]).forEach(sourceName => {
+        if (!name && domains[domainName][sourceName].toString() === stringAction) {
+          name = sourceName;
+        }
+      });
+    });
+  }
+
+  return name;
+};
+
+const getActionDetails = (action, domains) => {
+  if (!isFunction(action) && action.name) {
+    return action;
+  }
+  const method = action.action || action;
+  const parsed = {
+    name: getActionName(method, domains),
+    action: method
+  };
+  if (action.value) {
+    parsed.value = action.value;
+  }
+  return parsed;
+};
+
+export const parseActions = (actions, domains) => {
+  return actions.map(action => getActionDetails(action, domains));
 };

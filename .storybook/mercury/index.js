@@ -5,7 +5,7 @@ import { BOOLEAN, TEXT, NUMBER, OBJECT } from "./components/types";
 
 import { PARAM_KEY, OPTIONS_EVENT, ACTION_EVENT, REFRESH_SOURCE_EVENT } from "./shared";
 
-import { parseSources } from "./sourcesParser";
+import { parseSources, parseActions } from "./sourcesParser";
 
 const getTypeFunction = type => {
   return defaultValue => ({
@@ -28,9 +28,10 @@ export const withMercury = makeDecorator({
   wrapper: (getStory, context, { options, parameters }) => {
     const storyOptions = parameters || options;
     const channel = addons.getChannel();
+    const parsedActions = parseActions(storyOptions.actions, storyOptions.domains);
 
     channel.emit(OPTIONS_EVENT, {
-      actions: storyOptions.actions,
+      actions: parsedActions,
       sources: parseSources(storyOptions.sources, storyOptions.domains)
     });
 
@@ -53,7 +54,7 @@ export const withMercury = makeDecorator({
 
     channel.on(ACTION_EVENT, actionDetails => {
       console.log("Mercury action", actionDetails.name, actionDetails.value);
-      parameters.actions.forEach(action => {
+      parsedActions.forEach(action => {
         if (action.name === actionDetails.name) {
           action.action(actionDetails.value);
         }

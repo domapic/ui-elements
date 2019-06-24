@@ -35,31 +35,24 @@ stories.add(
     mercury: {
       sources: [cookies, cookiesAreAccepted],
       actions: [
+        rejectCookies,
+        acceptCookies,
         {
-          name: "rejectCookies",
-          action: rejectCookies
-        },
-        {
-          name: "acceptCookies",
-          action: acceptCookies
-        },
-        {
-          name: "toggleCookies",
           action: toggleCookies,
           value: boolean(true)
         },
         {
-          name: "numberTest",
+          name: "testNumber",
           action: toggleCookies,
           value: number(5)
         },
         {
-          name: "textTest",
+          name: "testString",
           action: toggleCookies,
           value: text("foo")
         },
         {
-          name: "objectTest",
+          name: "testObject",
           action: toggleCookies,
           value: object({
             foo: "foo4"
