@@ -4,6 +4,8 @@ import { withInfo } from "@storybook/addon-info";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { withConsole } from "@storybook/addon-console";
 
+import * as legal from "../src/data/legal";
+
 import theme from "./theme";
 
 addParameters({
@@ -21,6 +23,11 @@ addParameters({
           height: "95%"
         }
       }
+    }
+  },
+  mercury: {
+    domains: {
+      legal
     }
   }
 });

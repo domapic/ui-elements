@@ -5,6 +5,8 @@ import { BOOLEAN, TEXT, NUMBER, OBJECT } from "./components/types";
 
 import { PARAM_KEY, OPTIONS_EVENT, ACTION_EVENT, REFRESH_SOURCE_EVENT } from "./shared";
 
+import { parseSources } from "./sourcesParser";
+
 const getTypeFunction = type => {
   return defaultValue => ({
     type,
@@ -27,7 +29,10 @@ export const withMercury = makeDecorator({
     const storyOptions = parameters || options;
     const channel = addons.getChannel();
 
-    channel.emit(OPTIONS_EVENT, storyOptions);
+    channel.emit(OPTIONS_EVENT, {
+      actions: storyOptions.actions,
+      sources: parseSources(storyOptions.sources, storyOptions.domains)
+    });
 
     channel.removeAllListeners(ACTION_EVENT);
 
@@ -36,8 +41,10 @@ export const withMercury = makeDecorator({
         source.removeChangeAnyListener(changeAnyListener);
       });
       changeAnyListener = debounce(() => {
-        console.log("CHANGED!!");
-        channel.emit(REFRESH_SOURCE_EVENT, storyOptions.sources);
+        channel.emit(
+          REFRESH_SOURCE_EVENT,
+          parseSources(storyOptions.sources, storyOptions.domains)
+        );
       }, 500);
       storyOptions.sources.forEach(source => {
         source.onChangeAny(changeAnyListener);
