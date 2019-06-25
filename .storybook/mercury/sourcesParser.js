@@ -148,6 +148,9 @@ const parseSource = (source, domains) => {
 };
 
 export const parseSources = (sources, domains) => {
+  if (!sources) {
+    return [];
+  }
   return sources.map(source => parseSource(source, domains));
 };
 
@@ -178,7 +181,8 @@ const getActionDetails = (action, domains) => {
   const method = action.action || action;
   const parsed = {
     name: getActionName(method, domains),
-    action: method
+    action: method,
+    code: methodToString(method)
   };
   if (action.value) {
     parsed.value = action.value;
@@ -187,5 +191,44 @@ const getActionDetails = (action, domains) => {
 };
 
 export const parseActions = (actions, domains) => {
+  if (!actions) {
+    return [];
+  }
   return actions.map(action => getActionDetails(action, domains));
+};
+
+export const parseAll = (data, domains) => {
+  let result = {};
+  if (data._isSource) {
+    return {
+      sources: [parseSource(data, domains)]
+    };
+  }
+  if (isFunction(data)) {
+    return {
+      actions: [getActionDetails(data, domains)]
+    };
+  }
+  if (isArray(data)) {
+    data.forEach(dataItem => {
+      if (dataItem._isSource) {
+        result.sources = result.sources || [];
+        result.sources.push(parseSource(dataItem, domains));
+      } else if (isFunction(dataItem)) {
+        result.actions = result.actions || [];
+        result.actions.push(getActionDetails(dataItem, domains));
+      }
+    });
+    return result;
+  }
+  Object.keys(data).forEach(dataKey => {
+    if (data[dataKey]._isSource) {
+      result.sources = result.sources || [];
+      result.sources.push(parseSource(data[dataKey], domains));
+    } else if (isFunction(data[dataKey])) {
+      result.actions = result.actions || [];
+      result.actions.push(getActionDetails(data[dataKey], domains));
+    }
+  });
+  return result;
 };

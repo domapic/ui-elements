@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { Form, DocumentFormatting } from "@storybook/components";
+import { Form } from "@storybook/components";
 
 import SectionTitle from "./SectionTitle";
 import ActionField from "./ActionField";
+import DisplayWrapper from "./DisplayWrapper";
 
 export default class ActionsForm extends Component {
   render() {
     const { actions, onClickAction } = this.props;
     return (
-      <DocumentFormatting>
+      <DisplayWrapper>
         <SectionTitle>ACTIONS</SectionTitle>
         <Form>
           {actions.map(action => (
@@ -22,7 +23,7 @@ export default class ActionsForm extends Component {
             />
           ))}
         </Form>
-      </DocumentFormatting>
+      </DisplayWrapper>
     );
   }
 }

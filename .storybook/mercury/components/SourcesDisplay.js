@@ -1,21 +1,20 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { DocumentFormatting } from "@storybook/components";
-
 import SectionTitle from "./SectionTitle";
-import MercuryInspector from "./MercuryInspector";
+import SourceInspector from "./SourceInspector";
+import DisplayWrapper from "./DisplayWrapper";
 
 export default class SourcesDisplay extends Component {
   render() {
     const { sources } = this.props;
     return (
-      <DocumentFormatting>
+      <DisplayWrapper>
         <SectionTitle>SOURCES</SectionTitle>
         {sources.map(source => (
-          <MercuryInspector key={source.name || source._id || source.source._id} source={source} />
+          <SourceInspector key={source.name || source._id || source.source._id} source={source} />
         ))}
-      </DocumentFormatting>
+      </DisplayWrapper>
     );
   }
 }

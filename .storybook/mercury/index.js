@@ -1,3 +1,4 @@
+import React from "react";
 import { debounce } from "lodash";
 import addons, { makeDecorator } from "@storybook/addons";
 
@@ -6,6 +7,7 @@ import { BOOLEAN, TEXT, NUMBER, OBJECT } from "./components/types";
 import { PARAM_KEY, OPTIONS_EVENT, ACTION_EVENT, REFRESH_SOURCE_EVENT } from "./shared";
 
 import { parseSources, parseActions } from "./sourcesParser";
+import DataDisplay from "./components/DataDisplay";
 
 const getTypeFunction = type => {
   return defaultValue => ({
@@ -24,7 +26,7 @@ let changeAnyListener = () => {};
 export const withMercury = makeDecorator({
   name: "withMercury",
   parameterName: PARAM_KEY,
-  skipIfNoParametersOrOptions: true,
+  skipIfNoParametersOrOptions: false,
   wrapper: (getStory, context, { options, parameters }) => {
     const storyOptions = parameters || options;
     const channel = addons.getChannel();
@@ -64,3 +66,12 @@ export const withMercury = makeDecorator({
     return getStory(context);
   }
 });
+
+export const Display = DataDisplay;
+
+export const display = data => {
+  const displayWithDomain = context => {
+    return <Display domains={context.parameters.mercury.domains} data={data} />;
+  };
+  return displayWithDomain;
+};
