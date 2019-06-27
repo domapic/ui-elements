@@ -37,6 +37,7 @@ addParameters({
     }
   },
   mocks: {
+    url: "http://localhost:3100",
     behavior: "base",
     delay: 0
   }

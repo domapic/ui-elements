@@ -8,6 +8,9 @@ import { ScrollArea } from "@storybook/components";
 
 import SettingsForm from "./components/SettingsForm";
 
+import { settings } from "./data/settings";
+import { features, currentFeature } from "./data/features";
+
 import {
   ADDON_ID,
   PANEL_ID,
@@ -48,11 +51,19 @@ class Panel extends React.Component {
   }
 
   setOptions(options) {
-    if (options && (options.behavior || options.delay)) {
-      const { behavior, delay } = options;
+    if (options && (options.behavior || options.delay || options.url)) {
+      const { behavior, delay, url } = options;
       const newState = {};
       if (behavior) {
         newState.behavior = behavior;
+      }
+      if (url) {
+        const config = {
+          baseUrl: url
+        };
+        settings.config(config);
+        features.config(config);
+        currentFeature.config(config);
       }
       if (delay) {
         newState.delay = delay;

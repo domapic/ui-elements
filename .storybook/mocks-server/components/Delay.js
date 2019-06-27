@@ -29,7 +29,7 @@ export default class Delay extends React.Component {
     });
 
     if (!(Number.isNaN(parsedValue) || value === "")) {
-      onChange(parsedValue);
+      onChange(value);
     }
   }
 

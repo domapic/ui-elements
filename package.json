@@ -33,7 +33,8 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "lint": "eslint src scripts .storybook rollup.config.js",
     "lint-staged": "lint-staged",
-    "test": "jest"
+    "test": "jest",
+    "mocks": "mocks-server --features=./mocks"
   },
   "peerDependencies": {
     "react": "^16.8.6",
@@ -68,6 +69,7 @@
     "@storybook/react": "^5.1.8",
     "@storybook/theming": "^5.1.9",
     "@testing-library/react": "^8.0.1",
+    "@xbyorange/mocks-server": "^1.0.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.8.0",

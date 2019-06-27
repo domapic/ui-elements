@@ -6,15 +6,35 @@ import { Form } from "@storybook/components";
 import SelectBehavior from "./SelectBehavior";
 import Delay from "./Delay";
 
-export default class SettingsForm extends Component {
+import { connect } from "@xbyorange/react-mercury";
+
+import { changeDelay, delay } from "../data/settings";
+
+class SettingsForm extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChangeDelay = this.handleChangeDelay.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.delay !== this.props.delay) {
+      changeDelay(nextProps.delay);
+    }
+  }
+
+  handleChangeDelay(delay) {
+    changeDelay(delay);
+    this.props.onChangeDelay(delay);
+  }
+
   render() {
-    const { behavior, delay, onChangeDelay, onChangeBehavior } = this.props;
+    const { behavior, delayFromServer, onChangeBehavior } = this.props;
     return (
       <Form>
-        <Delay value={delay} onChange={onChangeBehavior} />
+        <Delay value={delayFromServer} onChange={this.handleChangeDelay} />
         <SelectBehavior
           value={behavior}
-          onChange={onChangeDelay}
+          onChange={onChangeBehavior}
           options={["foo", "foo2", "base"]}
         />
       </Form>
@@ -27,6 +47,15 @@ SettingsForm.displayName = "SettingsForm";
 SettingsForm.propTypes = {
   behavior: PropTypes.string,
   delay: PropTypes.number,
+  delayFromServer: PropTypes.number,
   onChangeBehavior: PropTypes.func.isRequired,
   onChangeDelay: PropTypes.func.isRequired
 };
+
+const mapDataSourceToProps = () => ({
+  delayFromServer: delay.read.getters.value
+});
+
+const ConnectedSettingsForm = connect(mapDataSourceToProps)(SettingsForm);
+
+export default ConnectedSettingsForm;
