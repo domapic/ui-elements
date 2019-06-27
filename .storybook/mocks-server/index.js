@@ -1,5 +1,3 @@
-import React from "react";
-import { debounce } from "lodash";
 import addons, { makeDecorator } from "@storybook/addons";
 
 import { PARAM_KEY, OPTIONS_EVENT, CHANGE_DELAY_EVENT, CHANGE_BEHAVIOR_EVENT } from "./shared";

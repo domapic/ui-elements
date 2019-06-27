@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import { Form } from '@storybook/components';
+import { Form } from "@storybook/components";
 
 export default class SelectBehavior extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       value: ""
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.value !== this.props.value){
-      this.setState({value: nextProps.value });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value !== this.props.value) {
+      this.setState({ value: nextProps.value });
     }
   }
 
@@ -27,17 +27,12 @@ export default class SelectBehavior extends Component {
   }
 
   render() {
-    const { options, onChange } = this.props;
+    const { options } = this.props;
     const { value } = this.state;
 
     return (
       <Form.Field label="Behavior">
-        <Form.Select
-          value={value}
-          name="behavior"
-          onChange={this.handleChange}
-          size="flex"
-        >
+        <Form.Select value={value} name="behavior" onChange={this.handleChange} size="flex">
           {options.map(option => (
             <option key={option} value={option}>
               {option}
@@ -50,7 +45,7 @@ export default class SelectBehavior extends Component {
 }
 
 SelectBehavior.propTypes = {
+  onChange: PropTypes.func.isRequired,
   options: PropTypes.array,
-  value: PropTypes.string,
-  onChange: PropTypes.func.isRequired
+  value: PropTypes.string
 };

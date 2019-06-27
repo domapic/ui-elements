@@ -1,17 +1,15 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { STORY_CHANGED } from "@storybook/core-events";
 import addons, { types } from "@storybook/addons";
 import { isNil } from "lodash";
 
 import { styled } from "@storybook/theming";
-import { Link, ScrollArea } from "@storybook/components";
+import { ScrollArea } from "@storybook/components";
 
 import SettingsForm from "./components/SettingsForm";
 
 import {
   ADDON_ID,
-  PARAM_KEY,
   PANEL_ID,
   OPTIONS_EVENT,
   CHANGE_BEHAVIOR_EVENT,
@@ -53,16 +51,16 @@ class Panel extends React.Component {
     if (options && (options.behavior || options.delay)) {
       const { behavior, delay } = options;
       const newState = {};
-      if(behavior){
+      if (behavior) {
         newState.behavior = behavior;
       }
-      if(delay){
+      if (delay) {
         newState.delay = delay;
       }
       this.setState(state => ({
         ...state,
         ...newState
-      }))
+      }));
     }
   }
 
@@ -85,7 +83,12 @@ class Panel extends React.Component {
     return (
       <Fragment>
         <PanelWrapper>
-          <SettingsForm behavior={behavior} delay={delay} onChangeDelay={this.sendDelay} onChangeBehavior={this.sendBehavior}/>
+          <SettingsForm
+            behavior={behavior}
+            delay={delay}
+            onChangeDelay={this.sendDelay}
+            onChangeBehavior={this.sendBehavior}
+          />
         </PanelWrapper>
       </Fragment>
     );

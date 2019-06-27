@@ -37,7 +37,7 @@ addParameters({
     }
   },
   mocks: {
-    behavior:"base",
+    behavior: "base",
     delay: 0
   }
 });
