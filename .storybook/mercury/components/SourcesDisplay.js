@@ -7,24 +7,24 @@ import DisplayWrapper from "./DisplayWrapper";
 
 import { findSelectors, findOrigins } from "../sourcesParser";
 
-const SourcesList = ({ title, sources}) => {
-  if(!sources.length) {
+const SourcesList = ({ title, sources }) => {
+  if (!sources.length) {
     return null;
   }
   return (
     <Fragment>
-    <SectionTitle>{title}</SectionTitle>
+      <SectionTitle>{title}</SectionTitle>
       {sources.map(source => (
         <SourceInspector key={source.name || source._id || source.source._id} source={source} />
       ))}
     </Fragment>
-    );
-}
+  );
+};
 
 SourcesList.propTypes = {
-  title: PropTypes.string.isRequired,
-  sources: PropTypes.array.isRequired
-}
+  sources: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired
+};
 
 export default class SourcesDisplay extends Component {
   render() {
@@ -38,7 +38,7 @@ export default class SourcesDisplay extends Component {
         <SourcesList title="SELECTORS" sources={selectors} />
       </DisplayWrapper>
     );
-  } 
+  }
 }
 
 SourcesDisplay.displayName = "SourcesDisplay";

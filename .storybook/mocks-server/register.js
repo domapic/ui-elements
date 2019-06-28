@@ -6,10 +6,11 @@ import { isNil } from "lodash";
 import { styled } from "@storybook/theming";
 import { ScrollArea } from "@storybook/components";
 
-import SettingsForm from "./components/SettingsForm";
+import SettingsFormController from "./components/SettingsFormController";
+import DisplayBehaviorController from "./components/DisplayBehaviorController";
 
 import { settings } from "./data/settings";
-import { features, currentFeature } from "./data/features";
+import { behaviors, currentBehavior } from "./data/behaviors";
 
 import {
   ADDON_ID,
@@ -32,12 +33,13 @@ class Panel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      url: null,
       behavior: null,
       delay: 0
     };
     this.setOptions = this.setOptions.bind(this);
-    this.sendDelay = this.sendDelay.bind(this);
-    this.sendBehavior = this.sendBehavior.bind(this);
+    this.handleChangeDelay = this.handleChangeDelay.bind(this);
+    this.handleChangeBehavior = this.handleChangeBehavior.bind(this);
   }
 
   componentDidMount() {
@@ -54,18 +56,19 @@ class Panel extends React.Component {
     if (options && (options.behavior || options.delay || options.url)) {
       const { behavior, delay, url } = options;
       const newState = {};
-      if (behavior) {
+      console.log(this.state);
+      if (behavior && behavior !== this.state.behavior) {
         newState.behavior = behavior;
       }
-      if (url) {
+      if (url && url !== this.state.url) {
         const config = {
           baseUrl: url
         };
         settings.config(config);
-        features.config(config);
-        currentFeature.config(config);
+        behaviors.config(config);
+        currentBehavior.config(config);
       }
-      if (delay) {
+      if (delay && delay !== this.state.delay) {
         newState.delay = delay;
       }
       this.setState(state => ({
@@ -75,14 +78,22 @@ class Panel extends React.Component {
     }
   }
 
-  sendDelay(delay) {
+  handleChangeDelay(delay) {
     const { api } = this.props;
     api.emit(CHANGE_DELAY_EVENT, delay);
+    this.setState(state => ({
+      ...state,
+      delay
+    }));
   }
 
-  sendBehavior(behavior) {
+  handleChangeBehavior(behavior) {
     const { api } = this.props;
     api.emit(CHANGE_BEHAVIOR_EVENT, behavior);
+    this.setState(state => ({
+      ...state,
+      behavior
+    }));
   }
 
   render() {
@@ -94,12 +105,13 @@ class Panel extends React.Component {
     return (
       <Fragment>
         <PanelWrapper>
-          <SettingsForm
+          <SettingsFormController
             behavior={behavior}
             delay={delay}
-            onChangeDelay={this.sendDelay}
-            onChangeBehavior={this.sendBehavior}
+            onChangeDelay={this.handleChangeDelay}
+            onChangeBehavior={this.handleChangeBehavior}
           />
+          <DisplayBehaviorController behavior={behavior} />
         </PanelWrapper>
       </Fragment>
     );

@@ -48,7 +48,18 @@ export default class DataDisplay extends Component {
     this.onCleanSource = this.onCleanSource.bind(this);
   }
 
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      sources: getSourcesFromData(nextProps.data)
+    };
+  }
+
   componentDidMount() {
+    this.addListeners(this.state.sources);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.removeListeners(prevState.sources);
     this.addListeners(this.state.sources);
   }
 
@@ -67,35 +78,26 @@ export default class DataDisplay extends Component {
     sources.forEach(source => {
       source.onChangeAny(this.onChangeSource);
       source.onCleanAny(this.onCleanSource);
-      if(this.props.dispatchRead) {
+      if (this.props.dispatchRead) {
         source.read();
       }
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    this.removeListeners(prevState.sources);
-    this.addListeners(this.state.sources);
-  }
-
   onChangeSource() {
     this.setState(state => ({
       ...state
-    }))
+    }));
   }
 
   onCleanSource(cleanDetails) {
     // TODO, remove condition after mercury is fixed
-    if(this.props.dispatchRead && cleanDetails.source._root) {
-      const source = cleanDetails.source._queryId ? cleanDetails.source._root._queries[cleanDetails.source._queryId] : cleanDetails.source._root;
+    if (this.props.dispatchRead && cleanDetails.source._root) {
+      const source = cleanDetails.source._queryId
+        ? cleanDetails.source._root._queries[cleanDetails.source._queryId]
+        : cleanDetails.source._root;
       source.read();
     }
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return {
-      sources: getSourcesFromData(nextProps.data)
-    };
   }
 
   render() {
@@ -114,6 +116,6 @@ DataDisplay.displayName = "DataDisplay";
 
 DataDisplay.propTypes = {
   data: PropTypes.any,
-  domains: PropTypes.any,
-  dispatchRead: PropTypes.bool
+  dispatchRead: PropTypes.bool,
+  domains: PropTypes.any
 };

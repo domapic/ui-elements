@@ -75,7 +75,13 @@ export const Display = DataDisplay;
 
 export const display = (data, options = {}) => {
   const displayWithDomain = context => {
-    return <Display domains={context.parameters.mercury.domains} data={data} dispatchRead={options.dispatchRead}/>;
+    return (
+      <Display
+        domains={context.parameters.mercury.domains}
+        data={data}
+        dispatchRead={options.dispatchRead}
+      />
+    );
   };
   return displayWithDomain;
 };

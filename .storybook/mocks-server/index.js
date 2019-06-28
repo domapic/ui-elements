@@ -21,12 +21,10 @@ export const withMocksServer = makeDecorator({
 
     channel.on(CHANGE_DELAY_EVENT, delay => {
       console.log("Mocks server delay", delay);
-      // TODO here, request to mocks server
     });
 
     channel.on(CHANGE_BEHAVIOR_EVENT, behavior => {
       console.log("Mocks server behavior", behavior);
-      // TODO here, request to mocks server
     });
 
     return getStory(context);
