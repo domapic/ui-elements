@@ -85,6 +85,7 @@ export default class DataDisplay extends Component {
   }
 
   onCleanSource(cleanDetails) {
+    // TODO, remove condition after mercury is fixed
     if(this.props.dispatchRead && cleanDetails.source._root) {
       const source = cleanDetails.source._queryId ? cleanDetails.source._root._queries[cleanDetails.source._queryId] : cleanDetails.source._root;
       source.read();
