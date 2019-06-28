@@ -24,7 +24,7 @@ export default class MercuryInspector extends Component {
   }
 }
 
-MercuryInspector.displayName = "MercuryInspector";
+MercuryInspector.displayName = "SourceInspector";
 
 MercuryInspector.propTypes = {
   source: PropTypes.any.isRequired

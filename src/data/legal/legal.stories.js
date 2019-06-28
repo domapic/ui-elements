@@ -8,11 +8,24 @@ const stories = storiesOf("Data/legal", module);
 
 stories.addDecorator(withMercury);
 
-stories.add("simple", display(data), {
-  info: {
-    disable: true
-  },
-  mercury: {
-    actions: [data.rejectCookies, data.acceptCookies]
+stories.add(
+  "simple",
+  display(data, {
+    dispatchRead: true
+  }),
+  {
+    info: {
+      disable: true
+    },
+    mercury: {
+      actions: [
+        data.rejectCookies,
+        data.acceptCookies,
+        {
+          name: "updateRoot",
+          action: () => data.cookies.update({ accepted: false })
+        }
+      ]
+    }
   }
-});
+);

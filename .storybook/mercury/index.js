@@ -22,6 +22,7 @@ export const number = getTypeFunction(NUMBER);
 export const object = getTypeFunction(OBJECT);
 
 let changeAnyListener = () => {};
+let listenedSources = [];
 
 export const withMercury = makeDecorator({
   name: "withMercury",
@@ -39,10 +40,12 @@ export const withMercury = makeDecorator({
 
     channel.removeAllListeners(ACTION_EVENT);
 
+    listenedSources.forEach(source => {
+      source.removeChangeAnyListener(changeAnyListener);
+    });
+    listenedSources = [];
+
     if (storyOptions.sources) {
-      storyOptions.sources.forEach(source => {
-        source.removeChangeAnyListener(changeAnyListener);
-      });
       changeAnyListener = debounce(() => {
         channel.emit(
           REFRESH_SOURCE_EVENT,
@@ -50,6 +53,7 @@ export const withMercury = makeDecorator({
         );
       }, 500);
       storyOptions.sources.forEach(source => {
+        listenedSources.push(source);
         source.onChangeAny(changeAnyListener);
       });
     }
@@ -69,9 +73,9 @@ export const withMercury = makeDecorator({
 
 export const Display = DataDisplay;
 
-export const display = data => {
+export const display = (data, options = {}) => {
   const displayWithDomain = context => {
-    return <Display domains={context.parameters.mercury.domains} data={data} />;
+    return <Display domains={context.parameters.mercury.domains} data={data} dispatchRead={options.dispatchRead}/>;
   };
   return displayWithDomain;
 };

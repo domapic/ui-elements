@@ -66,6 +66,14 @@ const getQueries = (source, domains, sourceConstructor) => {
   return queries;
 };
 
+export const findSelectors = sources => {
+  return sources.filter(source => source.data.type === "Selector");
+};
+
+export const findOrigins = sources => {
+  return sources.filter(source => source.data.type !== "Selector");
+};
+
 const getSources = (sources, domains) => {
   return sources.map(source => {
     if (isArray(source)) {
