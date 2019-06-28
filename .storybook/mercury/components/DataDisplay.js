@@ -85,7 +85,7 @@ export default class DataDisplay extends Component {
   }
 
   onCleanSource(cleanDetails) {
-    if(this.props.dispatchRead) {
+    if(this.props.dispatchRead && cleanDetails.source._root) {
       const source = cleanDetails.source._queryId ? cleanDetails.source._root._queries[cleanDetails.source._queryId] : cleanDetails.source._root;
       source.read();
     }
