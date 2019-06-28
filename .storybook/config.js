@@ -3,6 +3,7 @@ import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { withConsole } from "@storybook/addon-console";
+import { withMocksServer } from "./mocks-server";
 
 import * as legal from "../src/data/legal";
 
@@ -12,6 +13,11 @@ addParameters({
   options: {
     theme
   },
+  backgrounds: [
+    { name: "light", value: "#FFFFFF", default: true },
+    { name: "light-dirty", value: "#F7F7F4" },
+    { name: "dark", value: "#1B1C1D" }
+  ],
   viewport: {
     defaultViewport: "responsive",
     viewports: {
@@ -29,20 +35,19 @@ addParameters({
     domains: {
       legal
     }
+  },
+  mocks: {
+    url: "http://localhost:3100",
+    behavior: "base",
+    delay: 0
   }
 });
 
 addDecorator(withInfo);
 addDecorator(centered);
+addDecorator(withMocksServer);
 
 addDecorator((storyFn, context) => withConsole()(storyFn)(context));
-addParameters({
-  backgrounds: [
-    { name: "light", value: "#FFFFFF", default: true },
-    { name: "light-dirty", value: "#F7F7F4" },
-    { name: "dark", value: "#1B1C1D" }
-  ]
-});
 
 const loadStories = () => {
   const req = require.context("../src", true, /\.stories\.js$/);
