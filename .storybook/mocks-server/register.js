@@ -1,13 +1,9 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import addons, { types } from "@storybook/addons";
 import { isNil } from "lodash";
 
-import { styled } from "@storybook/theming";
-import { ScrollArea } from "@storybook/components";
-
-import SettingsFormController from "./components/SettingsFormController";
-import DisplayBehaviorController from "./components/DisplayBehaviorController";
+import PanelViewController from "./components/PanelViewController";
 
 import { settings } from "./data/settings";
 import { behaviors, currentBehavior } from "./data/behaviors";
@@ -20,15 +16,6 @@ import {
   CHANGE_DELAY_EVENT
 } from "./shared";
 
-const PanelWrapper = styled(({ children, className }) => (
-  <ScrollArea horizontal vertical className={className}>
-    {children}
-  </ScrollArea>
-))({
-  height: "100%",
-  width: "100%"
-});
-
 class Panel extends React.Component {
   constructor(props) {
     super(props);
@@ -38,8 +25,8 @@ class Panel extends React.Component {
       delay: 0
     };
     this.setOptions = this.setOptions.bind(this);
-    this.handleChangeDelay = this.handleChangeDelay.bind(this);
-    this.handleChangeBehavior = this.handleChangeBehavior.bind(this);
+    this.sendDelay = this.sendDelay.bind(this);
+    this.sendBehavior = this.sendBehavior.bind(this);
   }
 
   componentDidMount() {
@@ -56,7 +43,6 @@ class Panel extends React.Component {
     if (options && (options.behavior || options.delay || options.url)) {
       const { behavior, delay, url } = options;
       const newState = {};
-      console.log(this.state);
       if (behavior && behavior !== this.state.behavior) {
         newState.behavior = behavior;
       }
@@ -78,42 +64,30 @@ class Panel extends React.Component {
     }
   }
 
-  handleChangeDelay(delay) {
+  sendDelay(delay) {
     const { api } = this.props;
     api.emit(CHANGE_DELAY_EVENT, delay);
-    this.setState(state => ({
-      ...state,
-      delay
-    }));
   }
 
-  handleChangeBehavior(behavior) {
+  sendBehavior(behavior) {
     const { api } = this.props;
     api.emit(CHANGE_BEHAVIOR_EVENT, behavior);
-    this.setState(state => ({
-      ...state,
-      behavior
-    }));
   }
 
   render() {
     const { behavior, delay } = this.state;
     const { active } = this.props;
+    console.log("Rendering main panel", behavior, delay);
     if (!active || !behavior || isNil(delay)) {
       return null;
     }
     return (
-      <Fragment>
-        <PanelWrapper>
-          <SettingsFormController
-            behavior={behavior}
-            delay={delay}
-            onChangeDelay={this.handleChangeDelay}
-            onChangeBehavior={this.handleChangeBehavior}
-          />
-          <DisplayBehaviorController behavior={behavior} />
-        </PanelWrapper>
-      </Fragment>
+      <PanelViewController
+        behavior={behavior}
+        delay={delay}
+        onChangeDelay={this.sendDelay}
+        onChangeBehavior={this.sendBehavior}
+      />
     );
   }
 }
@@ -123,7 +97,7 @@ Panel.propTypes = {
   api: PropTypes.any
 };
 
-Panel.displayName = "MocksServerPanel";
+Panel.displayName = "MocksServerRegister";
 
 addons.register(ADDON_ID, api => {
   const render = ({ active }) => <Panel api={api} active={active} />;
