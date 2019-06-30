@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { styled } from "@storybook/theming";
 import { ScrollArea } from "@storybook/components";
+import { isNil } from "lodash";
 
 import SettingsForm from "./SettingsForm";
 import DisplayBehaviorController from "./DisplayBehaviorController";
@@ -20,7 +21,10 @@ export default class Panel extends React.Component {
     super(props);
     this.state = {
       behavior: null,
+      selectedBehavior: null,
+      serverBehavior: null,
       delay: null,
+      selectedDelay: null,
       url: null
     };
     this.handleChangeDelay = this.handleChangeDelay.bind(this);
@@ -29,16 +33,34 @@ export default class Panel extends React.Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const newState = {};
-    console.log("Getting derived state", nextProps, prevState);
-    if (nextProps.delayFromServer !== prevState.delay) {
-      newState.delay = nextProps.delayFromServer;
-      nextProps.onChangeDelay(nextProps.delayFromServer);
-      console.log("Updating delay in state");
+    console.log("start ---------------");
+    console.log("Getting derived state");
+    console.log("next props", nextProps);
+    console.log("prev state", prevState);
+    // Delay story option has changed
+    if (
+      !isNil(nextProps.serverDelay) &&
+      !nextProps.serverDelayLoading &&
+      nextProps.delay !== prevState.delay
+    ) {
+      newState.delay = nextProps.delay;
+      if (nextProps.delay !== prevState.selectedDelay) {
+        newState.selectedDelay = nextProps.delay;
+      }
+      nextProps.onChangeDelay(nextProps.delay);
     }
-    if (nextProps.behaviorFromServer !== prevState.behavior) {
-      newState.behavior = nextProps.behaviorFromServer;
-      nextProps.onChangeBehavior(nextProps.behaviorFromServer);
-      console.log("Updating behavior in state");
+
+    // Behavior story option has changed
+    if (
+      nextProps.serverBehavior &&
+      !nextProps.serverBehaviorLoading &&
+      nextProps.behavior !== prevState.behavior
+    ) {
+      newState.behavior = nextProps.behavior;
+      if (nextProps.behavior !== prevState.selectedBehavior) {
+        newState.selectedBehavior = nextProps.behavior;
+      }
+      nextProps.onChangeBehavior(nextProps.behavior);
     }
     return {
       ...prevState,
@@ -46,54 +68,65 @@ export default class Panel extends React.Component {
     };
   }
 
-  handleChangeDelay(delay) {
-    this.setState(
-      state => ({
-        ...state,
-        delay
-      }),
-      () => {
-        this.props.onChangeDelay(delay);
-      }
-    );
+  handleChangeDelay(selectedDelay) {
+    if (selectedDelay.length) {
+      const newDelay = parseInt(selectedDelay);
+      this.setState(
+        state => ({
+          ...state,
+          selectedDelay: newDelay
+        }),
+        () => {
+          this.props.onChangeDelay(selectedDelay);
+        }
+      );
+    }
   }
 
-  handleChangeBehavior(behavior) {
+  handleChangeBehavior(selectedBehavior) {
     this.setState(
       state => ({
         ...state,
-        behavior
+        selectedBehavior
       }),
       () => {
-        this.props.onChangeBehavior(behavior);
+        this.props.onChangeBehavior(selectedBehavior);
       }
     );
   }
 
   render() {
-    const { behavior, delay } = this.state;
-    const { onChangeBehavior, onChangeDelay, behaviorsNames } = this.props;
+    const { selectedBehavior, selectedDelay } = this.state;
+    const { behaviorsNames, active } = this.props;
+    if (!active || isNil(selectedDelay) || !selectedBehavior) {
+      return null;
+    }
     return (
       <PanelWrapper>
         <SettingsForm
-          behavior={behavior}
+          behavior={selectedBehavior}
           behaviorsNames={behaviorsNames}
-          delay={delay}
-          onChangeDelay={onChangeDelay}
-          onChangeBehavior={onChangeBehavior}
+          delay={selectedDelay}
+          onChangeDelay={this.handleChangeDelay}
+          onChangeBehavior={this.handleChangeBehavior}
         />
-        <DisplayBehaviorController behavior={behavior} />
+        <DisplayBehaviorController behavior={selectedBehavior} />
       </PanelWrapper>
     );
   }
 }
 
 Panel.propTypes = {
-  behaviorFromServer: PropTypes.string,
+  active: PropTypes.bool,
+  behavior: PropTypes.string,
   behaviorsNames: PropTypes.array,
-  delayFromServer: PropTypes.number,
+  delay: PropTypes.number,
   onChangeBehavior: PropTypes.func.isRequired,
-  onChangeDelay: PropTypes.func.isRequired
+  onChangeDelay: PropTypes.func.isRequired,
+  serverBehavior: PropTypes.string,
+  serverBehaviorLoading: PropTypes.bool,
+  serverDelay: PropTypes.number,
+  serverDelayLoading: PropTypes.bool
 };
 
 Panel.displayName = "MocksServerPanel";

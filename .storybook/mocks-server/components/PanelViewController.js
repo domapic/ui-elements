@@ -19,8 +19,10 @@ const mapDataSourceToProps = ({ onChangeDelay, onChangeBehavior }) => {
   return {
     onChangeDelay: updateDelay,
     onChangeBehavior: updateBehavior,
-    delayFromServer: delay.read.getters.value,
-    behaviorFromServer: currentBehaviorName.read.getters.value,
+    serverDelay: delay.read.getters.value,
+    serverDelayLoading: delay.read.getters.loading,
+    serverBehavior: currentBehaviorName.read.getters.value,
+    serverBehaviorLoading: currentBehaviorName.read.getters.loading,
     behaviorsNames: behaviorsNames.read.getters.value
   };
 };

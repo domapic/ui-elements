@@ -47,6 +47,7 @@ class Panel extends React.Component {
         newState.behavior = behavior;
       }
       if (url && url !== this.state.url) {
+        newState.url = url;
         const config = {
           baseUrl: url
         };
@@ -54,7 +55,7 @@ class Panel extends React.Component {
         behaviors.config(config);
         currentBehavior.config(config);
       }
-      if (delay && delay !== this.state.delay) {
+      if (!isNil(delay) && delay !== this.state.delay) {
         newState.delay = delay;
       }
       this.setState(state => ({
@@ -75,10 +76,9 @@ class Panel extends React.Component {
   }
 
   render() {
-    const { behavior, delay } = this.state;
+    const { behavior, delay, url } = this.state;
     const { active } = this.props;
-    console.log("Rendering main panel", behavior, delay);
-    if (!active || !behavior || isNil(delay)) {
+    if (!url) {
       return null;
     }
     return (
@@ -87,6 +87,7 @@ class Panel extends React.Component {
         delay={delay}
         onChangeDelay={this.sendDelay}
         onChangeBehavior={this.sendBehavior}
+        active={active}
       />
     );
   }
