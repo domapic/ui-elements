@@ -28,6 +28,7 @@ class Panel extends React.Component {
     this.setOptions = this.setOptions.bind(this);
     this.sendDelay = this.sendDelay.bind(this);
     this.sendBehavior = this.sendBehavior.bind(this);
+    this.configOrigins = this.configOrigins.bind(this);
     this.cleanServerData = this.cleanServerData.bind(this);
   }
 
@@ -56,13 +57,7 @@ class Panel extends React.Component {
       }
       if (url && url !== this.state.url) {
         newState.url = url;
-        const config = {
-          baseUrl: url,
-          retries: 0
-        };
-        settings.config(config);
-        behaviors.config(config);
-        currentBehavior.config(config);
+        this.configOrigins(url);
       }
       if (!isNil(delay) && delay !== this.state.delay) {
         newState.delay = delay;
@@ -72,6 +67,17 @@ class Panel extends React.Component {
         ...newState
       }));
     }
+  }
+
+  configOrigins(url) {
+    const config = {
+      baseUrl: url,
+      retries: 0
+    };
+    settings.config(config);
+    behaviors.config(config);
+    currentBehavior.config(config);
+    this.cleanServerData();
   }
 
   sendDelay(delay) {
@@ -105,6 +111,8 @@ class Panel extends React.Component {
         errorMessage={errorMessage}
         onErrorRetry={this.cleanServerData}
         active={active}
+        url={url}
+        onChangeUrl={this.configOrigins}
       />
     );
   }

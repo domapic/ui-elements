@@ -7,6 +7,7 @@ import { isNil } from "lodash";
 import SettingsForm from "./SettingsForm";
 import DisplayBehaviorController from "./DisplayBehaviorController";
 import ServerError from "./ServerError";
+import Url from "./Url";
 
 const PanelWrapper = styled(({ children, className }) => (
   <ScrollArea horizontal vertical className={className}>
@@ -115,7 +116,9 @@ export default class Panel extends React.Component {
       errorMessage,
       onErrorRetry,
       changeBehaviorError,
-      changeSettingsError
+      changeSettingsError,
+      url,
+      onChangeUrl
     } = this.props;
     const hasToRenderForm = !serverError && !isNil(selectedDelay) && selectedBehavior;
     const updateServerError = this.updateServerError(changeBehaviorError, changeSettingsError);
@@ -124,6 +127,7 @@ export default class Panel extends React.Component {
     }
     return (
       <PanelWrapper>
+        <Url value={url} onChange={onChangeUrl} />
         {serverError ? (
           <ServerError
             title="Mocks Server not reachable"
@@ -161,12 +165,14 @@ Panel.propTypes = {
   errorMessage: PropTypes.string,
   onChangeBehavior: PropTypes.func.isRequired,
   onChangeDelay: PropTypes.func.isRequired,
+  onChangeUrl: PropTypes.func.isRequired,
   onErrorRetry: PropTypes.func.isRequired,
   serverBehavior: PropTypes.string,
   serverBehaviorLoading: PropTypes.bool,
   serverDelay: PropTypes.number,
   serverDelayLoading: PropTypes.bool,
-  serverError: PropTypes.instanceOf(Error)
+  serverError: PropTypes.instanceOf(Error),
+  url: PropTypes.string
 };
 
 Panel.displayName = "MocksServerPanel";
