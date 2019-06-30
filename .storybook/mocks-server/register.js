@@ -22,11 +22,13 @@ class Panel extends React.Component {
     this.state = {
       url: null,
       behavior: null,
-      delay: 0
+      delay: null,
+      errorMessage: ""
     };
     this.setOptions = this.setOptions.bind(this);
     this.sendDelay = this.sendDelay.bind(this);
     this.sendBehavior = this.sendBehavior.bind(this);
+    this.cleanServerData = this.cleanServerData.bind(this);
   }
 
   componentDidMount() {
@@ -40,16 +42,23 @@ class Panel extends React.Component {
   }
 
   setOptions(options) {
-    if (options && (options.behavior || options.delay || options.url)) {
-      const { behavior, delay, url } = options;
+    if (
+      options &&
+      (options.behavior || !isNil(options.delay) || options.url || options.errorMessage)
+    ) {
+      const { behavior, delay, url, errorMessage } = options;
       const newState = {};
       if (behavior && behavior !== this.state.behavior) {
         newState.behavior = behavior;
       }
+      if (errorMessage && errorMessage !== this.state.errorMessage) {
+        newState.errorMessage = errorMessage;
+      }
       if (url && url !== this.state.url) {
         newState.url = url;
         const config = {
-          baseUrl: url
+          baseUrl: url,
+          retries: 0
         };
         settings.config(config);
         behaviors.config(config);
@@ -75,8 +84,14 @@ class Panel extends React.Component {
     api.emit(CHANGE_BEHAVIOR_EVENT, behavior);
   }
 
+  cleanServerData() {
+    settings.clean();
+    behaviors.clean();
+    currentBehavior.clean();
+  }
+
   render() {
-    const { behavior, delay, url } = this.state;
+    const { behavior, delay, url, errorMessage } = this.state;
     const { active } = this.props;
     if (!url) {
       return null;
@@ -87,6 +102,8 @@ class Panel extends React.Component {
         delay={delay}
         onChangeDelay={this.sendDelay}
         onChangeBehavior={this.sendBehavior}
+        errorMessage={errorMessage}
+        onErrorRetry={this.cleanServerData}
         active={active}
       />
     );

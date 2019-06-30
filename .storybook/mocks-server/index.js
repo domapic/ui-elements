@@ -13,7 +13,8 @@ export const withMocksServer = makeDecorator({
     channel.emit(OPTIONS_EVENT, {
       behavior: storyOptions.behavior,
       delay: storyOptions.delay,
-      url: storyOptions.url
+      url: storyOptions.url,
+      errorMessage: storyOptions.errorMessage
     });
 
     channel.removeAllListeners(CHANGE_DELAY_EVENT);

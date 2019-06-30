@@ -10,7 +10,8 @@ export default class Delay extends React.Component {
     this.state = {
       value: props.value
     };
-    this.handleChange = debounce(this.handleChange.bind(this), 500);
+    this.sendChange = debounce(this.sendChange.bind(this), 500);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -19,19 +20,26 @@ export default class Delay extends React.Component {
     }
   }
 
-  handleChange(event) {
+  sendChange(value) {
     const { onChange } = this.props;
-    const { value } = event.target;
-
     let parsedValue = Number(value);
-
-    this.setState({
-      value
-    });
 
     if (!(Number.isNaN(parsedValue) || value === "")) {
       onChange(value);
     }
+  }
+
+  handleChange(event) {
+    const { value } = event.target;
+
+    this.setState(
+      {
+        value
+      },
+      () => {
+        this.sendChange(value);
+      }
+    );
   }
 
   render() {

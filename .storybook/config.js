@@ -39,7 +39,8 @@ addParameters({
   mocks: {
     url: "http://localhost:3100",
     behavior: "base",
-    delay: 0
+    delay: 0,
+    errorMessage: `Start the mocks server running "npm run mocks"`
   }
 });
 

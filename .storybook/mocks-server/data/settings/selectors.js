@@ -2,4 +2,4 @@ import { Selector } from "@xbyorange/mercury";
 
 import { settings } from "./origins";
 
-export const delay = new Selector(settings, settingsResult => parseInt(settingsResult.delay), 0);
+export const delay = new Selector(settings, settingsResult => parseInt(settingsResult.delay));
