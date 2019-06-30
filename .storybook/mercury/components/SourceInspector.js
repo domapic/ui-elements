@@ -12,7 +12,14 @@ const SourceContainer = styled.div({
   fontSize: "14px",
   li: {
     margin: "0"
-  }
+  },
+  position: "relative"
+});
+
+const ButtonContainer = styled.div({
+  position: "absolute",
+  top: "6px",
+  right: "0px"
 });
 
 export default class MercuryInspector extends Component {
@@ -22,14 +29,16 @@ export default class MercuryInspector extends Component {
       <SourceContainer>
         <Inspector theme="chromeLight" data={source.data} name={source.name} />
         {onClickClean ? (
-          <Form.Button
-            type="button"
-            onClick={() => {
-              onClickClean(source);
-            }}
-          >
-            Clean
-          </Form.Button>
+          <ButtonContainer>
+            <Form.Button
+              type="button"
+              onClick={() => {
+                onClickClean(source);
+              }}
+            >
+              Clean
+            </Form.Button>
+          </ButtonContainer>
         ) : null}
       </SourceContainer>
     );
