@@ -13,6 +13,7 @@ import {
   PARAM_KEY,
   PANEL_ID,
   ACTION_EVENT,
+  CLEAN_SOURCE_EVENT,
   OPTIONS_EVENT,
   REFRESH_SOURCE_EVENT
 } from "./shared";
@@ -37,6 +38,7 @@ class Panel extends React.Component {
     this.setOptions = this.setOptions.bind(this);
     this.onStoryChange = this.onStoryChange.bind(this);
     this.onSourcesChange = this.onSourcesChange.bind(this);
+    this.sendClean = this.sendClean.bind(this);
   }
 
   componentDidMount() {
@@ -83,6 +85,11 @@ class Panel extends React.Component {
     });
   }
 
+  sendClean(source) {
+    const { api } = this.props;
+    api.emit(CLEAN_SOURCE_EVENT, source);
+  }
+
   render() {
     const { actions, sources } = this.state;
     const { active } = this.props;
@@ -105,7 +112,9 @@ class Panel extends React.Component {
     return (
       <Fragment>
         <PanelWrapper>
-          {sources.length > 0 ? <SourcesDisplay sources={sources} /> : null}
+          {sources.length > 0 ? (
+            <SourcesDisplay sources={sources} onClickClean={this.sendClean} />
+          ) : null}
           {actions.length > 0 ? (
             <ActionsForm actions={actions} onClickAction={this.sendAction} />
           ) : null}

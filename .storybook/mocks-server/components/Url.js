@@ -48,5 +48,5 @@ export default class Url extends React.Component {
 
 Url.propTypes = {
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.number
+  value: PropTypes.string
 };

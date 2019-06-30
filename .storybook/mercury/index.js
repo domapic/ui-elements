@@ -4,7 +4,13 @@ import addons, { makeDecorator } from "@storybook/addons";
 
 import { BOOLEAN, TEXT, NUMBER, OBJECT } from "./components/types";
 
-import { PARAM_KEY, OPTIONS_EVENT, ACTION_EVENT, REFRESH_SOURCE_EVENT } from "./shared";
+import {
+  PARAM_KEY,
+  OPTIONS_EVENT,
+  ACTION_EVENT,
+  REFRESH_SOURCE_EVENT,
+  CLEAN_SOURCE_EVENT
+} from "./shared";
 
 import { parseSources, parseActions } from "./sourcesParser";
 import DataDisplay from "./components/DataDisplay";
@@ -32,6 +38,7 @@ export const withMercury = makeDecorator({
     const storyOptions = parameters || options;
     const channel = addons.getChannel();
     const parsedActions = parseActions(storyOptions.actions, storyOptions.domains);
+    const storySources = storyOptions.sources;
 
     channel.emit(OPTIONS_EVENT, {
       actions: parsedActions,
@@ -39,6 +46,7 @@ export const withMercury = makeDecorator({
     });
 
     channel.removeAllListeners(ACTION_EVENT);
+    channel.removeAllListeners(CLEAN_SOURCE_EVENT);
 
     listenedSources.forEach(source => {
       source.removeChangeAnyListener(changeAnyListener);
@@ -59,10 +67,19 @@ export const withMercury = makeDecorator({
     }
 
     channel.on(ACTION_EVENT, actionDetails => {
-      console.log("Mercury action", actionDetails.name, actionDetails.value);
       parsedActions.forEach(action => {
         if (action.name === actionDetails.name) {
+          console.log("Sending Mercury action", actionDetails.name, actionDetails.value);
           action.action(actionDetails.value);
+        }
+      });
+    });
+
+    channel.on(CLEAN_SOURCE_EVENT, parsedSource => {
+      storySources.forEach(source => {
+        if (source._id === parsedSource.data.id) {
+          console.log("Cleaning Mercury source", source._id);
+          source.clean();
         }
       });
     });

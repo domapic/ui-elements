@@ -7,7 +7,7 @@ import DisplayWrapper from "./DisplayWrapper";
 
 import { findSelectors, findOrigins } from "../sourcesParser";
 
-const SourcesList = ({ title, sources }) => {
+const SourcesList = ({ title, sources, onClickClean }) => {
   if (!sources.length) {
     return null;
   }
@@ -15,27 +15,32 @@ const SourcesList = ({ title, sources }) => {
     <Fragment>
       <SectionTitle>{title}</SectionTitle>
       {sources.map(source => (
-        <SourceInspector key={source.name || source._id || source.source._id} source={source} />
+        <SourceInspector
+          key={source.name || source._id || source.source._id}
+          source={source}
+          onClickClean={onClickClean}
+        />
       ))}
     </Fragment>
   );
 };
 
 SourcesList.propTypes = {
+  onClickClean: PropTypes.func,
   sources: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired
 };
 
 export default class SourcesDisplay extends Component {
   render() {
-    const { sources } = this.props;
+    const { sources, onClickClean } = this.props;
     const selectors = findSelectors(sources);
     const origins = findOrigins(sources);
 
     return (
       <DisplayWrapper>
-        <SourcesList title="ORIGINS" sources={origins} />
-        <SourcesList title="SELECTORS" sources={selectors} />
+        <SourcesList title="ORIGINS" sources={origins} onClickClean={onClickClean} />
+        <SourcesList title="SELECTORS" sources={selectors} onClickClean={onClickClean} />
       </DisplayWrapper>
     );
   }
@@ -44,5 +49,6 @@ export default class SourcesDisplay extends Component {
 SourcesDisplay.displayName = "SourcesDisplay";
 
 SourcesDisplay.propTypes = {
+  onClickClean: PropTypes.func,
   sources: PropTypes.arrayOf(PropTypes.any).isRequired
 };
