@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { debounce } from "lodash";
 
 import { Form } from "@storybook/components";
 
@@ -9,7 +10,7 @@ export default class Delay extends React.Component {
     this.state = {
       value: props.value
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChange = debounce(this.handleChange.bind(this), 500);
   }
 
   componentWillReceiveProps(nextProps) {
