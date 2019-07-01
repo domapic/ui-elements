@@ -4,6 +4,7 @@ import { withInfo } from "@storybook/addon-info";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { withConsole } from "@storybook/addon-console";
 import { withMocksServer } from "./mocks-server";
+import { withMercuryApi } from "./mercury-api";
 
 import * as legalData from "../src/data/legal";
 import * as serviceData from "../src/data/service";
@@ -43,12 +44,17 @@ addParameters({
     behavior: "base",
     delay: 0,
     errorMessage: `Start the mocks server running "npm run mocks"`
+  },
+  mercuryApi: {
+    baseUrl: "http://localhost:3100/api",
+    clean: true
   }
 });
 
 addDecorator(withInfo);
 addDecorator(centered);
 addDecorator(withMocksServer);
+addDecorator(withMercuryApi);
 
 addDecorator((storyFn, context) => withConsole()(storyFn)(context));
 

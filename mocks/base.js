@@ -1,13 +1,15 @@
 const { Feature } = require("@xbyorange/mocks-server");
 
-const { getAccessoriesEmpty, getAccessoriesSuccess } = require("./fixtures/accessories/get");
-const { getConfigSuccess } = require("./fixtures/config/get");
+const { getConfig, getConfigNoCustom, getConfigError } = require("./fixtures/config/get");
 
-const base = new Feature([getAccessoriesSuccess, getConfigSuccess]);
+const base = new Feature([getConfig]);
 
-const noAccessories = base.extend([getAccessoriesEmpty]);
+const error = base.extend([getConfigError]);
+
+const configNoCustom = base.extend([getConfigNoCustom]);
 
 module.exports = {
   base,
-  noAccessories
+  configNoCustom,
+  error
 };

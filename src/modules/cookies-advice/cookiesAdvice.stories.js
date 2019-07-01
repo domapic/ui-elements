@@ -59,10 +59,6 @@ stories.add(
           })
         }
       ]
-    },
-    mocks: {
-      behavior: "noAccessories",
-      delay: 100
     }
   }
 );
