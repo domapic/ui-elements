@@ -8,7 +8,7 @@ const findNameAndDomain = (source, domains) => {
   if (domains) {
     Object.keys(domains).forEach(domainName => {
       Object.keys(domains[domainName]).forEach(sourceName => {
-        if (!found && source._id.indexOf(domains[domainName][sourceName]._id) === 0) {
+        if (!found && source === domains[domainName][sourceName]) {
           found = true;
           name = sourceName;
           domain = domainName;

@@ -1,0 +1,31 @@
+.ui.inverted.menu.content-container__menu--bottom--search {
+  padding-bottom: 41px;
+  background-color: #51545b;
+}
+
+.ui.fixed.menu.content-container__menu--top {
+  padding-top:54px;
+}
+
+.content-container__background--empty {
+  padding-top:30px;
+}
+
+.ui.content-container__segment.loading {
+  min-height: 200px;
+}
+
+.ui.content-container__segment.basic {
+  padding:0;
+}
+
+.ui.content-container__segment.basic.loading:before {
+  background: none;
+}
+.content-container__header {
+  min-height: 30px;
+}
+
+.ui.top.fixed.content-container__menu--top.menu, .ui.bottom.fixed.content-container__menu--bottom--search.menu {
+  z-index:1100;
+}

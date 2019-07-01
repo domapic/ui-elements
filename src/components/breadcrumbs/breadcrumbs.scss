@@ -1,0 +1,16 @@
+.breadcrumbs__separator {
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.breadcrumbs a .icon:only-child {
+  font-size:1em;
+  margin-right:0;
+  padding:0;
+}
+
+.breadcrumbs .icon:only-child {
+  font-size:1em;
+  margin-right:3px;
+  padding:0;
+}

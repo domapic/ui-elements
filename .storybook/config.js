@@ -1,3 +1,5 @@
+import React from "react";
+
 import { configure, addDecorator, addParameters } from "@storybook/react";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";
@@ -5,7 +7,8 @@ import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { withConsole } from "@storybook/addon-console";
 import { withMocksServer } from "./mocks-server";
 
-import * as legal from "../src/data/legal";
+import * as legalData from "../src/data/legal";
+import * as serviceData from "../src/data/service";
 
 import theme from "./theme";
 
@@ -33,7 +36,8 @@ addParameters({
   },
   mercury: {
     domains: {
-      legal
+      legal: legalData,
+      service: serviceData
     }
   },
   mocks: {
@@ -44,7 +48,19 @@ addParameters({
   }
 });
 
+const fullWidth = storyFn => (
+  <div
+    style={{
+      textAlign: "center",
+      minWidth: "90vw"
+    }}
+  >
+    {storyFn()}
+  </div>
+);
+
 addDecorator(withInfo);
+addDecorator(fullWidth);
 addDecorator(centered);
 addDecorator(withMocksServer);
 

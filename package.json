@@ -19,13 +19,12 @@
     "access": "public"
   },
   "files": [
-    "dist",
     "components",
     "contexts",
     "data",
+    "helpers",
     "modules"
   ],
-  "main": "dist/index.js",
   "scripts": {
     "build": "rollup --config",
     "dev": "cross-env node ./scripts/watchBuild.js",
@@ -48,6 +47,7 @@
     "@xbyorange/mercury-memory": "^1.1.0",
     "@xbyorange/react-mercury": "^1.0.1",
     "hoist-non-react-statics": "^3.3.0",
+    "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.2"
