@@ -1,6 +1,7 @@
 import moment from "moment";
 
 export const formatDate = dateString => {
+  console.log(dateString);
   return moment(dateString).format("YY-MM-DD, HH:mm:ss");
 };
 
