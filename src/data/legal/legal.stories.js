@@ -1,12 +1,10 @@
 import { storiesOf } from "@storybook/react";
-import { withMercury, display } from "storybook/addons/mercury";
+import { display } from "storybook/addons/mercury";
 
 import * as data from "data/legal";
 // import readme from "./readme.md";
 
 const stories = storiesOf("Data/legal", module);
-
-stories.addDecorator(withMercury);
 
 stories.add(
   "simple",

@@ -1,9 +1,11 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { withKnobs } from "@storybook/addon-knobs";
 
-import { withMercury, boolean, number, text, object } from "storybook/addons/mercury";
-import withRoutesKnob from "storybook/decorators/with-routes-knob";
+import { object } from "@storybook/addon-knobs";
+
+import { boolean, number, text, object as mercuryObject } from "storybook/addons/mercury";
+import { withContextKnobs } from "storybook/displays/with-context-knobs";
+import RoutesContext from "contexts/routes";
 
 import {
   cookies,
@@ -17,15 +19,15 @@ import readme from "./readme.md";
 
 const stories = storiesOf("Modules/cookies-advice", module);
 
-stories.addDecorator(withKnobs);
-stories.addDecorator(withMercury);
-
 stories.add(
   "simple",
   () => {
-    const CookiesAdvice = withRoutesKnob({
-      privacy: "#"
-    })(CookiesAdviceModule);
+    const CookiesAdvice = withContextKnobs(
+      RoutesContext,
+      object("routes context", {
+        privacy: "#"
+      })
+    )(CookiesAdviceModule);
     return <CookiesAdvice />;
   },
   {
@@ -54,7 +56,7 @@ stories.add(
         {
           name: "testObject",
           action: toggleCookies,
-          value: object({
+          value: mercuryObject({
             foo: "foo4"
           })
         }
