@@ -1,33 +1,32 @@
 @import "theme";
 
-.accept-cookies {
+.acceptCookies {
   opacity:0.8;
   padding:6px 20px;
-}
-
-.accept-cookies a {
-  text-decoration: underline;
-  padding-left: 6px;
-  color:#fff;
-}
-
-.accept-cookies a:hover {
-  color:#fff;
-}
-
-.accept-cookies p {
-  word-wrap: break-word;
-  max-width: 80vw;
-}
-
-@include mobile-and-tablet {
-  .accept-cookies p {
-    max-width: 70vw;
+  a {
+    text-decoration: underline;
+    padding-left: 6px;
+    color:#fff;
   }
-}
 
-.accept-cookies.ui.menu .item>.button {
-  color: #000;
-  padding-top:0.5em;
-  padding-bottom: 0.5em;
+  a:hover {
+    color:#fff;
+  }
+
+  p {
+    word-wrap: break-word;
+    max-width: 80vw;
+  }
+
+  @include mobile-and-tablet {
+    p {
+      max-width: 70vw;
+    }
+  }
+
+  &:global(.ui.menu .item>.button) {
+    color: #000;
+    padding-top:0.5em;
+    padding-bottom: 0.5em;
+  }
 }

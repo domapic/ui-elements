@@ -25,10 +25,10 @@ yarn-error.log*
 .vs
 
 #build
-webpack-stats.json
 /components
 /modules
 /contexts
 /data
+.public
 
 #config

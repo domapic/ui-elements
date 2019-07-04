@@ -6,7 +6,7 @@ import { Menu, Button } from "semantic-ui-react";
 
 import Link from "components/link";
 
-import "./acceptCookies.scss";
+import styles from "./acceptCookies.scss";
 
 export default class AcceptCookies extends React.Component {
   constructor(props) {
@@ -23,7 +23,7 @@ export default class AcceptCookies extends React.Component {
       return null;
     }
     return (
-      <Menu inverted borderless fixed="bottom" className="accept-cookies">
+      <Menu inverted borderless fixed="bottom" className={styles["acceptCookies"]}>
         <Menu.Item position="left">
           <p>
             We use cookies to help optimize the website and give you the best experience. By

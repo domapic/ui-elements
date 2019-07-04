@@ -1,37 +1,40 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-
 const aliasImporter = require("node-sass-alias-importer");
 
-// Export a function. Accept the base config as the only param.
 module.exports = async ({ config /*, mode*/ }) => {
-  // `mode` has a value of 'DEVELOPMENT' or 'PRODUCTION'
-  // You can change the configuration based on that.
-  // 'PRODUCTION' is used when building the static version of storybook.
-
-  // Make whatever fine-grained changes you need
-  config.module.rules.push({
-    test: /\.scss$/,
-    use: [
-      "style-loader",
-      "css-loader",
-      {
-        loader: "sass-loader",
-        options: {
-          importer: aliasImporter({
-            theme: "./src/themes/base/index"
-          })
+  config.module.rules.push(
+    {
+      test: /\.scss$/,
+      use: [
+        "style-loader",
+        {
+          loader: "css-loader",
+          options: {
+            sourceMap: true,
+            modules: {
+              localIdentName: `[local]___${new Date().getTime()}__[hash:base64:5]`
+            }
+          }
+        },
+        "postcss-loader",
+        {
+          loader: "sass-loader",
+          options: {
+            importer: aliasImporter({
+              theme: `./src/themes/base/index`
+            })
+          }
         }
-      }
-    ],
-    include: path.resolve(__dirname, "..", "src")
-  });
-
-  config.module.rules.push({
-    test: /\.stories\.js?$/,
-    loaders: [require.resolve("@storybook/addon-storysource/loader")],
-    enforce: "pre"
-  });
+      ],
+      include: path.resolve(__dirname, "..")
+    },
+    {
+      test: /\.stories\.js?$/,
+      loaders: [require.resolve("@storybook/addon-storysource/loader")],
+      enforce: "pre"
+    }
+  );
 
   config.plugins.push(
     new CopyWebpackPlugin([
@@ -44,10 +47,14 @@ module.exports = async ({ config /*, mode*/ }) => {
         from: "semantic.min.css",
         to: "semantic/semantic.min.css",
         context: "node_modules/semantic-ui-css"
+      },
+      {
+        from: "**",
+        to: ".",
+        context: "static"
       }
     ])
   );
 
-  // Return the altered config
   return config;
 };

@@ -4,6 +4,7 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { withConsole } from "@storybook/addon-console";
 
+import { withMercury } from "storybook/addons/mercury";
 import { withMocksServer } from "storybook/addons/mocks-server";
 import { withMercuryApi } from "storybook/addons/mercury-api";
 
@@ -55,6 +56,7 @@ addParameters({
 addDecorator(withKnobs);
 addDecorator(centered);
 addDecorator(withMocksServer);
+addDecorator(withMercury);
 addDecorator(withMercuryApi);
 
 addDecorator((storyFn, context) => withConsole()(storyFn)(context));

@@ -4,10 +4,10 @@ const globule = require("globule");
 const commonjs = require("rollup-plugin-commonjs");
 const resolve = require("rollup-plugin-node-resolve");
 const babel = require("rollup-plugin-babel");
-const sassPlugin = require("rollup-plugin-sass");
+const postcss = require("rollup-plugin-postcss");
 const { flatten, compact, difference } = require("lodash");
 const sass = require("node-sass");
-const fsExtra = require("fs-extra");
+const autoprefixer = require("autoprefixer");
 
 const packageJson = require("./package.json");
 
@@ -92,20 +92,40 @@ const getElementConfig = (type, name) => {
       babel({
         exclude: "node_modules/**"
       }),
-      sassPlugin({
-        insert: true,
-        output: styles => {
-          const filePath = path.resolve(__dirname, type, `${name}.css`);
-          fsExtra.writeFile(filePath, styles, "utf8").then(() => {
-            console.log(`created ${filePath}`);
-          });
+      postcss({
+        modules: {
+          localIdentName: `[local]___${new Date().getTime()}__[hash:base64:5]`
         },
-        runtime: sass,
-        options: {
-          importer: aliasImporter({
-            theme: "./src/themes/base/index"
-          })
-        }
+        minimize: true,
+        plugins: [autoprefixer({})],
+        use: ["sass-alias"],
+        loaders: [
+          {
+            name: "sass-alias",
+            test: /\.s[ac]ss$/,
+            process: function() {
+              return new Promise((resolve, reject) => {
+                sass.render(
+                  {
+                    file: this.id,
+                    importer: aliasImporter({
+                      theme: `./src/themes/base/index`
+                    })
+                  },
+                  (err, result) => {
+                    if (err) {
+                      reject(err);
+                    } else {
+                      resolve({
+                        code: result.css.toString()
+                      });
+                    }
+                  }
+                );
+              });
+            }
+          }
+        ]
       })
     ]
   };
