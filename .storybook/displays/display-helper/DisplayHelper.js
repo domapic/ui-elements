@@ -80,7 +80,3 @@ DisplayHelper.propTypes = {
 };
 
 DisplayHelper.displayName = "DisplayHelper";
-
-DisplayHelper.propTypes = {
-  helper: PropTypes.func.isRequired
-};

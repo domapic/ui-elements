@@ -1,6 +1,6 @@
 import { configure, addDecorator, addParameters } from "@storybook/react";
 import centered from "@storybook/addon-centered/react";
-import { withInfo } from "@storybook/addon-info";
+import { withKnobs } from "@storybook/addon-knobs";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { withConsole } from "@storybook/addon-console";
 
@@ -52,7 +52,7 @@ addParameters({
   }
 });
 
-addDecorator(withInfo);
+addDecorator(withKnobs);
 addDecorator(centered);
 addDecorator(withMocksServer);
 addDecorator(withMercuryApi);
