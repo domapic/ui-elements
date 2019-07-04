@@ -29,18 +29,21 @@ export class DisplayContext extends Component {
     const { Context, name } = this.props;
     return (
       <DisplayWrapper>
-        <ContextName>
-        {name} context
-        </ContextName>
-          <Context.Consumer>
-            {defaultValue => {
-              return (
-                <InspectorWrapper>
-                  <Inspector theme="chromeLight" name="Default value" data={defaultValue} expandLevel={10} />
-                </InspectorWrapper>
-              );
-            }}
-          </Context.Consumer>
+        <ContextName>{name} context</ContextName>
+        <Context.Consumer>
+          {defaultValue => {
+            return (
+              <InspectorWrapper>
+                <Inspector
+                  theme="chromeLight"
+                  name="Default value"
+                  data={defaultValue}
+                  expandLevel={10}
+                />
+              </InspectorWrapper>
+            );
+          }}
+        </Context.Consumer>
       </DisplayWrapper>
     );
   }
