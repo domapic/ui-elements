@@ -1,11 +1,10 @@
 import React from "react";
 
 import { storiesOf } from "@storybook/react";
-import { withMercury } from "../../../.storybook/mercury";
+import { withMercury } from "storybook/addons/mercury";
+import fullWidth from "storybook/decorators/full-width";
 
 import { config, baseConfig, customConfig } from "data/service";
-
-import fullWidth from "storybook/full-width";
 
 import ConfigModule from "./index";
 import readme from "./readme.md";

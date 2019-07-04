@@ -1,9 +1,9 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs } from "@storybook/addon-knobs";
-import { withMercury, boolean, number, text, object } from "../../../.storybook/mercury";
 
-import withRoutesKnob from "storybook/with-routes-knob";
+import { withMercury, boolean, number, text, object } from "storybook/addons/mercury";
+import withRoutesKnob from "storybook/decorators/with-routes-knob";
 
 import {
   cookies,

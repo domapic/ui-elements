@@ -1,5 +1,5 @@
 import { storiesOf } from "@storybook/react";
-import { withMercury, display } from "../../../.storybook/mercury";
+import { withMercury, display } from "storybook/addons/mercury";
 
 import * as service from "data/service";
 // import readme from "./readme.md";

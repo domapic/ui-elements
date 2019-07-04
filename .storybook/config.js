@@ -3,8 +3,9 @@ import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { withConsole } from "@storybook/addon-console";
-import { withMocksServer } from "./mocks-server";
-import { withMercuryApi } from "./mercury-api";
+
+import { withMocksServer } from "storybook/addons/mocks-server";
+import { withMercuryApi } from "storybook/addons/mercury-api";
 
 import * as legalData from "../src/data/legal";
 import * as serviceData from "../src/data/service";

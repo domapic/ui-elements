@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, text } from "@storybook/addon-knobs";
 
-import { DisplayHelper } from "storybook/display-helper";
+import { DisplayHelper } from "storybook/displays/display-helper";
 
 import { formatDate } from "./index";
 import readme from "./readme.md";

@@ -6,7 +6,7 @@
       {
         "root": ["."],
         "alias": {
-          "storybook": "./src/storybook",
+          "storybook": "./.storybook",
           "contexts": "./src/contexts",
           "components": "./src/components",
           "modules": "./src/modules",
