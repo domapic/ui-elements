@@ -4,6 +4,5 @@ export const appendStyleSheet = (url, options = {}) => {
   link.rel = "stylesheet";
   link.type = "text/css";
   link.href = url;
-  console.log(method);
   document.head[method](link);
 };
