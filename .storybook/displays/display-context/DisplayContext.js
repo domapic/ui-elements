@@ -50,7 +50,7 @@ export class DisplayContext extends Component {
 }
 
 DisplayContext.propTypes = {
-  Context: PropTypes.func,
+  Context: PropTypes.any,
   name: PropTypes.string
 };
 

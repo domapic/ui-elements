@@ -65,6 +65,7 @@
     "@storybook/addon-centered": "^5.1.9",
     "@storybook/addon-console": "^1.1.0",
     "@storybook/addon-knobs": "^5.1.8",
+    "@storybook/addon-links": "^5.1.9",
     "@storybook/addon-notes": "^5.1.8",
     "@storybook/addon-storysource": "^5.1.8",
     "@storybook/addon-viewport": "^5.1.8",
@@ -116,6 +117,7 @@
     "sass-loader": "^7.1.0",
     "serve": "^11.0.2",
     "sinon": "^7.3.2",
+    "storybook-react-router": "^1.0.5",
     "style-loader": "^0.23.1"
   },
   "lint-staged": {

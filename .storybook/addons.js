@@ -8,3 +8,4 @@ import "@storybook/addon-console";
 import "storybook/addons/mercury/register";
 import "storybook/addons/mercury-api/register";
 import "storybook/addons/mocks-server/register";
+import "@storybook/addon-links/register";
