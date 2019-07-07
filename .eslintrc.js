@@ -17,6 +17,7 @@ module.exports = {
     "it": "readonly",
     "expect": "readonly",
     "afterEach": "readonly",
+    "beforeEach": "readonly",
     "Set": "readonly"
   },
   plugins: ["prettier"],

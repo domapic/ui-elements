@@ -1,0 +1,17 @@
+@import "theme";
+
+a {
+  color:$brand-secondary;
+
+  &:hover {
+    color:$brand-terciary;
+  }
+
+  &:global(.text__link) {
+    text-decoration: underline;
+  }
+}
+
+body {
+  font-size:1em;
+}

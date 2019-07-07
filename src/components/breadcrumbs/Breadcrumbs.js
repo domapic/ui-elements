@@ -4,11 +4,12 @@ import { Icon } from "semantic-ui-react";
 
 import Link from "components/link";
 
-import "./breadcrumbs.scss";
+import "components/global-styles";
+import styles from "./breadcrumbs.scss";
 
 export const Breadcrumbs = ({ sections }) => {
   return (
-    <span className="breadcrumbs">
+    <span className={styles.breadcrumbs}>
       {sections.map((sectionData, index) => {
         const icon = sectionData.icon ? <Icon name={sectionData.icon} /> : null;
         const key = `breadcrumb-${index}`;
@@ -25,7 +26,7 @@ export const Breadcrumbs = ({ sections }) => {
             <Link to={sectionData.url}>
               {icon} {sectionData.text}
             </Link>
-            <span className="breadcrumbs__separator"> &gt; </span>
+            <span className={styles.breadcrumbs__separator}> &gt; </span>
           </React.Fragment>
         );
       })}
@@ -34,5 +35,11 @@ export const Breadcrumbs = ({ sections }) => {
 };
 
 Breadcrumbs.propTypes = {
-  sections: PropTypes.array
+  sections: PropTypes.arrayOf(
+    PropTypes.shape({
+      icon: PropTypes.string,
+      text: PropTypes.string.isRequired,
+      url: PropTypes.string
+    })
+  ).isRequired
 };
