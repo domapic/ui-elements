@@ -9,7 +9,7 @@ import styles from "./breadcrumbs.scss";
 
 export const Breadcrumbs = ({ sections }) => {
   return (
-    <span className={styles.breadcrumbs}>
+    <span className={styles.breadcrumbs} data-testid="breadcrumbs">
       {sections.map((sectionData, index) => {
         const icon = sectionData.icon ? <Icon name={sectionData.icon} /> : null;
         const key = `breadcrumb-${index}`;
