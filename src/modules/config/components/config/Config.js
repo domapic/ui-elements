@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Container from "components/container-content";
+import Container from "components/content-layout";
 import ItemInfo from "components/item-info";
 import Breadcrumbs from "components/breadcrumbs";
 
