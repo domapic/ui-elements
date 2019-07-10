@@ -1,31 +1,39 @@
-.ui.inverted.menu.content-container__menu--bottom--search {
-  padding-bottom: 41px;
-  background-color: #51545b;
+@import "theme";
+
+.content-container__menu--bottom--search {
+  &:global(.ui.inverted.menu) {
+    padding-bottom: 41px;
+    background-color: $dark-light;
+  }
+
+  &:global(.ui.bottom.fixed) {
+    z-index:1100;
+  }
 }
 
-.ui.fixed.menu.content-container__menu--top {
-  padding-top:54px;
+.content-container__menu--top {
+  &:global(.ui.fixed.menu) {
+    padding-top:54px;
+  }
+  &:global(.menu.ui.top.fixed) {
+    z-index:1100;
+  }
 }
 
-.content-container__background--empty {
-  padding-top:30px;
+.content-container__segment {
+  &:global(.ui.loading) {
+    min-height: 200px;
+  }
+
+  &:global(.ui.basic) {
+    padding:0;
+  }
+
+  &:global(.ui.basic.loading:before) {
+    background: none;
+  }
 }
 
-.ui.content-container__segment.loading {
-  min-height: 200px;
-}
-
-.ui.content-container__segment.basic {
-  padding:0;
-}
-
-.ui.content-container__segment.basic.loading:before {
-  background: none;
-}
 .content-container__header {
   min-height: 30px;
-}
-
-.ui.top.fixed.content-container__menu--top.menu, .ui.bottom.fixed.content-container__menu--bottom--search.menu {
-  z-index:1100;
 }

@@ -6,7 +6,7 @@ import ErrorComponent from "components/error";
 import Search from "components/search";
 import Responsive from "components/responsive";
 
-import "./containerContent.scss";
+import styles from "./containerContent.scss";
 
 const HEADER = "ContentHeader";
 const PLACEHOLDER = "ContentPlaceholder";
@@ -23,7 +23,7 @@ export const ContentHeader = ({ children, as, loading }) => {
       </Placeholder.Paragraph>
     </Placeholder>
   ) : (
-    <Header as={type} className="content-container__header">
+    <Header as={type} className={styles["content-container__header"]}>
       {children}
     </Header>
   );
@@ -133,13 +133,13 @@ export class ContainerContent extends Component {
               <Menu
                 pointing
                 fixed={this.state.fixedMenu ? "top" : null}
-                className="content-container__menu--top"
+                className={styles["content-container__menu--top"]}
               >
                 {search}
                 {hasMenu ? <Menu.Menu position="right">{menu}</Menu.Menu> : null}
               </Menu>
               {this.state.fixedMenu ? (
-                <Menu className="content-container__menu--top">
+                <Menu className={styles["content-container__menu--top"]}>
                   <Menu.Item />
                 </Menu>
               ) : null}
@@ -149,7 +149,7 @@ export class ContainerContent extends Component {
         <Segment
           basic={!this.props.background}
           loading={this.props.loading && !hasPlaceholder}
-          className="content-container__segment"
+          className={styles["content-container__segment"]}
         >
           {this.props.loading ? placeholder : null}
           {((hasPlaceholder && !this.props.loading) || !hasPlaceholder) && !this.props.error
@@ -160,7 +160,11 @@ export class ContainerContent extends Component {
         {hasSearch || hasMenu ? (
           <Responsive device="mobile">
             {hasSearch && this.state.searchVisible ? (
-              <Menu inverted fixed="bottom" className="content-container__menu--bottom--search">
+              <Menu
+                inverted
+                fixed="bottom"
+                className={styles["content-container__menu--bottom--search"]}
+              >
                 {search}
               </Menu>
             ) : null}
