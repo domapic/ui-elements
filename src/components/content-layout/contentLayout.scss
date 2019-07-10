@@ -1,6 +1,6 @@
 @import "theme";
 
-.content-container__menu--bottom--search {
+.content-layout__menu--bottom--search {
   &:global(.ui.inverted.menu) {
     padding-bottom: 41px;
     background-color: $dark-light;
@@ -11,7 +11,7 @@
   }
 }
 
-.content-container__menu--top {
+.content-layout__menu--top {
   &:global(.ui.fixed.menu) {
     padding-top:54px;
   }
@@ -20,7 +20,7 @@
   }
 }
 
-.content-container__segment {
+.content-layout__segment {
   &:global(.ui.loading) {
     min-height: 200px;
   }
@@ -34,6 +34,6 @@
   }
 }
 
-.content-container__header {
+.content-layout__header {
   min-height: 30px;
 }

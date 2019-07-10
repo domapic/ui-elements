@@ -1,29 +1,29 @@
-## Container Content component
+## Content Layout component
 
-> Container for the main content
+> Layout for the main content
 
-This Container expose some subcomponents as statics that correspond to defined areas inside the container.
+This Layout exposes some subcomponents as statics that correspond to defined areas inside the layout.
 
 ### Usage
 
 ```jsx
-import Container from "@domapic/ui-elements/components/container-content"
+import Layout from "@domapic/ui-elements/components/content-layout"
 
 export const Foo = () => (
-  <Container loading={false} error={null} background={true}>
-    <Container.Header loading={true}>
+  <Layout loading={false} error={null} background={true}>
+    <Layout.Header loading={true}>
       This will be displayed in the header area
-    </Container.Header>
-    <Container.Menu>
+    </Layout.Header>
+    <Layout.Menu>
       This will be displayed in the menu area
-    </Container.Menu>
-    <Container.Placeholder>
+    </Layout.Menu>
+    <Layout.Placeholder>
       This will be displayed in the content area while loading prop is true
-    </Container.Placeholder>
-    <Container.Content>
+    </Layout.Placeholder>
+    <Layout.Content>
       This will be displayed in the content area when loading prop is false
-    </Container.Content>
-  </Container>
+    </Layout.Content>
+  </Layout>
 );
 ```
 
@@ -45,7 +45,7 @@ export const Foo = () => (
 
 #### Menu
 
-When the container position is scrolled above the window area, the menu display type becomes:
+When the layout position is scrolled above the window area, the menu display type becomes:
 * Fixed to the top for window widths upper than mobile media-query.
 * Fixed to the bottom for window widths lower than mobile media-query.
 

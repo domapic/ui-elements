@@ -5,28 +5,28 @@ import { boolean } from "@storybook/addon-knobs";
 
 import { Placeholder } from "semantic-ui-react";
 
-import { ContainerContent } from "./ContainerContent";
+import Layout from "./index";
 
 import readme from "./readme.md";
 
-storiesOf("Components/container-content", module)
+storiesOf("Components/content-layout", module)
   .addDecorator(fullWidth)
   .add(
     "simple",
     () => (
-      <ContainerContent
+      <Layout
         loading={boolean("loading", false)}
         error={null}
         background={boolean("background", true)}
       >
-        <ContainerContent.Header loading={boolean("header loading", false)}>
+        <Layout.Header loading={boolean("header loading", false)}>
           This is the header area
-        </ContainerContent.Header>
-        <ContainerContent.Menu>This is the menu area</ContainerContent.Menu>
-        <ContainerContent.Content>
+        </Layout.Header>
+        <Layout.Menu>This is the menu area</Layout.Menu>
+        <Layout.Content>
           This is displayed in the content area when loading prop is false
-        </ContainerContent.Content>
-      </ContainerContent>
+        </Layout.Content>
+      </Layout>
     ),
     {
       notes: {
@@ -37,22 +37,22 @@ storiesOf("Components/container-content", module)
   .add(
     "with placeholder",
     () => (
-      <ContainerContent
+      <Layout
         loading={boolean("loading", true)}
         error={null}
         background={boolean("background", true)}
       >
-        <ContainerContent.Header loading={boolean("header loading", true)}>
+        <Layout.Header loading={boolean("header loading", true)}>
           This is the header area
-        </ContainerContent.Header>
-        <ContainerContent.Menu>This is the menu area</ContainerContent.Menu>
-        <ContainerContent.Placeholder>
+        </Layout.Header>
+        <Layout.Menu>This is the menu area</Layout.Menu>
+        <Layout.Placeholder>
           <Placeholder.Line />
-        </ContainerContent.Placeholder>
-        <ContainerContent.Content>
+        </Layout.Placeholder>
+        <Layout.Content>
           This is displayed in the content area when loading prop is false
-        </ContainerContent.Content>
-      </ContainerContent>
+        </Layout.Content>
+      </Layout>
     ),
     {
       notes: {
@@ -63,20 +63,20 @@ storiesOf("Components/container-content", module)
   .add(
     "with search",
     () => (
-      <ContainerContent
+      <Layout
         loading={boolean("loading", false)}
         error={null}
         background={boolean("background", true)}
       >
-        <ContainerContent.Header loading={boolean("header loading", false)}>
+        <Layout.Header loading={boolean("header loading", false)}>
           This is the header area
-        </ContainerContent.Header>
-        <ContainerContent.Menu>This is the menu area</ContainerContent.Menu>
-        <ContainerContent.Search />
-        <ContainerContent.Content>
+        </Layout.Header>
+        <Layout.Menu>This is the menu area</Layout.Menu>
+        <Layout.Search />
+        <Layout.Content>
           This is displayed in the content area when loading prop is false
-        </ContainerContent.Content>
-      </ContainerContent>
+        </Layout.Content>
+      </Layout>
     ),
     {
       notes: {

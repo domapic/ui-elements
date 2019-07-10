@@ -6,7 +6,7 @@ import ErrorComponent from "components/error";
 import Search from "components/search";
 import Responsive from "components/responsive";
 
-import styles from "./containerContent.scss";
+import styles from "./contentLayout.scss";
 
 const HEADER = "ContentHeader";
 const PLACEHOLDER = "ContentPlaceholder";
@@ -23,7 +23,7 @@ export const ContentHeader = ({ children, as, loading }) => {
       </Placeholder.Paragraph>
     </Placeholder>
   ) : (
-    <Header as={type} className={styles["content-container__header"]}>
+    <Header as={type} className={styles["content-layout__header"]}>
       {children}
     </Header>
   );
@@ -65,7 +65,7 @@ ContentMenu.propTypes = {
   children: PropTypes.node
 };
 
-export class ContainerContent extends Component {
+export class ContentLayout extends Component {
   static Header = ContentHeader;
   static Placeholder = ContentPlaceholder;
   static Content = ContentContent;
@@ -133,13 +133,13 @@ export class ContainerContent extends Component {
               <Menu
                 pointing
                 fixed={this.state.fixedMenu ? "top" : null}
-                className={styles["content-container__menu--top"]}
+                className={styles["content-layout__menu--top"]}
               >
                 {search}
                 {hasMenu ? <Menu.Menu position="right">{menu}</Menu.Menu> : null}
               </Menu>
               {this.state.fixedMenu ? (
-                <Menu className={styles["content-container__menu--top"]}>
+                <Menu className={styles["content-layout__menu--top"]}>
                   <Menu.Item />
                 </Menu>
               ) : null}
@@ -149,7 +149,7 @@ export class ContainerContent extends Component {
         <Segment
           basic={!this.props.background}
           loading={this.props.loading && !hasPlaceholder}
-          className={styles["content-container__segment"]}
+          className={styles["content-layout__segment"]}
         >
           {this.props.loading ? placeholder : null}
           {((hasPlaceholder && !this.props.loading) || !hasPlaceholder) && !this.props.error
@@ -163,7 +163,7 @@ export class ContainerContent extends Component {
               <Menu
                 inverted
                 fixed="bottom"
-                className={styles["content-container__menu--bottom--search"]}
+                className={styles["content-layout__menu--bottom--search"]}
               >
                 {search}
               </Menu>
@@ -185,7 +185,7 @@ export class ContainerContent extends Component {
   }
 }
 
-ContainerContent.propTypes = {
+ContentLayout.propTypes = {
   background: PropTypes.bool,
   children: PropTypes.node,
   error: PropTypes.instanceOf(Error),
