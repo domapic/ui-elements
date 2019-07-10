@@ -23,7 +23,11 @@ export const ContentHeader = ({ children, as, loading }) => {
       </Placeholder.Paragraph>
     </Placeholder>
   ) : (
-    <Header as={type} className={styles["content-layout__header"]}>
+    <Header
+      as={type}
+      className={styles["content-layout__header"]}
+      data-testid="content-layout-header"
+    >
       {children}
     </Header>
   );

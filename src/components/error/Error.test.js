@@ -1,10 +1,7 @@
 import React from "react";
-import { render, cleanup, waitForElement } from "@testing-library/react";
-import "jest-dom/extend-expect";
+import { render, waitForElement } from "@testing-library/react";
 
 import { ErrorComponent } from "./Error";
-
-afterEach(cleanup);
 
 describe("Error component", () => {
   it("should render provided error message", async () => {

@@ -27,5 +27,6 @@ module.exports = {
     "^.+\\.scss$": "<rootDir>/config/tests/cssTransform.js"
   },
 
-  setupFiles: ["<rootDir>/jest.init.js"]
+  setupFiles: ["<rootDir>/config/tests/init.js"],
+  setupFilesAfterEnv: ["<rootDir>/config/tests/setup.js", "jest-prop-type-error"]
 };

@@ -1,10 +1,8 @@
 import React from "react";
-import { render, cleanup } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "jest-dom/extend-expect";
 
 import { Breadcrumbs } from "./Breadcrumbs";
-
-afterEach(cleanup);
 
 describe("Breadcrumbs component", () => {
   const FOO_SECTIONS = [
