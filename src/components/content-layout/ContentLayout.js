@@ -1,80 +1,24 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Segment, Header, Placeholder, Menu, Icon, Visibility } from "semantic-ui-react";
+import { Segment, Menu, Icon, Visibility } from "semantic-ui-react";
 
 import ErrorComponent from "components/error";
-import Search from "components/search";
 import Responsive from "components/responsive";
 
 import styles from "./contentLayout.scss";
 
-const HEADER = "ContentHeader";
-const PLACEHOLDER = "ContentPlaceholder";
-const CONTENT = "ContentContent";
-const SEARCH = "ContentSearch";
-const MENU = "ContentMenu";
-
-export const ContentHeader = ({ children, as, loading }) => {
-  const type = as || "h4";
-  return loading ? (
-    <Placeholder as={type}>
-      <Placeholder.Paragraph>
-        <Placeholder.Line as={type} />
-      </Placeholder.Paragraph>
-    </Placeholder>
-  ) : (
-    <Header
-      as={type}
-      className={styles["content-layout__header"]}
-      data-testid="content-layout-header"
-    >
-      {children}
-    </Header>
-  );
-};
-
-ContentHeader.displayName = HEADER;
-
-ContentHeader.propTypes = {
-  as: PropTypes.string,
-  children: PropTypes.node,
-  loading: PropTypes.bool
-};
-
-export const ContentPlaceholder = ({ children }) => <Placeholder>{children}</Placeholder>;
-
-ContentPlaceholder.propTypes = {
-  children: PropTypes.node
-};
-
-ContentPlaceholder.displayName = PLACEHOLDER;
-
-export const ContentContent = ({ children }) => <React.Fragment>{children}</React.Fragment>;
-
-ContentContent.displayName = CONTENT;
-
-ContentContent.propTypes = {
-  children: PropTypes.node
-};
-
-export const ContentSearch = props => <Search {...props} />;
-
-ContentSearch.displayName = SEARCH;
-
-export const ContentMenu = ({ children }) => <React.Fragment>{children}</React.Fragment>;
-
-ContentMenu.displayName = MENU;
-
-ContentMenu.propTypes = {
-  children: PropTypes.node
-};
+import { HeaderArea } from "./areas/Header";
+import { PlaceholderArea } from "./areas/Placeholder";
+import { ContentArea } from "./areas/Content";
+import { SearchArea } from "./areas/Search";
+import { MenuArea } from "./areas/Menu";
 
 export class ContentLayout extends Component {
-  static Header = ContentHeader;
-  static Placeholder = ContentPlaceholder;
-  static Content = ContentContent;
-  static Search = ContentSearch;
-  static Menu = ContentMenu;
+  static Header = HeaderArea;
+  static Placeholder = PlaceholderArea;
+  static Content = ContentArea;
+  static Search = SearchArea;
+  static Menu = MenuArea;
 
   constructor() {
     super();
@@ -116,16 +60,16 @@ export class ContentLayout extends Component {
   }
 
   render() {
-    const search = this.renderChilds(SEARCH);
+    const search = this.renderChilds(SearchArea.displayName);
     const hasSearch = search.length;
-    const menu = this.renderChilds(MENU);
+    const menu = this.renderChilds(MenuArea.displayName);
     const hasMenu = menu.length;
-    const placeholder = this.renderChilds(PLACEHOLDER);
+    const placeholder = this.renderChilds(PlaceholderArea.displayName);
     const hasPlaceholder = placeholder.length;
 
     return (
       <React.Fragment>
-        {this.renderChilds(HEADER)}
+        {this.renderChilds(HeaderArea.displayName)}
         <Responsive device="tablet-and-desktop">
           {hasSearch || hasMenu ? (
             <Visibility
@@ -157,7 +101,7 @@ export class ContentLayout extends Component {
         >
           {this.props.loading ? placeholder : null}
           {((hasPlaceholder && !this.props.loading) || !hasPlaceholder) && !this.props.error
-            ? this.renderChilds(CONTENT)
+            ? this.renderChilds(ContentArea.displayName)
             : null}
           {this.props.error ? <ErrorComponent>{this.props.error.message}</ErrorComponent> : null}
         </Segment>
