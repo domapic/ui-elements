@@ -65,14 +65,6 @@ ContentMenu.propTypes = {
   children: PropTypes.node
 };
 
-const EmptyBackground = ({ children }) => (
-  <div className="content-container__background--empty">{children}</div>
-);
-
-EmptyBackground.propTypes = {
-  children: PropTypes.node
-};
-
 export class ContainerContent extends Component {
   static Header = ContentHeader;
   static Placeholder = ContentPlaceholder;
@@ -113,7 +105,7 @@ export class ContainerContent extends Component {
 
   renderChilds(type) {
     return React.Children.map(this.props.children, child => {
-      if (child && child.type.displayName === type) {
+      if (child && child.type && child.type.displayName === type) {
         return child;
       }
     });
@@ -156,7 +148,7 @@ export class ContainerContent extends Component {
         </Responsive>
         <Segment
           basic={!this.props.background}
-          loading={this.props.loading}
+          loading={this.props.loading && !hasPlaceholder}
           className="content-container__segment"
         >
           {this.props.loading ? placeholder : null}

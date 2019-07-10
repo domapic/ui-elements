@@ -81,3 +81,13 @@ Search.propTypes = {
   sortByActive: PropTypes.string,
   sortOrderActive: PropTypes.string
 };
+
+Search.defaultProps = {
+  onSearchChange: () => {},
+  onSortByChange: () => {},
+  onSortOrderChange: () => {},
+  searchValue: "",
+  sortBy: [],
+  sortByActive: "",
+  sortOrderActive: "asc"
+};
