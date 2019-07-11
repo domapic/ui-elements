@@ -6,9 +6,15 @@ import { ForcedResponsive } from "./ForcedResponsive";
 
 export const windowInnerWidth = () => window.innerWidth;
 
+const MOBILE = "mobile";
+const MOBILE_AND_TABLET = "mobile-and-tablet";
+const TABLET = "tablet";
+const TABLET_AND_DESKTOP = "tablet-and-desktop";
+const DESKTOP = "desktop";
+
 export const Responsive = ({ device, as, className, children }) => {
   switch (device) {
-    case "mobile":
+    case MOBILE:
       return (
         <ForcedResponsive device={device} content={children}>
           <SemanticResponsive
@@ -21,7 +27,7 @@ export const Responsive = ({ device, as, className, children }) => {
           </SemanticResponsive>
         </ForcedResponsive>
       );
-    case "mobile-and-tablet":
+    case MOBILE_AND_TABLET:
       return (
         <ForcedResponsive device={device} content={children}>
           <SemanticResponsive
@@ -34,7 +40,7 @@ export const Responsive = ({ device, as, className, children }) => {
           </SemanticResponsive>
         </ForcedResponsive>
       );
-    case "tablet":
+    case TABLET:
       return (
         <ForcedResponsive device={device} content={children}>
           <SemanticResponsive
@@ -47,7 +53,7 @@ export const Responsive = ({ device, as, className, children }) => {
           </SemanticResponsive>
         </ForcedResponsive>
       );
-    case "tablet-and-desktop":
+    case TABLET_AND_DESKTOP:
       return (
         <ForcedResponsive device={device} content={children}>
           <SemanticResponsive
@@ -60,7 +66,7 @@ export const Responsive = ({ device, as, className, children }) => {
           </SemanticResponsive>
         </ForcedResponsive>
       );
-    case "desktop":
+    case DESKTOP:
       return (
         <ForcedResponsive device={device} content={children}>
           <SemanticResponsive
@@ -75,6 +81,12 @@ export const Responsive = ({ device, as, className, children }) => {
       );
   }
 };
+
+Responsive.MOBILE = MOBILE;
+Responsive.MOBILE_AND_TABLET = MOBILE_AND_TABLET;
+Responsive.TABLET = TABLET;
+Responsive.TABLET_AND_DESKTOP = TABLET_AND_DESKTOP;
+Responsive.DESKTOP = DESKTOP;
 
 Responsive.propTypes = {
   as: PropTypes.any,

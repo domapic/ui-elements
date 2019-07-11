@@ -5,7 +5,7 @@ import "./index";
 import readme from "./readme.md";
 
 storiesOf("Components/global-styles", module).add(
-  "self",
+  "simple",
   () => {
     return (
       <div className="ui info message">

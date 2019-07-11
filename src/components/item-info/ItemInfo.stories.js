@@ -9,7 +9,7 @@ import readme from "./readme.md";
 storiesOf("Components/item-info", module)
   .addDecorator(fullWidth)
   .add(
-    "self",
+    "simple",
     () => {
       return (
         <ItemInfo
