@@ -82,12 +82,20 @@ export class ContentLayout extends Component {
                 pointing
                 fixed={this.state.fixedMenu ? "top" : null}
                 className={styles["content-layout__menu--top"]}
+                data-testid="content-layout-search"
               >
                 {search}
-                {hasMenu ? <Menu.Menu position="right">{menu}</Menu.Menu> : null}
+                {hasMenu ? (
+                  <Menu.Menu position="right" data-testid="content-layout-menu">
+                    {menu}
+                  </Menu.Menu>
+                ) : null}
               </Menu>
               {this.state.fixedMenu ? (
-                <Menu className={styles["content-layout__menu--top"]}>
+                <Menu
+                  className={styles["content-layout__menu--top"]}
+                  data-testid="content-layout-menu"
+                >
                   <Menu.Item />
                 </Menu>
               ) : null}
@@ -98,6 +106,7 @@ export class ContentLayout extends Component {
           basic={!this.props.background}
           loading={this.props.loading && !hasPlaceholder}
           className={styles["content-layout__segment"]}
+          data-testid="content-layout-content"
         >
           {this.props.loading ? placeholder : null}
           {((hasPlaceholder && !this.props.loading) || !hasPlaceholder) && !this.props.error
@@ -112,11 +121,17 @@ export class ContentLayout extends Component {
                 inverted
                 fixed="bottom"
                 className={styles["content-layout__menu--bottom--search"]}
+                data-testid="content-layout-search"
               >
                 {search}
               </Menu>
             ) : null}
-            <Menu inverted fixed="bottom" className={styles["content-layout__menu--bottom"]}>
+            <Menu
+              inverted
+              fixed="bottom"
+              className={styles["content-layout__menu--bottom"]}
+              data-testid="content-layout-menu"
+            >
               {hasMenu ? menu : null}
               {hasSearch ? (
                 <Menu.Menu position="right">
