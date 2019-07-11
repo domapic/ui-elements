@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { Table } from "semantic-ui-react";
 
-import "./itemInfo.scss";
+import styles from "./itemInfo.scss";
 
 export const Detail = ({ label, value }) => (
   <Table.Row>
@@ -18,7 +18,7 @@ Detail.propTypes = {
 };
 
 export const ItemInfo = ({ data }) => (
-  <Table basic className="table-info" striped unstackable size="small">
+  <Table basic className={styles["table-info"]} striped unstackable size="small">
     <Table.Body>
       {data.map(detail => (
         <Detail key={detail.label} label={detail.label} value={detail.value} />
@@ -28,5 +28,10 @@ export const ItemInfo = ({ data }) => (
 );
 
 ItemInfo.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.any)
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.string
+    })
+  ).isRequired
 };
