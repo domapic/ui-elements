@@ -11,6 +11,12 @@
   }
 }
 
+.content-layout__menu--bottom {
+  &:global(.ui.bottom.fixed) {
+    z-index:1200;
+  }
+}
+
 .content-layout__menu--top {
   &:global(.ui.fixed.menu) {
     padding-top:54px;

@@ -116,7 +116,7 @@ export class ContentLayout extends Component {
                 {search}
               </Menu>
             ) : null}
-            <Menu inverted fixed="bottom">
+            <Menu inverted fixed="bottom" className={styles["content-layout__menu--bottom"]}>
               {hasMenu ? menu : null}
               {hasSearch ? (
                 <Menu.Menu position="right">
