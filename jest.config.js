@@ -11,7 +11,8 @@ module.exports = {
     "src/**",
     "!src/**/index.js",
     "!src/**/*.stories.js",
-    "!src/components/global-styles/**/*.js"
+    "!src/components/global-styles/**/*.js",
+    "!src/components/router-poc/**/*.js"
   ],
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
