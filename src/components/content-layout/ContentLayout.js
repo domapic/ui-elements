@@ -5,6 +5,7 @@ import { Segment, Menu, Icon, Visibility } from "semantic-ui-react";
 import ErrorComponent from "components/error";
 import Responsive from "components/responsive";
 
+import "components/global-styles";
 import styles from "./contentLayout.scss";
 
 import { HeaderArea } from "./areas/Header";

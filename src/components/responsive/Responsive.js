@@ -92,5 +92,5 @@ Responsive.propTypes = {
   as: PropTypes.any,
   children: PropTypes.node,
   className: PropTypes.string,
-  device: PropTypes.string
+  device: PropTypes.oneOf([MOBILE, MOBILE_AND_TABLET, TABLET, TABLET_AND_DESKTOP, DESKTOP])
 };

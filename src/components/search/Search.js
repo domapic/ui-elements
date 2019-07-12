@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 
 import { Menu, Dropdown, Input, Icon } from "semantic-ui-react";
 
-import "./search.scss";
+import "components/global-styles";
+import styles from "./search.scss";
 
 const sortOrders = [{ value: "asc", icon: "caret up" }, { value: "desc", icon: "caret down" }];
 
@@ -37,10 +38,18 @@ export class Search extends Component {
             placeholder="Search..."
             onChange={this.handleSearchChange}
             defaultValue={this.props.searchValue}
+            data-testid="search-field"
           />
         </Menu.Item>
         <Menu.Menu>
-          <Dropdown item text="Sort" className="search__dropdown" pointing="top right" icon="sort">
+          <Dropdown
+            item
+            text="Sort"
+            className={styles["search__dropdown"]}
+            pointing="top right"
+            icon="sort"
+            data-testid="search-sort-by-order"
+          >
             <Dropdown.Menu size="mini">
               <Dropdown.Header>By</Dropdown.Header>
               {this.props.sortBy.map(sortBy => (
@@ -79,7 +88,7 @@ Search.propTypes = {
   searchValue: PropTypes.string,
   sortBy: PropTypes.array,
   sortByActive: PropTypes.string,
-  sortOrderActive: PropTypes.string
+  sortOrderActive: PropTypes.oneOf(["asc", "desc"])
 };
 
 Search.defaultProps = {

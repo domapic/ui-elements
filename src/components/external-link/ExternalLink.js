@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import "components/global-styles";
+
 const ExternalLink = ({ to, children, self, ...rest }) => {
   const newWindow = self
     ? {}

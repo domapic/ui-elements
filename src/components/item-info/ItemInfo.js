@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { Table } from "semantic-ui-react";
 
+import "components/global-styles";
 import styles from "./itemInfo.scss";
 
 export const Detail = ({ label, value }) => (

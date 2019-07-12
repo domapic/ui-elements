@@ -6,7 +6,7 @@ import ExternalLink from "./index";
 import readme from "./readme.md";
 
 storiesOf("Components/external-link", module).add(
-  "self",
+  "simple",
   () => {
     return (
       <ExternalLink to="https://www.domapic.com" self={boolean("self", false)}>
