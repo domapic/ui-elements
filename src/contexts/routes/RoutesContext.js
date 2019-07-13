@@ -5,11 +5,13 @@ const defaultRoute = "/";
 export const defaultRoutes = {
   index: defaultRoute,
   assets: defaultRoute,
-  privacy: "",
+  privacy: defaultRoute,
   home: defaultRoute,
   resetPassword: defaultRoute,
   helpers: {
-    getRoute: () => {}
+    getRoute: () => {
+      return defaultRoute;
+    }
   },
   sections: {},
   changeCurrentServer: () => {}
