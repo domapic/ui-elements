@@ -70,7 +70,7 @@
     "@storybook/addon-storysource": "^5.1.8",
     "@storybook/addon-viewport": "^5.1.8",
     "@storybook/components": "^5.1.9",
-    "@storybook/react": "^5.1.8",
+    "@storybook/react": "^5.1.9",
     "@storybook/theming": "^5.1.9",
     "@testing-library/react": "^8.0.1",
     "@xbyorange/mocks-server": "^1.0.1",
