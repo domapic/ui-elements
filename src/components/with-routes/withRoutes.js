@@ -14,7 +14,7 @@ export const withRoutes = WrappedComponent => {
     </RoutesContext.Consumer>
   );
 
-  WithRoutesComponent.displayName = `WithRoutes(${getDisplayName(WrappedComponent)})`;
+  WithRoutesComponent.displayName = `withRoutes(${getDisplayName(WrappedComponent)})`;
 
   hoistNonReactStatics(WithRoutesComponent, WrappedComponent);
 

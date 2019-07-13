@@ -1,3 +1,3 @@
-import LinkContext from "./Link";
+import { Link } from "./Link";
 
-export default LinkContext;
+export default Link;
