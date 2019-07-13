@@ -13,7 +13,7 @@ const stories = storiesOf("Helpers/append-header", module);
 stories.addDecorator(withKnobs);
 
 stories.add(
-  "appendHeader",
+  "appendStyleSheet",
   () => {
     return (
       <DisplayHelper helper={appendStyleSheet} args={[text("url", "semantic/semantic.min.css")]} />
