@@ -26,7 +26,12 @@ export const Config = ({ title, loading, error, config = [] }) => {
 };
 
 Config.propTypes = {
-  config: PropTypes.any.isRequired,
+  config: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.string
+    })
+  ),
   error: PropTypes.instanceOf(Error),
   loading: PropTypes.bool.isRequired,
   title: PropTypes.string

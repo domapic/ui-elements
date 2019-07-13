@@ -1,3 +1,3 @@
 import { Config } from "./Config";
 
-export const Component = Config;
+export default Config;

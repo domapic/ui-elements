@@ -1,6 +1,6 @@
 import { connect } from "@xbyorange/react-mercury";
 
-import { Component as ConfigComponent } from "../components/config";
+import Config from "../components/config";
 
 import { baseConfig } from "data/service";
 
@@ -12,4 +12,4 @@ export const mapDataSourceToProps = () => {
   };
 };
 
-export const BaseConfig = connect(mapDataSourceToProps)(ConfigComponent);
+export const BaseConfig = connect(mapDataSourceToProps)(Config);
