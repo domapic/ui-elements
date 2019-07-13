@@ -2,7 +2,7 @@ import { storiesOf } from "@storybook/react";
 import { display } from "storybook/addons/mercury";
 
 import * as data from "data/legal";
-// import readme from "./readme.md";
+import readme from "./readme.md";
 
 const stories = storiesOf("Data/legal", module);
 
@@ -24,6 +24,9 @@ stories.add(
           action: () => data.cookies.update({ accepted: false })
         }
       ]
+    },
+    notes: {
+      markdown: readme
     }
   }
 );

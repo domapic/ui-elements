@@ -1,3 +1,4 @@
+import { isEqual } from "lodash";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { styled } from "@storybook/theming";
@@ -38,6 +39,8 @@ const getSourcesFromData = data => {
   return sources;
 };
 
+const getSourcesIds = (sources = []) => sources.map(source => source._id);
+
 export default class DataDisplay extends Component {
   constructor(props) {
     super(props);
@@ -48,10 +51,16 @@ export default class DataDisplay extends Component {
     this.onCleanSource = this.onCleanSource.bind(this);
   }
 
-  static getDerivedStateFromProps(nextProps) {
-    return {
-      sources: getSourcesFromData(nextProps.data)
-    };
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const sources = getSourcesFromData(nextProps.data);
+    const sourceIds = getSourcesIds(sources);
+    if(!isEqual(sourceIds, prevState.sourceIds)) {
+      return {
+        sourceIds,
+        sources
+      };
+    }
+    return null;
   }
 
   componentDidMount() {
@@ -59,8 +68,10 @@ export default class DataDisplay extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this.removeListeners(prevState.sources);
-    this.addListeners(this.state.sources);
+    if(prevState.sources !== this.state.sources) {
+      this.removeListeners(prevState.sources);
+      this.addListeners(this.state.sources);
+    }
   }
 
   componentWillUnmount() {

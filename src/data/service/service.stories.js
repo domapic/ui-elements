@@ -2,7 +2,7 @@ import { storiesOf } from "@storybook/react";
 import { display } from "storybook/addons/mercury";
 
 import * as service from "data/service";
-// import readme from "./readme.md";
+import readme from "./readme.md";
 
 const stories = storiesOf("Data/service", module);
 
@@ -14,6 +14,9 @@ stories.add(
   {
     info: {
       disable: true
+    },
+    notes: {
+      markdown: readme
     }
   }
 );

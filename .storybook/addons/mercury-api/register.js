@@ -27,10 +27,6 @@ class Panel extends React.Component {
     api.off(OPTIONS_EVENT, this.setOptions);
   }
 
-  sendRendered() {
-    console.log("RENDEREDEDEEED!");
-  }
-
   setOptions(options) {
     if (options && options.baseUrl) {
       const { baseUrl } = options;
