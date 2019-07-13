@@ -54,7 +54,7 @@ export default class DataDisplay extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const sources = getSourcesFromData(nextProps.data);
     const sourceIds = getSourcesIds(sources);
-    if(!isEqual(sourceIds, prevState.sourceIds)) {
+    if (!isEqual(sourceIds, prevState.sourceIds)) {
       return {
         sourceIds,
         sources
@@ -68,7 +68,7 @@ export default class DataDisplay extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(prevState.sources !== this.state.sources) {
+    if (prevState.sources !== this.state.sources) {
       this.removeListeners(prevState.sources);
       this.addListeners(this.state.sources);
     }
