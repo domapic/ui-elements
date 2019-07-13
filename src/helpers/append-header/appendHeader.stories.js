@@ -5,7 +5,7 @@ import { withKnobs, text } from "@storybook/addon-knobs";
 
 import { DisplayHelper } from "storybook/displays/display-helper";
 
-import { appendStyleSheet } from "./index";
+import { appendStyleSheet } from "./appendStyleSheet";
 import readme from "./readme.md";
 
 const stories = storiesOf("Helpers/append-header", module);
