@@ -16,6 +16,7 @@ module.exports = {
     "describe": "readonly",
     "it": "readonly",
     "expect": "readonly",
+    "jest": "readonly",
     "afterEach": "readonly",
     "beforeEach": "readonly",
     "Set": "readonly"
