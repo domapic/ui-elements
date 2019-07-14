@@ -8,7 +8,7 @@ import Link from "components/link";
 
 import styles from "./acceptCookies.scss";
 
-export default class AcceptCookies extends React.Component {
+export class AcceptCookies extends React.Component {
   constructor(props) {
     super(props);
     this.handleAccept = this.handleAccept.bind(this);
