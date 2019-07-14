@@ -32,7 +32,12 @@ export class AcceptCookies extends React.Component {
           </p>
         </Menu.Item>
         <Menu.Item position="right">
-          <Button size="mini" compact onClick={this.handleAccept}>
+          <Button
+            size="mini"
+            compact
+            onClick={this.handleAccept}
+            data-testid="accept-cookies-button"
+          >
             Got it
           </Button>
         </Menu.Item>
