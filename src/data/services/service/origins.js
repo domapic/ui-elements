@@ -14,12 +14,15 @@ export const serviceModels = SelectedControllerBasedOrigin(
     socket.addListener(["service:updated", "service:deleted"], eventData => {
       origin.query(byIdQuery(eventData._id)).clean();
       controllerBasedOrigin
-        .queryAddingServer({ query: byIdQuery(eventData._id), controller: eventData._controller })
+        .queryAddingController({
+          query: byIdQuery(eventData._id),
+          controller: eventData._controller
+        })
         .clean();
     });
   }
 );
 
-serviceModels.addCustomFilter({
+serviceModels.addCustomQuery({
   byId: byIdQuery
 });

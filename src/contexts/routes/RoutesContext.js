@@ -14,7 +14,7 @@ export const defaultRoutes = {
     }
   },
   sections: {},
-  changeCurrentServer: () => {}
+  changeCurrentController: () => {}
 };
 
 export const RoutesContext = React.createContext(defaultRoutes);

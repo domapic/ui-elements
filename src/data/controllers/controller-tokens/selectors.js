@@ -12,6 +12,10 @@ export const controllerTokensOfUserMe = new Selector(
       return controllerTokensCollection.customQueries.ofUser(previousResults[0]._id);
     }
   },
-  (userMe, controllerTokens) => controllerTokens,
+  (userMe, controllerTokens) =>
+    controllerTokens.map(controllerToken => ({
+      ...controllerToken,
+      _controller: controllerToken._server
+    })),
   []
 );

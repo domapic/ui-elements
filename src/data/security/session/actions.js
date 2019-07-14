@@ -37,6 +37,7 @@ class Session {
   }
 
   _doLogin(dataSources, retry) {
+    console.log("DO LOGIN!!");
     const noAuthenticationTokenError = new Error("Invalid credentials");
     return Promise.all([this._refreshToken.read(), this._apiKey.read()])
       .then(tokens => {
@@ -77,9 +78,12 @@ class Session {
   }
 
   _configDataSources() {
-    apis.config({
-      authErrorHandler: this._doLogin
-    });
+    apis.config(
+      {
+        authErrorHandler: this._doLogin
+      },
+      ["need_auth"]
+    );
   }
 
   logout() {

@@ -1,6 +1,7 @@
 import { Api } from "@xbyorange/mercury-api";
 
-export const gravatar = new Api("https://www.gravatar.com/avatar/:hash", {
+export const gravatar = new Api("/avatar/:hash", {
+  tags: ["gravatar"],
   fullResponse: true,
   validateStatus: () => true
 });

@@ -12,7 +12,10 @@ export const abilityModels = SelectedControllerBasedOrigin(
     socket.addListener("ability:updated", "ability:deleted", eventData => {
       origin.query(byIdQuery(eventData._id)).clean();
       controllerBasedOrigin
-        .queryAddingServer({ query: byIdQuery(eventData._id), controller: eventData._controller })
+        .queryAddingController({
+          query: byIdQuery(eventData._id),
+          controller: eventData._controller
+        })
         .clean();
     });
   }
@@ -31,7 +34,10 @@ export const abilityStates = SelectedControllerBasedOrigin(
     socket.addListener("ability:event", eventData => {
       origin.query(byIdQuery(eventData._id)).clean();
       controllerBasedOrigin
-        .queryAddingServer({ query: byIdQuery(eventData._id), controller: eventData._controller })
+        .queryAddingController({
+          query: byIdQuery(eventData._id),
+          controller: eventData._controller
+        })
         .clean();
     });
   }

@@ -9,9 +9,11 @@ export const userAvatar = new Selector(
     source: gravatar,
     query: query => query
   },
-  gravatarResponse => ({
-    avatar: gravatarResponse.status === 200 ? gravatarResponse.request.responseURL : null
-  })
+  gravatarResponse => {
+    return {
+      avatar: gravatarResponse.status === 200 ? gravatarResponse.request.responseURL : null
+    };
+  }
 );
 
 userAvatar.addCustomQuery({

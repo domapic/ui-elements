@@ -27,7 +27,7 @@ export const controllersOfUserMeWithExtraData = new Selector(
         ...controller,
         userIsOwner: controller._user === userMe._id,
         userCanConnect: !!controllerTokensOfUserMe.find(
-          controllerToken => controllerToken._server === controller._id
+          controllerToken => controllerToken._controller === controller._id
         )
       };
     });

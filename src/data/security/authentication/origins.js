@@ -13,7 +13,10 @@ authSessionDetails.addCustomQuery({
 export const authSessionRemember = new LocalStorage("authentication");
 export const authSessionTemporal = new SessionStorage("authentication");
 
-export const authSessionStatus = new Memory("authentication-status");
+export const authSessionStatus = new Memory({
+  isLogedIn: false,
+  isLoginIn: true
+});
 
 authSessionStatus.addCustomQuery({
   isLogedIn: () => "isLogedIn"

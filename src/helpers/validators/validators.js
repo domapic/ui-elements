@@ -17,4 +17,4 @@ export const isUserName = name => name.length > 4 && NAME_REGEX.test(name);
 
 export const isPassword = password => password.length > 5;
 
-export const serverNameHasMinLength = serverName => serverName.length > 4;
+export const controllerNameHasMinLength = controllerName => controllerName.length > 4;

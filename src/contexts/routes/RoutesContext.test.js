@@ -49,7 +49,7 @@ describe("Routes Context", () => {
     expect(value.helpers.getRoute()).toEqual(defaultRoute);
   });
 
-  it("should have a default function for changing current server in routes", () => {
+  it("should have a default function for changing current controller in routes", () => {
     let value;
     render(
       <RoutesContext.Consumer>
@@ -59,6 +59,6 @@ describe("Routes Context", () => {
         }}
       </RoutesContext.Consumer>
     );
-    expect(value.changeCurrentServer()).toEqual(undefined);
+    expect(value.changeCurrentController()).toEqual(undefined);
   });
 });

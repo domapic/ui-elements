@@ -22,7 +22,9 @@ socket.addListener(["controller:updated", "controller:deleted"], eventData => {
   controllerModels.byId(eventData._id).clean();
 });
 
-export const selectedController = new Memory("selected-controller");
+export const selectedController = new Memory({
+  required: false
+});
 
 selectedController.addCustomQuery({
   id: () => "id"

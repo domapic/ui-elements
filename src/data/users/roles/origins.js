@@ -27,4 +27,4 @@ const ROLES = [
   }
 ];
 
-export const roles = new Memory("roles", ROLES);
+export const roles = new Memory(ROLES);
