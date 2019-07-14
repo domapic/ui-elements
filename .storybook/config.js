@@ -10,7 +10,7 @@ import { withMocksServer } from "storybook/addons/mocks-server";
 import { withMercuryApi } from "storybook/addons/mercury-api";
 
 import * as legalData from "../src/data/legal";
-import * as serviceData from "../src/data/service";
+import * as settingsData from "../src/data/settings";
 
 import theme from "./theme";
 
@@ -39,7 +39,7 @@ addParameters({
   mercury: {
     domains: {
       legal: legalData,
-      service: serviceData
+      settings: settingsData
     }
   },
   mocks: {

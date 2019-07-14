@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { withMercury } from "storybook/addons/mercury";
 import fullWidth from "storybook/decorators/full-width";
 
-import { config, baseConfig, customConfig } from "data/service";
+import { config, baseConfig, customConfig } from "data/settings";
 
 import ConfigModule from "./index";
 import readme from "./readme.md";

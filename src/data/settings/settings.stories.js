@@ -1,14 +1,14 @@
 import { storiesOf } from "@storybook/react";
 import { display } from "storybook/addons/mercury";
 
-import * as service from "data/service";
+import * as settings from "./index";
 import readme from "./readme.md";
 
-const stories = storiesOf("Data/service", module);
+const stories = storiesOf("Data/settings", module);
 
 stories.add(
   "simple",
-  display(service, {
+  display(settings, {
     dispatchRead: true
   }),
   {

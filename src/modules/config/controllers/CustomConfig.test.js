@@ -1,5 +1,5 @@
 import { mapDataSourceToProps } from "./CustomConfig";
-import { customConfig } from "data/service";
+import { customConfig } from "data/settings";
 
 describe("CustomConfig controller", () => {
   describe("connect", () => {

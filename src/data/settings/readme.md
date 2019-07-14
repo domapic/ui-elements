@@ -1,6 +1,6 @@
-## Service data
+## Settings data
 
-> Service data contains Mercury origins and selectors related with Domapic services:
+> Settings data contains Mercury origins and selectors related with Domapic service settings:
 
 ### Entities
 

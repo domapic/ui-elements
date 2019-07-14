@@ -2,7 +2,7 @@ import { connect } from "@xbyorange/react-mercury";
 
 import Config from "../components/config";
 
-import { customConfig } from "data/service";
+import { customConfig } from "data/settings";
 
 export const mapDataSourceToProps = () => {
   return {
