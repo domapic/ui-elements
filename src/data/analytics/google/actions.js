@@ -56,7 +56,7 @@ export const sendEvent = (action, category) => {
 };
 
 export const enableAnalytics = id => {
-  googleAnalytics.update({
+  return googleAnalytics.update({
     enabled: true,
     id
   });
