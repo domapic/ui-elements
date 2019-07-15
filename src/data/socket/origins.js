@@ -117,6 +117,15 @@ class Socket {
     this._apiKey.onChange(this._getCurrentAuth);
   }
 
+  // Only for testing purposes
+  _trigger(eventName, eventData) {
+    this._listeners
+      .filter(listener => listener.eventName === eventName)
+      .forEach(listener => {
+        listener.callback(eventData);
+      });
+  }
+
   // DataSources will add their listeners using this method
   addListener(eventName, callback) {
     const eventNames = isArray(eventName) ? eventName : [eventName];
