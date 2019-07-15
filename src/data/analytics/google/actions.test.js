@@ -38,6 +38,15 @@ describe("cookies actions", () => {
       });
     });
 
+    it("should remove ids from urls sent to analytics", async () => {
+      await sendPage("/foo/url/dasdasdeq3r4frgfgfddgfgfl3234q4fsf/testing");
+      expect(global.gtag.getCall(0).args[0]).toEqual("config");
+      expect(global.gtag.getCall(0).args[2]).toEqual({
+        page_title: "Foo Url Testing",
+        page_path: "/foo/url/testing"
+      });
+    });
+
     it("should send home page data to google gtag if page path is /", async () => {
       await sendPage("/");
       expect(global.gtag.getCall(0).args[0]).toEqual("config");
