@@ -9,8 +9,8 @@
 ### Props
 
 * data - `<Array of Objects>`
-  * label - `<String>` Label.
-  * value - `<String>` Value.
+	* label - `<String>` Label.
+	* value - `<String>` Value.
 
 ### Usage
 

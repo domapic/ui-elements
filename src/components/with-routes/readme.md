@@ -1,6 +1,6 @@
 ## withRoutes HOC
 
-> High order component that adds the routes context to them through a `routes` prop.
+> High order component that adds the routes context to wrapped components through a `routes` prop.
 
 ### Usage
 

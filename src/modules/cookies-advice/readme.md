@@ -9,9 +9,9 @@
 ### Context dependencies
 
 * `contexts/routes`
-  * `routes.privacy` Link to the privacy policy page.
+	* `routes.privacy` Link to the privacy policy page.
 * `contexts/link`
-  * `link` Link component to be used for internal links. (such as `{ Link } from "react-router-dom"`)
+	* `link` Link component to be used for internal links. (such as `{ Link } from "react-router-dom"`)
 
 ### Usage
 
@@ -26,5 +26,5 @@ export const Foo = () => (
 ### Data
 
 * `data/legal`
-  * When `cookies.query("accepted")` selector returns true it is not displayed.
-  * Dispatchs `acceptCookies` action when "got it" button is pressed.
+	* When `cookies.query("accepted")` selector returns true it is not displayed.
+	* Dispatchs `acceptCookies` action when "got it" button is pressed.

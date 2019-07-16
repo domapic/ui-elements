@@ -1,6 +1,6 @@
 ## Gloabl Styles component
 
-> Load Semantic UI styesheet and defines global css styles.
+> Appends Semantic UI stylesheet and defines global css styles.
 
 ### Usage
 

@@ -26,5 +26,4 @@ export const App = () => {
     </LinkContext.Provider>
   </Router>
 }
-
 ```

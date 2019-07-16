@@ -8,16 +8,17 @@ Appends a `<link rel="stylesheet" type="text/css" href=[url]/>` tag to the heade
 
 #### API
 
-`appendStyleSheet(url)`
+`appendStyleSheet(url[, options])`
 
 * Arguments
 	* url - `<String>` Url of the css file to be appended.
+	* options - `<Object>`
+		* method - `<String>` One of "append" or "prepend". Defineds where the link tag will be inserted. "append" by default.
 
 #### Usage
 
 ```jsx
-import { appendStyleSheet } from "@nex/ui-elements/helpers/append-header"
+import { appendStyleSheet } from "@domapic/ui-elements/helpers/append-header"
 
 appendStyleSheet("https://cdn.com/styles.css");
-
 ```

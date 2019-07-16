@@ -4,7 +4,7 @@
 
 ### Details
 
-* Displays an <a> tag with `rel` and `target` correspondant attributes depending of target.
+* Displays an `<a>` tag with `rel` and `target` correspondant attributes depending of target.
 
 ### Props
 
