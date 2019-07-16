@@ -8,8 +8,8 @@
 
 ### Props
 
-* as - `<String>` - Identifier of the html tag to render as children wrapper ([read the react-semantic-ui Responsive element documentation for further info](https://react.semantic-ui.com/addons/responsive)). `div` by default.
-* className - `<String>` - Class name to add to wrapper.
+* as - `<String>` Identifier of the html tag to render as children wrapper ([read the react-semantic-ui Responsive element documentation for further info](https://react.semantic-ui.com/addons/responsive)). `div` by default.
+* className - `<String>` Class name to add to wrapper.
 * children - `<React node>` Children to render.
 * device - `<String>` Device width in which the content should be rendered. Available choices are:
 	* mobile

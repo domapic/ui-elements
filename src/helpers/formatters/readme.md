@@ -14,7 +14,7 @@ Given a date as string, formats it to "YY-MM-DD, HH:mm:ss".
 	* dateAsString - `<String>` Date to be formatted.
 
 * Returns
-	* <String> - Formatted date.
+	* `<String>` Formatted date.
 
 #### Usage
 
@@ -36,7 +36,7 @@ Stringifies data for displaying it. If provided data is a `string` or a `number`
 	* data - `<Any>` Data to be formatted.
 
 * Returns
-	* <String> - Stringified data.
+	* `<String>` Stringified data.
 
 #### Usage
 

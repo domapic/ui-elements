@@ -26,5 +26,5 @@ export const Foo = () => (
 ### Data
 
 * `data/legal`
-	* When `cookies.query("accepted")` selector returns true it is not displayed.
+	* When `cookies.query("accepted")` selector returns true the module is not displayed.
 	* Dispatchs `acceptCookies` action when "got it" button is pressed.

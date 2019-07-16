@@ -29,9 +29,9 @@ export const Foo = () => (
 
 ### Props
 
-* loading - `<Boolean>` - If true, placeholder area will be rendered instead of content area.
-* error - `<Error>` - If defined, the message of the error will be displayed instead of content area.
-* background - `<Boolean>` - If true, the content area will be displayed with background and border, if not, it will be transparent.
+* loading - `<Boolean>` If true, placeholder area will be rendered instead of content area.
+* error - `<Error>` If defined, the message of the error will be displayed instead of content area.
+* background - `<Boolean>` If true, the content area will be displayed with background and border, if not, it will be transparent.
 
 ### Areas
 
@@ -39,8 +39,8 @@ export const Foo = () => (
 
 ##### Props
 
-* loading - `<Boolean>` - If true, a placeholder will be rendered instead of children.
-* as - `<String>` - Identifier of the html tag to render as header ([read the react-semantic-ui Header element documentation for further info](https://react.semantic-ui.com/elements/header/)). `h4` by default.
+* loading - `<Boolean>` If true, a placeholder will be rendered instead of children.
+* as - `<String>` Identifier of the html tag to render as header ([read the react-semantic-ui Header element documentation for further info](https://react.semantic-ui.com/elements/header/)). `h4` by default.
 * children - `<React node>` Children to render inside the header.
 
 #### Menu

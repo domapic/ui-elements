@@ -4,10 +4,10 @@
 
 ### Props
 
-* accepted - `<Boolean>` - If `true`, component will not be displayed.
-* onAccept - `<Function>` - Dispatched when accept button is pressed.
+* accepted - `<Boolean>` If `true`, component will not be displayed.
+* onAccept - `<Function>` Dispatched when accept button is pressed.
 * routes - `<Object>`
-	* privacy - `<String>` - Route to privacy policy section.
+	* privacy - `<String>` Route to privacy policy section.
 
 ### Usage
 

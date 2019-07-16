@@ -9,12 +9,12 @@
 
 ### Props
 
-* onSearchChange - `<Function>` - Triggered when search field value changes.
-* onSortByChange - `<Function>` - Triggered when "sort by" value changes.
-* onSortOrderChange - `<Function>` - Triggered when "sort order" field value changes.
-* searchValue - `<String>` - Value of the search field.
-* sortBy - `<Array>` - Array of possible values for "sort by" selector.
-* sortByActive - `<String>` - Selected value in "sort by" selector.
+* onSearchChange - `<Function>` Triggered when search field value changes.
+* onSortByChange - `<Function>` Triggered when "sort by" value changes.
+* onSortOrderChange - `<Function>` Triggered when "sort order" field value changes.
+* searchValue - `<String>` Value of the search field.
+* sortBy - `<Array>` Array of possible values for "sort by" selector.
+* sortByActive - `<String>` Selected value in "sort by" selector.
 * sortOrderActive - `<String> One of "asc", "desc"` - Selected value in "sort order" selector.
 
 ### Usage

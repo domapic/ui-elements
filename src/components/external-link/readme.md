@@ -8,7 +8,7 @@
 
 ### Props
 
-* to - `<String>` - href attribute for the link element.
+* to - `<String>` href attribute for the link element.
 * self - `<Boolean>` If `true`, adds `target="_blank"` and `rel="noopener"` attributes.
 
 ### Usage
