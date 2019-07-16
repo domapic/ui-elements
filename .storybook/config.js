@@ -9,12 +9,30 @@ import { withMercury } from "storybook/addons/mercury";
 import { withMocksServer } from "storybook/addons/mocks-server";
 import { withMercuryApi } from "storybook/addons/mercury-api";
 
+import * as analyticsData from "../src/data/analytics";
+import * as cloudUsersData from "../src/data/cloud-users";
+import * as controllersData from "../src/data/controllers";
 import * as legalData from "../src/data/legal";
+import * as securityData from "../src/data/security";
+import * as servicesData from "../src/data/services";
 import * as settingsData from "../src/data/settings";
+import * as usersData from "../src/data/users";
 
 import theme from "./theme";
 
 addParameters({
+  mercury: {
+    domains: {
+      legal: legalData,
+      settings: settingsData,
+      analytics: analyticsData,
+      cloudUsers: cloudUsersData,
+      controllers: controllersData,
+      security: securityData,
+      services: servicesData,
+      users: usersData
+    }
+  },
   options: {
     theme
   },
@@ -34,12 +52,6 @@ addParameters({
           height: "95%"
         }
       }
-    }
-  },
-  mercury: {
-    domains: {
-      legal: legalData,
-      settings: settingsData
     }
   },
   mocks: {
