@@ -1,10 +1,10 @@
 @import "theme";
 
 a {
-  color:$brand-secondary;
+  color: $brand-secondary;
 
   &:hover {
-    color:$brand-terciary;
+    color: $brand-terciary;
   }
 
   &:global(.text__link) {
@@ -13,5 +13,5 @@ a {
 }
 
 body {
-  font-size:1em;
+  font-size: 1em;
 }

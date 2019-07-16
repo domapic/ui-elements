@@ -1,16 +1,17 @@
 @import "theme";
 
 .acceptCookies {
-  opacity:0.8;
-  padding:6px 20px;
+  opacity: 0.8;
+  padding: 6px 20px;
+
   a {
     text-decoration: underline;
     padding-left: 6px;
-    color:#fff;
+    color: $light;
   }
 
   a:hover {
-    color:#fff;
+    color: $light;
   }
 
   p {
@@ -25,8 +26,8 @@
   }
 
   &:global(.ui.menu .item>.button) {
-    color: #000;
-    padding-top:0.5em;
+    color: $dark;
+    padding-top: 0.5em;
     padding-bottom: 0.5em;
   }
 }

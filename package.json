@@ -31,7 +31,8 @@
     "build-storybook": "build-storybook -c .storybook -o .public",
     "start": "start-storybook -s ./static -p 3001",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "lint": "eslint src scripts .storybook rollup.config.js",
+    "lint": "eslint src scripts .storybook rollup.config.js postcss.config.js jest.config.js",
+    "lint:styles": "stylelint src",
     "lint-staged": "lint-staged",
     "serve": "serve -l 3002",
     "test": "jest",
@@ -122,11 +123,19 @@
     "serve": "^11.0.2",
     "sinon": "^7.3.2",
     "storybook-react-router": "^1.0.5",
-    "style-loader": "^0.23.1"
+    "style-loader": "^0.23.1",
+    "stylelint": "^10.1.0",
+    "stylelint-config-sass-guidelines": "^6.0.0",
+    "stylelint-declaration-use-variable": "^1.7.0",
+    "stylelint-scss": "^3.9.1"
   },
   "lint-staged": {
     "src/**/*.js": "eslint",
-    "rollup.config.js": "eslint"
+    "scripts/**/*.js": "eslint",
+    ".storybook/**/*.js": "eslint",
+    "*.js": "eslint",
+    "src/**/*.scss": "stylelint",
+    "src/**/*.css": "stylelint"
   },
   "husky": {
     "hooks": {

@@ -1,28 +1,29 @@
 @import "theme";
 
-.content-layout__menu--bottom--search {
+.content-layout__menu--bottom-search {
   &:global(.ui.inverted.menu) {
     padding-bottom: 41px;
     background-color: $dark-light;
   }
 
   &:global(.ui.bottom.fixed) {
-    z-index:1100;
+    z-index: 1100;
   }
 }
 
 .content-layout__menu--bottom {
   &:global(.ui.bottom.fixed) {
-    z-index:1200;
+    z-index: 1200;
   }
 }
 
 .content-layout__menu--top {
   &:global(.ui.fixed.menu) {
-    padding-top:54px;
+    padding-top: 54px;
   }
+
   &:global(.menu.ui.top.fixed) {
-    z-index:1100;
+    z-index: 1100;
   }
 }
 
@@ -32,10 +33,10 @@
   }
 
   &:global(.ui.basic) {
-    padding:0;
+    padding: 0;
   }
 
-  &:global(.ui.basic.loading:before) {
-    background: none;
+  &:global(.ui.basic.loading::before) {
+    background: $none;
   }
 }

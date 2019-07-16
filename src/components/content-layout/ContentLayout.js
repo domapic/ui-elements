@@ -121,7 +121,7 @@ export class ContentLayout extends Component {
               <Menu
                 inverted
                 fixed="bottom"
-                className={styles["content-layout__menu--bottom--search"]}
+                className={styles["content-layout__menu--bottom-search"]}
                 data-testid="content-layout-search"
               >
                 {search}
