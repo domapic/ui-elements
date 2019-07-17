@@ -44,7 +44,8 @@ export const usersCollectionExactFiltered = new Selector(
 
 export const usersCollectionFiltered = new Selector(
   usersCollectionWithExtraData,
-  (usersResults, { search, showSystem }) => {
+  (usersResults, query = {}) => {
+    const { search, showSystem } = query;
     return usersResults.filter(user => {
       if (!showSystem && user.isSystemRole) {
         return false;
@@ -65,7 +66,7 @@ export const usersCollectionFiltered = new Selector(
 export const usersCollectionFilteredAndSorted = new Selector(
   {
     source: usersCollectionFiltered,
-    query: ({ search, showSystem }) => ({ search, showSystem })
+    query: (query = {}) => ({ search: query.search, showSystem: query.showSystem })
   },
   (usersResults, query) => {
     const results = sortBy(usersResults, (query && query.sortBy) || "name");

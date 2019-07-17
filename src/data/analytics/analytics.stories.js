@@ -4,7 +4,7 @@ import { display } from "storybook/addons/mercury";
 import * as data from "./index";
 import readme from "./readme.md";
 
-const stories = storiesOf("Data/legal", module);
+const stories = storiesOf("Data/analytics", module);
 
 stories.add(
   "simple",
@@ -12,16 +12,6 @@ stories.add(
     dispatchRead: true
   }),
   {
-    mercury: {
-      actions: [
-        data.rejectCookies,
-        data.acceptCookies,
-        {
-          name: "updateRoot",
-          action: () => data.cookies.update({ accepted: false })
-        }
-      ]
-    },
     notes: {
       markdown: readme
     }

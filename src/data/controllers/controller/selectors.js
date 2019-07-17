@@ -24,7 +24,7 @@ export const currentController = new Selector(
   []
 );
 
-export const SelectedControllerSwitch = (origin, controllerBasedOrigin, defaultValue) => {
+const SelectedControllerSwitch = (origin, controllerBasedOrigin, defaultValue) => {
   return new Selector(
     {
       source: selectedController,

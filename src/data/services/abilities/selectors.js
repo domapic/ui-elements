@@ -33,7 +33,7 @@ export const abilitiesCollectionFiltered = new Selector(
 export const abilitiesCollectionFilteredAndSorted = new Selector(
   {
     source: abilitiesCollectionFiltered,
-    query: ({ search }) => search
+    query: (query = {}) => query.search
   },
   sortAndOrderBy,
   []

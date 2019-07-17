@@ -37,7 +37,7 @@ export const pluginsCollectionFiltered = new Selector(
 export const modulesCollectionFilteredAndSorted = new Selector(
   {
     source: modulesCollectionFiltered,
-    query: ({ search }) => search
+    query: (query = {}) => query.search
   },
   sortAndOrderBy,
   []
@@ -46,7 +46,7 @@ export const modulesCollectionFilteredAndSorted = new Selector(
 export const pluginsCollectionFilteredAndSorted = new Selector(
   {
     source: pluginsCollectionFiltered,
-    query: ({ search }) => search
+    query: (query = {}) => query.search
   },
   sortAndOrderBy,
   []

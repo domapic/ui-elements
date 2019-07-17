@@ -14,3 +14,9 @@
 
 * baseConfig - `<Object>` Filters `config` origin, returning an array containing only common configuration properties of all Domapic services. It also add properties for better display of configuration properties, such as `label`, `displayValue`, etc.
 * customConfig - `<Object>` Filters `config` origin, returning an array with custom configuration properties of a Domapic service. It also add properties for better display of configuration properties, such as `label`, `displayValue`, etc.
+
+#### About
+
+##### Origins
+
+* about - `<Object>` Returns package information of a Domapic Service.
