@@ -1,6 +1,6 @@
 ## Services data
 
-> Mercury origins and selectors related with domapic plugins and accessories:
+> Data related to domapic plugins and accessories:
 
 ### Entities
 
@@ -23,7 +23,7 @@
 
 ##### Actions
 
-* `validateAbilityData(ability, value)` - Returns `<String>` containing errors details, or `null` if value is valid.
+* `validateAbilityData(ability, value)` Returns `<String>` containing errors details, or `null` if value is valid.
 	* ability - `<Object>` Ability data to be validated.
 	* value - `<Any>` Value to validate.
 
