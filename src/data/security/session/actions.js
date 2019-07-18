@@ -4,7 +4,7 @@ import { apis } from "@xbyorange/mercury-api";
 
 import queryString from "query-string";
 
-import { removeAuth, setJwtAuth, setApiKeyAuth } from "helpers/api";
+import { removeAuth, setJwtAuth, setApiKeyAuth } from "../helpers/auth";
 import { socket } from "data/socket";
 import { acceptCookies } from "data/legal";
 

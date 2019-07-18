@@ -1,4 +1,4 @@
-import { setApiKeyAuth, setJwtAuth } from "helpers/api";
+import { setApiKeyAuth, setJwtAuth } from "../helpers/auth";
 
 import { sendLogin } from "data/analytics";
 
