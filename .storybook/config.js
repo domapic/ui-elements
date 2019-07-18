@@ -58,7 +58,7 @@ addParameters({
     url: "http://localhost:3100",
     behavior: "base",
     delay: 0,
-    errorMessage: `Start the mocks server running "npm run mocks"`
+    errorMessage: `Clone the "domapic/ui-elements" github repository and start the mocks server running "npm run mocks"`
   },
   mercuryApi: {
     baseUrl: "http://localhost:3100/api",

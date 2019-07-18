@@ -1,6 +1,6 @@
 export const methodToString = method => {
-  const webpackAliasRegex = /[^\s]*_WEBPACK_IMPORTED[^\s]*\["([\S]*)"\]/;
-  return method.toString().replace(webpackAliasRegex, "$1");
+  const webpackAliasRegex = /([^\s]*?)(?:_)*WEBPACK_IMPORTED[^\s]*(?:(?:\["([\S]*)"\])|(?:default\(\)))/;
+  return method.toString().replace(webpackAliasRegex, "$1$2");
 };
 
 export const parseHelper = helper => {
