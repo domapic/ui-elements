@@ -3,6 +3,7 @@ import { render } from "@testing-library/react";
 import "jest-dom/extend-expect";
 
 import { ContentLayout } from "./ContentLayout";
+import VisibilityContext from "contexts/visibility";
 
 describe("ContentLayout component", () => {
   it("should render the header area", () => {
@@ -42,7 +43,19 @@ describe("ContentLayout component", () => {
       </ContentLayout>
     );
 
-    expect(getByTestId("content-layout-search")).toBeDefined();
+    expect(getByTestId("search-field")).toBeDefined();
+  });
+
+  it("should render the search area fixed to top when search container is not visible in scroll", () => {
+    const { getByTestId } = render(
+      <VisibilityContext.Provider value="onTopPassed">
+        <ContentLayout>
+          <ContentLayout.Search />
+        </ContentLayout>
+      </VisibilityContext.Provider>
+    );
+
+    expect(getByTestId("content-layout-search-container--fixed")).toBeDefined();
   });
 
   it("should render the menu area", () => {

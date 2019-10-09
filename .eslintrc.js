@@ -19,6 +19,8 @@ module.exports = {
     "jest": "readonly",
     "afterEach": "readonly",
     "beforeEach": "readonly",
+    "afterAll": "readonly",
+    "beforeAll": "readonly",
     "Set": "readonly"
   },
   plugins: ["prettier"],

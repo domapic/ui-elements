@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Segment, Menu, Icon, Visibility } from "semantic-ui-react";
+import { Segment, Menu, Icon } from "semantic-ui-react";
 
 import ErrorComponent from "components/error";
 import Responsive from "components/responsive";
+import Visibility from "components/visibility";
 
 import "components/global-styles";
 import styles from "./contentLayout.scss";
@@ -83,7 +84,11 @@ export class ContentLayout extends Component {
                 pointing
                 fixed={this.state.fixedMenu ? "top" : null}
                 className={styles["content-layout__menu--top"]}
-                data-testid="content-layout-search"
+                data-testid={
+                  this.state.fixedMenu
+                    ? "content-layout-search-container--fixed"
+                    : "content-layout-search-container"
+                }
               >
                 {search}
                 {hasMenu ? (
@@ -93,10 +98,7 @@ export class ContentLayout extends Component {
                 ) : null}
               </Menu>
               {this.state.fixedMenu ? (
-                <Menu
-                  className={styles["content-layout__menu--top"]}
-                  data-testid="content-layout-menu"
-                >
+                <Menu className={styles["content-layout__menu--top"]}>
                   <Menu.Item />
                 </Menu>
               ) : null}
@@ -122,7 +124,7 @@ export class ContentLayout extends Component {
                 inverted
                 fixed="bottom"
                 className={styles["content-layout__menu--bottom-search"]}
-                data-testid="content-layout-search"
+                data-testid="content-layout-search-container--mobile"
               >
                 {search}
               </Menu>
