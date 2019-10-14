@@ -8,6 +8,7 @@ import "components/global-styles";
 import styles from "./search.scss";
 
 const sortOrders = [{ value: "asc", icon: "caret up" }, { value: "desc", icon: "caret down" }];
+const defaultCallback = () => {};
 
 export class Search extends Component {
   constructor() {
@@ -92,9 +93,9 @@ Search.propTypes = {
 };
 
 Search.defaultProps = {
-  onSearchChange: () => {},
-  onSortByChange: () => {},
-  onSortOrderChange: () => {},
+  onSearchChange: defaultCallback,
+  onSortByChange: defaultCallback,
+  onSortOrderChange: defaultCallback,
   searchValue: "",
   sortBy: [],
   sortByActive: "",

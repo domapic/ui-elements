@@ -41,6 +41,12 @@ describe("Search component", () => {
     expect(onSortOrderChange.mock.calls[0][0]).toEqual("asc");
   });
 
+  it("should not throw when sortOrder button is clicked if no callback is provided", () => {
+    const { getByTestId, getByText } = render(<Search searchValue="foo" />);
+    fireEvent.click(getByTestId("search-sort-by-order"));
+    fireEvent.click(getByText("asc"));
+  });
+
   it("should execute onSearchChange callback when search input changes", async () => {
     const onSearchChange = jest.fn();
     const { getByPlaceholderText } = render(
