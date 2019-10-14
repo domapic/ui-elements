@@ -7,7 +7,7 @@ import styles from "./header.scss";
 export const HeaderArea = ({ children, as, loading }) => {
   const type = as || "h4";
   return loading ? (
-    <Placeholder as={type}>
+    <Placeholder as={type} data-testid="content-layout-header--placeholder">
       <Placeholder.Paragraph>
         <Placeholder.Line as={type} />
       </Placeholder.Paragraph>

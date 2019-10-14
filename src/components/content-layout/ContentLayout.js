@@ -138,7 +138,11 @@ export class ContentLayout extends Component {
               {hasMenu ? menu : null}
               {hasSearch ? (
                 <Menu.Menu position="right">
-                  <Menu.Item active={this.state.searchVisible} onClick={this.handleSearchToggle}>
+                  <Menu.Item
+                    active={this.state.searchVisible}
+                    onClick={this.handleSearchToggle}
+                    data-testid="content-layout-search-button--mobile"
+                  >
                     <Icon name="ellipsis horizontal" size="small" />
                   </Menu.Item>
                 </Menu.Menu>
