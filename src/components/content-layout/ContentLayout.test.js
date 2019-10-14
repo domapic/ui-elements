@@ -100,13 +100,7 @@ describe("ContentLayout component", () => {
       </ResponsiveContext.Provider>
     );
 
-    fireEvent(
-      getByTestId("content-layout-search-button--mobile"),
-      new MouseEvent("click", {
-        bubbles: true,
-        cancelable: true
-      })
-    );
+    fireEvent.click(getByTestId("content-layout-search-button--mobile"));
     expect(getByTestId("content-layout-search-container--mobile")).toBeDefined();
   });
 });
