@@ -12,14 +12,14 @@ controllerModels.addCustomQuery({
   byId: byIdQuery
 });
 
+socket.addListener(["controller:updated", "controller:deleted"], eventData => {
+  controllerModels.byId(eventData._id).clean();
+});
+
 export const controllerApiKey = new Api("/controllers/:id/api-key", getAuthConfig({}));
 
 controllerApiKey.addCustomQuery({
   byId: byIdQuery
-});
-
-socket.addListener(["controller:updated", "controller:deleted"], eventData => {
-  controllerModels.byId(eventData._id).clean();
 });
 
 export const selectedController = new Memory({
