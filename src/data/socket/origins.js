@@ -156,6 +156,10 @@ class Socket {
       this._emitCurrentController();
     }
   }
+
+  get currentController() {
+    return this._currentController;
+  }
 }
 
 export const socket = new Socket();
