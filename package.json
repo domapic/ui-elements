@@ -10,7 +10,8 @@
     "domapic",
     "catalog",
     "front-end",
-    "react"
+    "react",
+    "storybook"
   ],
   "author": "Javier Brea",
   "license": "Apache-2.0",
@@ -44,7 +45,7 @@
     "react-router-dom": "^5.0.1"
   },
   "dependencies": {
-    "@xbyorange/mercury": "^1.1.0",
+    "@xbyorange/mercury": "^1.5.0",
     "@xbyorange/mercury-api": "^1.2.0",
     "@xbyorange/mercury-browser-storage": "^1.1.0",
     "@xbyorange/mercury-memory": "^1.1.0",
