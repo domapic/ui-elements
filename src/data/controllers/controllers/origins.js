@@ -14,7 +14,7 @@ controllersCollection.addCustomQuery({
     if (userId) {
       return {
         queryString: {
-          ["allowed-user"]: userId
+          "allowed-user": userId
         }
       };
     }
