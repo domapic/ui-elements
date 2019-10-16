@@ -2,7 +2,7 @@ import sinon from "sinon";
 import AxiosMock from "../../../../config/tests/Axios.mock.js";
 
 import { socket } from "data/socket";
-import { controllerModels } from "./origins";
+import { controllerModels, selectedController } from "./origins";
 import { currentController, SelectedControllerBasedOrigin } from "./selectors";
 
 describe("currentController selector", () => {
@@ -52,6 +52,67 @@ describe("SelectedControllerBasedOrigin constructor", () => {
         const fooApi = SelectedControllerBasedOrigin("/foo-url", {});
         await fooApi.read();
         expect(axios.stubs.instance.getCall(0).args[0].url).toEqual("/foo-url");
+      });
+
+      it("should return default value if selected controller is required", async () => {
+        selectedController.update({
+          id: null,
+          required: true
+        });
+        const fooApi = SelectedControllerBasedOrigin("/foo-url", {
+          defaultValue: {
+            foo: "foo-result"
+          }
+        });
+        const result = await fooApi.read();
+        expect(result).toEqual({
+          foo: "foo-result"
+        });
+      });
+    });
+
+    describe("when there is selected controller", () => {
+      beforeEach(() => {
+        selectedController.update({
+          id: "foo-controller-id",
+          required: false
+        });
+      });
+
+      it("should return the value of api origin created with provided url adding controller url", async () => {
+        const fooApi = SelectedControllerBasedOrigin("/foo-url", {});
+        await fooApi.read();
+        expect(axios.stubs.instance.getCall(0).args[0].url).toEqual(
+          "/controllers/foo-controller-id/foo-url"
+        );
+      });
+
+      it("should add received url params from query to resultant url", async () => {
+        const fooApi = SelectedControllerBasedOrigin("/foo-url/:foo", {});
+        await fooApi
+          .query({
+            urlParams: {
+              foo: "foo-param"
+            }
+          })
+          .read();
+        expect(axios.stubs.instance.getCall(0).args[0].url).toEqual(
+          "/controllers/foo-controller-id/foo-url/foo-param"
+        );
+      });
+
+      it("should add received query string params from query to resultant url", async () => {
+        const fooApi = SelectedControllerBasedOrigin("/foo-url", {});
+        await fooApi
+          .query({
+            queryString: {
+              foo: "foo1"
+            }
+          })
+          .read();
+        expect(axios.stubs.instance.getCall(0).args[0].url).toEqual(
+          "/controllers/foo-controller-id/foo-url?foo=foo1"
+        );
       });
     });
   });
