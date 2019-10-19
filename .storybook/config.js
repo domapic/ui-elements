@@ -73,8 +73,6 @@ addDecorator(withMocksServer);
 addDecorator(withMercury);
 addDecorator(withMercuryApi);
 
-addDecorator((storyFn, context) => withConsole()(storyFn)(context));
-
 const loadStories = () => {
   const req = require.context("../src", true, /\.stories\.js$/);
   req.keys().forEach(filename => req(filename));
