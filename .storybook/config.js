@@ -2,7 +2,6 @@ import { configure, addDecorator, addParameters } from "@storybook/react";
 import centered from "@storybook/addon-centered/react";
 import { withKnobs } from "@storybook/addon-knobs";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
-import { withConsole } from "@storybook/addon-console";
 import StoryRouter from "storybook-react-router";
 
 import { withMercury } from "storybook/addons/mercury";
