@@ -50,9 +50,10 @@ const SelectedControllerSwitch = (origin, controllerBasedOrigin, defaultValue) =
 };
 
 export const SelectedControllerBasedOrigin = (url, options, callback) => {
+  const controllerBasedOriginUrl = `/controllers/:controllerId${url}`;
   const controllerBasedOrigin = new Api(
-    `/controllers/:controllerId${url}`,
-    getAuthConfig(options && options.defaultValue, options)
+    controllerBasedOriginUrl,
+    getAuthConfig(options && options.defaultValue, { ...options, uuid: controllerBasedOriginUrl })
   );
 
   controllerBasedOrigin.addCustomQuery({
@@ -72,7 +73,7 @@ export const SelectedControllerBasedOrigin = (url, options, callback) => {
     }
   );
 
-  const origin = new Api(url, options);
+  const origin = new Api(url, { ...options, uuid: url });
 
   if (callback) {
     callback(origin, controllerBasedOrigin);

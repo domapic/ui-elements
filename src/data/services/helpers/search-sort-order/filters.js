@@ -9,8 +9,8 @@ export const searchByNameAndDescription = (servicesResults, search) => {
   );
 };
 
-export const sortAndOrderBy = (servicesResults, query) => {
-  const results = sortBy(servicesResults, (query && query.sortBy) || "name");
+export const sortAndOrderBy = (servicesResults, query = {}) => {
+  const results = sortBy(servicesResults, query.sortBy || "name");
   if (query.reverse) {
     return results.reverse();
   }
