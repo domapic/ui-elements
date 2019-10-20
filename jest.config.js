@@ -19,10 +19,10 @@ module.exports = {
 
   coverageThreshold: {
     global: {
-      branches: 25,
-      functions: 25,
-      lines: 25,
-      statements: 25
+      branches: 50,
+      functions: 50,
+      lines: 50,
+      statements: 50
     }
   },
   // The glob patterns Jest uses to detect test files
