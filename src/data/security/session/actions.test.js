@@ -27,8 +27,6 @@ describe("authentication session", () => {
     sandbox.stub(authJwt, "create").resolves({
       accessToken: "foo-access-token"
     });
-    /* sandbox.stub(authSession, "apiKey").resolves();
-    sandbox.stub(authSession, "rememberMe").resolves(); */
   });
 
   afterEach(() => {
