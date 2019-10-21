@@ -17,7 +17,8 @@ export const validateAbilityData = (ability, value) => {
         errors.push(`Has to be multiple of ${ability.multipleOf}`);
       }
     }
-  } else if (ability.type === "string") {
+  }
+  if (ability.type === "string") {
     value = value.toString();
     if (ability.format === "date-time" && !isISO8601(value)) {
       errors.push("Not valid ISO8601 date-time");

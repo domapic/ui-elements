@@ -9,7 +9,7 @@ export const abilityModels = SelectedControllerBasedOrigin(
     defaultValue: {}
   },
   (origin, controllerBasedOrigin) => {
-    socket.addListener("ability:updated", "ability:deleted", eventData => {
+    socket.addListener(["ability:updated", "ability:deleted"], eventData => {
       origin.query(byIdQuery(eventData._id)).clean();
       controllerBasedOrigin
         .queryAddingController({
