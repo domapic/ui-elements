@@ -1,6 +1,11 @@
 import { displayValue, formatDate } from "helpers/formatters";
 import { byPageAndAbility } from "./filters";
-import { logsPage, logsPageLoaded, logsPageWithDetails } from "./selectors";
+import {
+  logsPage,
+  logsPageLoaded,
+  logsPageWithDetails,
+  logsPageWithDetailsLoaded
+} from "./selectors";
 
 describe("logsPage selector", () => {
   describe("logs query", () => {
@@ -106,6 +111,20 @@ describe("logsPageWithDetails selector", () => {
           module: "-"
         }
       ]);
+    });
+  });
+});
+
+describe("logsPageWithDetailsLoaded selector", () => {
+  describe("logsPageWithDetails query", () => {
+    it("should bypass query", () => {
+      expect(logsPageWithDetailsLoaded.test.queries[0]("foo")).toEqual("foo");
+    });
+  });
+
+  describe("results selector", () => {
+    it("should return true", () => {
+      expect(logsPageWithDetailsLoaded.test.selector()).toEqual(true);
     });
   });
 });
