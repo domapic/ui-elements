@@ -114,6 +114,10 @@ describe("modulesCollectionFilteredAndSorted selector", () => {
         })
       ).toEqual("foo");
     });
+
+    it("should return undefined if no query is provided", () => {
+      expect(modulesCollectionFilteredAndSorted.test.queries[0]()).toEqual(undefined);
+    });
   });
 });
 
@@ -125,6 +129,10 @@ describe("pluginsCollectionFilteredAndSorted selector", () => {
           search: "foo"
         })
       ).toEqual("foo");
+    });
+
+    it("should return undefined if no query is provided", () => {
+      expect(pluginsCollectionFilteredAndSorted.test.queries[0]()).toEqual(undefined);
     });
   });
 });

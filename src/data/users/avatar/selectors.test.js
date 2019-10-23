@@ -44,6 +44,17 @@ describe("userAvatar selector", () => {
           }
         });
       });
+
+      it("should return md5 email and 404 querystring parameter if no email is provided", () => {
+        expect(userAvatar.test.customQueries.byEmail()).toEqual({
+          urlParams: {
+            hash: md5("")
+          },
+          queryString: {
+            d: 404
+          }
+        });
+      });
     });
   });
 });
