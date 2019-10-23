@@ -66,10 +66,10 @@ export const usersCollectionFiltered = new Selector(
 export const usersCollectionFilteredAndSorted = new Selector(
   {
     source: usersCollectionFiltered,
-    query: (query = {}) => ({ search: query.search, showSystem: query.showSystem })
+    query: query => query
   },
-  (usersResults, query) => {
-    const results = sortBy(usersResults, (query && query.sortBy) || "name");
+  (usersResults, query = {}) => {
+    const results = sortBy(usersResults, query.sortBy || "name");
     if (query.reverse) {
       return results.reverse();
     }
