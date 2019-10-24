@@ -163,7 +163,7 @@ describe("socket", () => {
       socketMock.emit("unauthorized", new Error());
     });
 
-    it("should emit current controller if defined", async () => {
+    it("should emit current controller if defined on authenticated event", async () => {
       expect.assertions(3);
       socketMock.connect();
       socketMock.once("changeController", currentController => {
