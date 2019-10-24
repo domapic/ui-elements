@@ -15,7 +15,7 @@ class Socket {
     this._listeners = [];
     this._refreshToken = authSession.refreshToken();
     this._apiKey = authSession.apiKey();
-    this._doJwtLogin = debounce(this._doLogin.bind(this), DEBOUNCE_TIME);
+    this._doLogin = debounce(this._doLogin.bind(this), DEBOUNCE_TIME);
     this._doLogout = debounce(this._doLogout.bind(this), DEBOUNCE_TIME);
     this._getCurrentAuth = debounce(this._getCurrentAuth.bind(this), DEBOUNCE_TIME);
 
@@ -32,7 +32,7 @@ class Socket {
 
   _doLogin(refreshToken) {
     if (this._currentToken !== refreshToken) {
-      if (!this.socket) {
+      if (!this._socket) {
         if (refreshToken !== AUTH_METHODS.ANONYMOUS || !this._options.avoidAnonymous) {
           console.log("Initializing socket");
           this._initSocket();
