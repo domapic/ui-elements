@@ -1,6 +1,7 @@
 import { isISO8601, isEmail, isIP, matches, isURL } from "helpers/validators";
 
-export const validateAbilityData = (ability, value) => {
+export const validateAbilityData = (ability, val) => {
+  let value = val;
   const errors = [];
   if (ability.type === "number") {
     if (!/^-?(\d)*\.?(\d)*$/.test(value)) {
