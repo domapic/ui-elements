@@ -129,9 +129,9 @@ class Socket {
   // DataSources will add their listeners using this method
   addListener(eventName, callback) {
     const eventNames = isArray(eventName) ? eventName : [eventName];
-    eventNames.forEach(eventName => {
+    eventNames.forEach(event => {
       this._listeners.push({
-        eventName,
+        eventName: event,
         callback
       });
       if (this._socket) {

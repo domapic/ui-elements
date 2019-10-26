@@ -34,8 +34,9 @@ export const logsPageWithDetails = new Selector(
   },
   (abilitiesResults, servicesResults, logsResults) => {
     return logsResults.map(log => {
-      const ability = abilitiesResults.find(ability => ability._id === log._ability);
-      const service = ability && servicesResults.find(service => service._id === ability._service);
+      const ability = abilitiesResults.find(abilityData => abilityData._id === log._ability);
+      const service =
+        ability && servicesResults.find(serviceData => serviceData._id === ability._service);
       return {
         ...log,
         dateTime: formatDate(log.createdAt),
