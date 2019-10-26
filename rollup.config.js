@@ -2,7 +2,7 @@ const path = require("path");
 
 const globule = require("globule");
 const commonjs = require("rollup-plugin-commonjs");
-const resolve = require("rollup-plugin-node-resolve");
+const nodeResolve = require("rollup-plugin-node-resolve");
 const babel = require("rollup-plugin-babel");
 const postcss = require("rollup-plugin-postcss");
 const { flatten, compact, difference } = require("lodash");
@@ -82,7 +82,7 @@ const getElementConfig = (type, name) => {
       paths: getOtherRelativePaths(otherAbsolutePaths)
     },
     plugins: [
-      resolve({
+      nodeResolve({
         mainFields: ["module", "jsnext:main", "main"],
         preferBuiltins: true
       }),

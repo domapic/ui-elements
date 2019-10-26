@@ -3,6 +3,16 @@ import { byIdQuery } from "helpers/api";
 
 import { socket } from "data/socket";
 
+const cleanOrigins = (origin, controllerBasedOrigin, eventData) => {
+  origin.query(byIdQuery(eventData._id)).clean();
+  controllerBasedOrigin
+    .queryAddingController({
+      query: byIdQuery(eventData._id),
+      controller: eventData._controller
+    })
+    .clean();
+};
+
 export const abilityModels = SelectedControllerBasedOrigin(
   "/abilities/:id",
   {
@@ -10,13 +20,7 @@ export const abilityModels = SelectedControllerBasedOrigin(
   },
   (origin, controllerBasedOrigin) => {
     socket.addListener(["ability:updated", "ability:deleted"], eventData => {
-      origin.query(byIdQuery(eventData._id)).clean();
-      controllerBasedOrigin
-        .queryAddingController({
-          query: byIdQuery(eventData._id),
-          controller: eventData._controller
-        })
-        .clean();
+      cleanOrigins(origin, controllerBasedOrigin, eventData);
     });
   }
 );
@@ -32,13 +36,7 @@ export const abilityStates = SelectedControllerBasedOrigin(
   },
   (origin, controllerBasedOrigin) => {
     socket.addListener("ability:event", eventData => {
-      origin.query(byIdQuery(eventData._id)).clean();
-      controllerBasedOrigin
-        .queryAddingController({
-          query: byIdQuery(eventData._id),
-          controller: eventData._controller
-        })
-        .clean();
+      cleanOrigins(origin, controllerBasedOrigin, eventData);
     });
   }
 );

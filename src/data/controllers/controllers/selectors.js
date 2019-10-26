@@ -21,12 +21,12 @@ export const controllersOfUserMeWithExtraData = new Selector(
   cloudUserMe,
   controllersOfUserMe,
   controllerTokensOfUserMe,
-  (userMe, controllersOfUserMe, controllerTokensOfUserMe) => {
-    return controllersOfUserMe.map(controller => {
+  (userMe, controllersOfUserMeResult, controllerTokensOfUserMeResult) => {
+    return controllersOfUserMeResult.map(controller => {
       return {
         ...controller,
         userIsOwner: controller._user === userMe._id,
-        userCanConnect: !!controllerTokensOfUserMe.find(
+        userCanConnect: !!controllerTokensOfUserMeResult.find(
           controllerToken => controllerToken._controller === controller._id
         )
       };

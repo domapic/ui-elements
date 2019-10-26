@@ -13,10 +13,10 @@ const removeUrlIds = url => {
     .join(URL_SEP);
 };
 
-const sendIfEnabled = sendEvent => {
+const sendIfEnabled = sendEventCallback => {
   return googleAnalytics.read().then(analytics => {
     if (analytics.enabled) {
-      sendEvent(analytics);
+      sendEventCallback(analytics);
     }
   });
 };

@@ -5,7 +5,7 @@ import { createBrowserHistory } from "history";
 import { Link as ReactRouterLink, Router } from "react-router-dom";
 
 import LinkContext from "contexts/link";
-import Link from "./Link";
+import Link from "./LinkComponent";
 
 const history = createBrowserHistory({
   basename: "/"
