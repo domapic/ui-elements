@@ -11,9 +11,11 @@ describe("socket", () => {
   let sandbox;
   let fooScript;
   let socketMock;
+  let fooEventListener;
 
   beforeAll(() => {
     sandbox = sinon.createSandbox();
+    fooEventListener = sandbox.spy();
     fooScript = {};
     sandbox.stub(document, "createElement").returns(fooScript);
     sandbox.stub(document.head, "appendChild");
@@ -64,11 +66,25 @@ describe("socket", () => {
       expect.assertions(2);
       socket._currentToken = null; //force reexecution of doLogin
       socket._options.avoidAnonymous = false;
+      socket.addListener("foo-event-name", fooEventListener);
       window.io.returns(socketMock);
       fooScript.onload();
       await waitForEvents();
       expect(window.io.callCount).toEqual(1);
       expect(socketMock.connect.callCount).toEqual(1);
+    });
+
+    it("should run socket listeners added before creating and connecting socket", async () => {
+      expect.assertions(1);
+      socketMock.emit("foo-event-name");
+      expect(fooEventListener.callCount).toEqual(1);
+    });
+
+    it("should run socket listeners added after creating and connecting socket", async () => {
+      expect.assertions(1);
+      socket.addListener("foo-event-name-2", fooEventListener);
+      socketMock.emit("foo-event-name-2");
+      expect(fooEventListener.callCount).toEqual(1);
     });
   });
 
@@ -173,6 +189,41 @@ describe("socket", () => {
       });
       socket._currentController = "foo-controller-id";
       socketMock.emit("authenticated");
+    });
+
+    it("should not emit current controller if it is not defined on authenticated event", async () => {
+      expect.assertions(2);
+      const controllerChangedSpy = sandbox.spy();
+      socketMock.once("changeController", controllerChangedSpy);
+      socketMock.once("authenticated", async () => {
+        expect(console.log.getCall(0).args[0]).toEqual("Socket authenticated");
+        await waitForEvents(1000);
+        expect(controllerChangedSpy.callCount).toEqual(0);
+      });
+      socket._currentController = null;
+      socketMock.emit("authenticated");
+    });
+
+    it("should emit new current controller when it changes", async () => {
+      expect.assertions(2);
+      socketMock.connect();
+      socket._currentController = "foo-controller-id";
+      socketMock.once("changeController", currentController => {
+        expect(currentController).toEqual("foo-new-controller-id");
+        expect(socket.currentController).toEqual(currentController);
+      });
+      socket.currentController = "foo-new-controller-id";
+    });
+
+    it("should not emit new current controller if it does not change", async () => {
+      expect.assertions(1);
+      socketMock.connect();
+      const controllerChangedSpy = sandbox.spy();
+      socket._currentController = "foo-controller-id";
+      socketMock.once("changeController", controllerChangedSpy);
+      socket.currentController = "foo-controller-id";
+      await waitForEvents(1000);
+      expect(controllerChangedSpy.callCount).toEqual(0);
     });
   });
 });

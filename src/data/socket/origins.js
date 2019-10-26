@@ -134,6 +134,9 @@ class Socket {
         eventName,
         callback
       });
+      if (this._socket) {
+        this._socket.on(eventName, callback);
+      }
     });
   }
 
