@@ -1,4 +1,4 @@
-const { Feature } = require("@xbyorange/mocks-server");
+const { Feature } = require("@mocks-server/main");
 
 const { getConfig, getConfigNoCustom, getConfigError } = require("./fixtures/config/get");
 
