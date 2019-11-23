@@ -1,4 +1,4 @@
-import { Selector } from "@xbyorange/mercury";
+import { Selector } from "@data-provider/core";
 
 import { isSystemRole } from "../helpers/user-roles";
 import { userAvatar } from "../avatar/selectors";

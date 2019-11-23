@@ -1,3 +1,3 @@
-import { apis as apisHandler } from "@xbyorange/mercury-api";
+import { apis as apisHandler } from "@data-provider/axios";
 
 export const apis = apisHandler;

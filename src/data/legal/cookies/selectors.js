@@ -1,4 +1,4 @@
-import { Selector } from "@xbyorange/mercury";
+import { Selector } from "@data-provider/core";
 import { cookies } from "./origins";
 
 export const cookiesAreAccepted = new Selector(

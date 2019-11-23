@@ -1,4 +1,4 @@
-import { Memory } from "@xbyorange/mercury-memory";
+import { Memory } from "@data-provider/memory";
 
 const ROLES = [
   {

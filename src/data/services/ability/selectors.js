@@ -1,4 +1,4 @@
-import { Selector } from "@xbyorange/mercury";
+import { Selector } from "@data-provider/core";
 
 import { addAbilityExtraData } from "../helpers/ability";
 import { modulesCollection } from "../services/selectors";

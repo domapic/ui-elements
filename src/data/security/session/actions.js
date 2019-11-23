@@ -1,6 +1,6 @@
 "use strict";
 
-import { apis } from "@xbyorange/mercury-api";
+import { apis } from "@data-provider/axios";
 
 import queryString from "query-string";
 

@@ -1,6 +1,6 @@
 import sinon from "sinon";
 
-import { apis } from "@xbyorange/mercury-api";
+import { apis } from "@data-provider/axios";
 import { socket } from "data/socket";
 
 import { authJwt, authSessionStatus } from "../authentication/origins";

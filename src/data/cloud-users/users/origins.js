@@ -1,4 +1,4 @@
-import { Api } from "@xbyorange/mercury-api";
+import { Api } from "@data-provider/axios";
 
 import { socket } from "data/socket";
 import { byIdQuery, getAuthConfig } from "helpers/api";

@@ -1,6 +1,6 @@
 import md5 from "md5";
 
-import { Selector } from "@xbyorange/mercury";
+import { Selector } from "@data-provider/core";
 
 import { gravatar } from "./origins";
 

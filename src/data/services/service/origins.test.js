@@ -1,5 +1,5 @@
 import sinon from "sinon";
-import { sources } from "@xbyorange/mercury";
+import { sources } from "@data-provider/core";
 import { socket } from "data/socket";
 import { byIdQuery } from "helpers/api";
 import { serviceModels } from "./origins";

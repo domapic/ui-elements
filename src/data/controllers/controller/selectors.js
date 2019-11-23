@@ -1,5 +1,5 @@
-import { Selector } from "@xbyorange/mercury";
-import { Api } from "@xbyorange/mercury-api";
+import { Selector } from "@data-provider/core";
+import { Api } from "@data-provider/axios";
 
 import { socket } from "data/socket";
 

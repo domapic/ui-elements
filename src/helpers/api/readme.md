@@ -19,7 +19,7 @@ Returns configuration for a mercury-api origin adding authentication tag.
 #### Usage
 
 ```jsx
-import { Api } from "@xbyorange/mercury-api";
+import { Api } from "@data-provider/axios";
 
 import { getAuthConfig } from "helpers/api";
 

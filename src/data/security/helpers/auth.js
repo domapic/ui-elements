@@ -1,4 +1,4 @@
-import { apis } from "@xbyorange/mercury-api";
+import { apis } from "@data-provider/axios";
 import { TAGS } from "helpers/api";
 
 const JWT_HEADER = "Authorization";

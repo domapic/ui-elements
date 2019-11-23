@@ -1,5 +1,5 @@
-import { Api } from "@xbyorange/mercury-api";
-import { Memory } from "@xbyorange/mercury-memory";
+import { Api } from "@data-provider/axios";
+import { Memory } from "@data-provider/memory";
 
 import { socket } from "data/socket";
 import { byIdQuery, getAuthConfig } from "helpers/api";

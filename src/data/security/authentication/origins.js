@@ -1,6 +1,6 @@
-import { LocalStorage, SessionStorage } from "@xbyorange/mercury-browser-storage";
-import { Memory } from "@xbyorange/mercury-memory";
-import { Api } from "@xbyorange/mercury-api";
+import { LocalStorage, SessionStorage } from "@data-provider/browser-storage";
+import { Memory } from "@data-provider/memory";
+import { Api } from "@data-provider/axios";
 
 // AUTHENTICATION SESSION
 

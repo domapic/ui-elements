@@ -1,4 +1,4 @@
-import { Api } from "@xbyorange/mercury-api";
+import { Api } from "@data-provider/axios";
 
 export const gravatar = new Api("/avatar/:hash", {
   tags: ["gravatar"],

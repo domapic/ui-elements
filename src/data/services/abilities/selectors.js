@@ -1,4 +1,4 @@
-import { Selector } from "@xbyorange/mercury";
+import { Selector } from "@data-provider/core";
 
 import { searchByNameAndDescription, sortAndOrderBy } from "../helpers/search-sort-order";
 import { addAbilityExtraData } from "../helpers/ability";

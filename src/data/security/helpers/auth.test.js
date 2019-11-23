@@ -1,5 +1,5 @@
 import sinon from "sinon";
-import { apis } from "@xbyorange/mercury-api";
+import { apis } from "@data-provider/axios";
 
 import { setJwtAuth, setApiKeyAuth, removeAuth } from "./auth";
 
