@@ -1,6 +1,6 @@
 import DisplayBehavior from "./DisplayBehavior";
 
-import { connect } from "@xbyorange/react-mercury";
+import { connect } from "@data-provider/connector-react";
 
 import { behaviorFixturesDisplay } from "../data/behaviors";
 

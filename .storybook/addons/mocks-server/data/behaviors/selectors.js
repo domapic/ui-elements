@@ -1,4 +1,4 @@
-import { Selector } from "@xbyorange/mercury";
+import { Selector } from "@data-provider/core";
 
 import { behaviors, currentBehavior } from "./origins";
 

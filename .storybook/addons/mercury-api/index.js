@@ -2,7 +2,7 @@ import addons, { makeDecorator } from "@storybook/addons";
 
 import { PARAM_KEY, OPTIONS_EVENT, CHANGE_CONFIG_EVENT, CLEAN_EVENT } from "./shared";
 
-import { apis } from "@xbyorange/mercury-api";
+import { apis } from "@data-provider/axios";
 
 let waitAndClean;
 let firstConfig;
